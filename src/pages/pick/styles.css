@@ -1,0 +1,104 @@
+:root {
+  --bg: #fbfaf7;
+  --fg: #1d1d1b;
+  --muted: #6c6a64;
+  --line: #e4e1d9;
+  --card: #ffffff;
+  --accent: #3a7d44;
+  --warn-bg: #fff6e0;
+  --warn-line: #e8c76a;
+  --bad-bg: #fdecea;
+  --bad-line: #e59a92;
+  --c-W: #e8e1c4;
+  --c-U: #4a8fd4;
+  --c-B: #4a4540;
+  --c-R: #d9573f;
+  --c-G: #3f9a5a;
+  --c-multi: #d4af37;
+  --c-colorless: #a7a59e;
+  --c-land: #9a7b56;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #161615;
+    --fg: #ecebe6;
+    --muted: #9c9a93;
+    --line: #34332f;
+    --card: #1f1f1d;
+    --accent: #7cc283;
+    --warn-bg: #2d2615;
+    --warn-line: #8a7230;
+    --bad-bg: #331b18;
+    --bad-line: #8f4a42;
+    --c-W: #d8d1b4;
+    --c-B: #8d857c;
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.45 system-ui, -apple-system, sans-serif; }
+a { color: var(--accent); }
+button {
+  font: inherit; padding: 6px 14px; border-radius: 8px; border: 1px solid var(--line);
+  background: var(--card); color: var(--fg); cursor: pointer;
+}
+button:disabled { opacity: 0.5; cursor: default; }
+.page { max-width: 760px; margin: 0 auto; padding: 16px 16px 48px; }
+h1 { font-size: 1.4rem; margin: 0 0 4px; }
+.muted { color: var(--muted); }
+.loading::before { content: "⏳ "; }
+
+.deck-input { display: flex; gap: 8px; flex-wrap: wrap; }
+.deck-input input { flex: 1 1 260px; font: inherit; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--card); color: var(--fg); }
+
+.deck-header { position: sticky; top: 0; background: var(--bg); padding: 8px 0; border-bottom: 1px solid var(--line); z-index: 1; }
+.deck-header p { margin: 0 0 8px; }
+.toolbar { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.check { display: inline-flex; gap: 6px; align-items: center; }
+
+.notices h2 { font-size: 1.1rem; margin: 20px 0 8px; }
+.notice { border: 1px solid var(--warn-line); background: var(--warn-bg); border-radius: 10px; padding: 10px 14px; margin: 8px 0; }
+.notice.unavailable, .notice.overAllocated { border-color: var(--bad-line); background: var(--bad-bg); }
+.notice h3 { font-size: 1rem; margin: 0 0 4px; }
+.notice p { margin: 4px 0; }
+.notice .label { font-weight: 600; }
+.alternatives { margin: 4px 0; padding-left: 20px; }
+.holders { font-size: 0.95em; }
+
+.skipped { color: var(--muted); font-size: 0.95em; margin: 16px 0 0; }
+
+.section { font-size: 1.15rem; margin: 24px 0 4px; padding-bottom: 4px; border-bottom: 2px solid var(--line); }
+.section .muted { font-size: 0.8em; font-weight: normal; }
+.group { font-size: 0.95rem; margin: 14px 0 2px; color: var(--muted); font-weight: 600; }
+
+.pick {
+  display: grid; grid-template-columns: auto auto auto 1fr; grid-template-areas: "box pip qty name" ". . . printing";
+  column-gap: 8px; align-items: center; padding: 8px 4px; border-bottom: 1px solid var(--line); cursor: pointer;
+}
+.pick input { grid-area: box; width: 20px; height: 20px; margin: 0; }
+.pick .pip { grid-area: pip; width: 10px; height: 10px; border-radius: 50%; border: 1px solid var(--line); }
+.pick .qty { grid-area: qty; font-variant-numeric: tabular-nums; color: var(--muted); }
+.pick .name { grid-area: name; font-weight: 600; overflow-wrap: anywhere; }
+.pick .printing { grid-area: printing; }
+.pick.done .name, .pick.done .printing { text-decoration: line-through; opacity: 0.5; }
+@media (min-width: 560px) {
+  .pick { grid-template-columns: auto auto auto 1fr auto; grid-template-areas: "box pip qty name printing"; }
+}
+.printing { color: var(--muted); font-size: 0.9em; font-weight: normal; }
+.badge { margin-left: 6px; padding: 0 6px; border-radius: 999px; background: var(--line); color: var(--fg); font-size: 0.85em; }
+
+.c-W { background: var(--c-W); } .c-U { background: var(--c-U); } .c-B { background: var(--c-B); }
+.c-R { background: var(--c-R); } .c-G { background: var(--c-G); } .c-multi { background: var(--c-multi); }
+.c-colorless { background: var(--c-colorless); } .c-land { background: var(--c-land); }
+
+.error { border: 1px solid var(--bad-line); background: var(--bad-bg); border-radius: 10px; padding: 12px 16px; }
+.diagnostics { margin-top: 32px; font-size: 0.9em; }
+.diagnostics table { border-collapse: collapse; width: 100%; }
+.diagnostics td, .diagnostics th { text-align: left; padding: 2px 6px; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }
+
+@media print {
+  .toolbar, .diagnostics, .pick input { display: none; }
+  .deck-header { position: static; }
+}

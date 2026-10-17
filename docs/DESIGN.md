@@ -4,9 +4,9 @@
 
 | | |
 | --- | --- |
-| **Status** | Design. Discovery done: the [probe spike](../spikes/moxfield-probe/README.md) proved the extension approach. Next: write down the sort system, then build the engine |
+| **Status** | Phase 2: the engine and extension MVP are built and tested against a fake Moxfield; next is a real deck pull in Firefox |
 | **Owner** | Jason Addington |
-| **Last updated** | 2026-10-16 |
+| **Last updated** | 2026-10-17 |
 
 This is a living document. Update it when a decision is made, an assumption turns out wrong, or an open question is answered. The [Decision log](#decision-log) records the reasons behind each change.
 
@@ -286,10 +286,13 @@ Moxfield can't be updated programmatically, and the extension doesn't pick subst
 
 ### 7.1 Stack
 
-- TypeScript, bundled with Vite (one build for the picklist page, the content script, and the background script).
-- UI: Preact. It's small and uses React's API, and the pages are simple.
-- Tests: Vitest for the engine and the Moxfield client's parsing, using fixtures from the probe.
-- `web-ext` for linting, running in a dev profile, and signing.
+- TypeScript, bundled with Vite 8 in two builds: the picklist page and background script as ES modules, and the content script on its own as one classic script (content scripts can't be modules).
+- UI: Preact 10 (10.29.x). Preact 11 shipped two weeks before this was set up and the Vite plugin predates it, so 11 can wait.
+- Response validation: zod 4, in `jitless` mode because extension pages forbid `eval`.
+- Firefox API types: `@types/webextension-polyfill`, for types only; Firefox's native `browser` global is used directly.
+- Tests: Vitest. Engine tests use synthetic cards plus a trimmed copy of Scryfall's set list. Client and app tests run against a fake Moxfield server (`tests/fakeMoxfield.ts`) that reproduces the behavior measured in the spike: tokens, incremental search with server-issued session ids, and the query-length cap.
+- `web-ext` for linting and signing. Its Android-debugging dependency (`node-forge`) has a high-severity advisory that npm can only "fix" by downgrading web-ext to 5.x. It's a dev-only tool that never ships in the extension, so the advisory is accepted.
+- **Dev environment:** all Node tooling runs in a `node:24` container (OrbStack) via `scripts/dev`; nothing is installed on the host. See the README.
 
 ### 7.2 Distribution
 
@@ -306,19 +309,11 @@ Release Firefox only runs extensions signed by Mozilla. The extension is signed 
 | `ci.yml` | PRs, pushes to `main` | `npm ci`, typecheck, lint, `vitest`, `vite build`, `web-ext lint` |
 | `release.yml` | tag `v*` | Build, `web-ext sign --channel=unlisted` (AMO API key and secret in repo secrets), create a GitHub Release with the `.xpi`, update the update manifest |
 
-### 7.4 Proposed repo layout
+### 7.4 Repo layout
 
-```text
-/src/content/        🥒 button on deck pages
-/src/background/     tab opening, fallback token capture
-/src/pages/pick/     picklist page (Preact)
-/src/moxfield/       auth, decks, incremental collection search, schemas
-/src/engine/         sort keys, sections, availability, notices (pure); sections.ts
-/tests/fixtures/     sanitized Moxfield responses from the probe
-/spikes/             throwaway experiments (moxfield-probe)
-/docs/DESIGN.md      this file
-manifest.json, vite.config.ts, .github/workflows/
-```
+See the README's layout table. In short: `src/engine/` (pure logic; `sections.ts` is the hand-edited config), `src/moxfield/`, `src/scryfall/`, `src/app/`, `src/pages/pick/`, `src/content/`, `src/background/`, `public/manifest.json`, and `tests/`.
+
+**Manifest:** permissions `storage` and `webRequest`; host permissions for `api2.moxfield.com`, `api.scryfall.com`, and `moxfield.com`. `webRequest` is only used to learn the `x-moxfield-version` and `X-Session-User` values Moxfield's own pages send (Q7). The add-on id `magic-pickle@picklist.local` is a placeholder: **choose the final id before the first signed release**, because changing it later breaks updates. The minimum versions are Firefox 140 and Firefox for Android 142, the first to support `data_collection_permissions`, which AMO now requires (declared as `none`).
 
 ## 8. Plan
 
@@ -327,7 +322,7 @@ manifest.json, vite.config.ts, .github/workflows/
 | **0. Discovery** ✅ | Prove extension access, auth, the search protocol, and the data shape | Done: §4 |
 | **0b. Sort system** | Write down the hotel and binder layout and order ✅; capture fixtures (target deck, 2–3 built decks, binder decks, collection search results) | §6.3 filled in ✅; fixtures in `tests/fixtures` |
 | **1. Engine** | Sort keys and sections ✅, availability ✅, printing notices ✅, binder copies ✅, with Vitest tests ✅ | Correct picklist for the fixtures. Synthetic fixtures pass; real Moxfield fixtures come with phase 2 |
-| **2. Extension MVP** | Scaffold (Vite + TypeScript + Preact + `web-ext`), Moxfield client, 🥒 button, picklist page. **Test:** whether `x-moxfield-version` and `X-Session-User` are required (Q7) | A real deck pull done with it on desktop |
+| **2. Extension MVP** | Scaffold ✅, Moxfield client ✅, 🥒 button ✅, picklist page ✅, all tested against a fake Moxfield. **Test:** whether `x-moxfield-version` and `X-Session-User` are required (Q7; there's a button for it under Diagnostics) | A real deck pull done with it on desktop |
 | **3. Ship** | CI, unlisted signing, Releases, auto-update. **Research and test:** installing on Firefox for Android (Q6) | Signed build installed on desktop and phone |
 | **4. Polish** | Pull progress, settings, printing details | Fewer manual steps per pull |
 
@@ -341,7 +336,7 @@ Resolved questions are struck through; their answers are in the decision log.
 4. ~~Language.~~ A copy counts toward a deck entry only if its language matches the deck card's language (§6.1).
 5. ~~Collection quirks.~~ None; Moxfield tracks nothing outside the hotels, boxes, and binders.
 6. **Android install.** Can an unlisted, self-hosted signed `.xpi` be installed on Firefox for Android? To research and test in phase 3.
-7. **Required headers.** Are `x-moxfield-version` and `X-Session-User` required, and if so where should the extension get `x-moxfield-version` from? To test in phase 2.
+7. **Required headers.** Are `x-moxfield-version` and `X-Session-User` required? The extension learns both from Moxfield's own traffic and sends them when known. The picklist page's Diagnostics has a button that compares a request with and without them. To check on the first real run.
 8. ~~Merged or set-by-set?~~ Set by set.
 9. ~~Sets you didn't mention.~~ §6.3 table.
 10. ~~Guild Kit 2.~~ Guild Kit section.
@@ -380,6 +375,9 @@ Resolved questions are struck through; their answers are in the decision log.
 | 2026-10-16 | A copy counts for a deck entry only if its language matches the deck card's `lang` | Foreign copies aren't played and live in their own section; Phyrexian still works because those printings have their own Scryfall ids |
 | 2026-10-17 | English and Phyrexian printings are offered as alternatives for each other; other languages still never are | Phyrexian cards are played, and there are few copies, so a busy Phyrexian printing should point to free English ones and vice versa |
 | 2026-10-17 | Binder decks match by name prefix | Deck names carry completion emoji and card counts after the configured name |
+| 2026-10-17 | Dev tooling runs in a `node:24` container via OrbStack (`scripts/dev`) | Your preference: no Node or dev dependencies installed on the host |
+| 2026-10-17 | Preact 10.29 rather than 11; zod in `jitless` mode; two Vite builds | Preact 11 is two weeks old and its Vite plugin predates it; extension pages forbid eval; content scripts can't be ES modules |
+| 2026-10-17 | Learn `x-moxfield-version` and `X-Session-User` from Moxfield's own requests (`webRequest`) and send them when known | Cheap insurance until Q7 is answered; the values aren't secret |
 | 2026-10-16 | Siblings strictly alphabetical by set code; panorama cards by collector number; playtest cards in their own box; box order arbitrary but fixed | Your answers to Q13, Q17b, Q18, and Q19 |
 | 2026-10-16 | Scryfall blocks count only for expansion blocks through GRN/RNA/WAR; siblings come from `parent_set_code`; named sections override both | Scryfall also labels all Commander products, all core sets, and newer set families (e.g. OTJ) as blocks, which don't match your system |
 | 2026-10-14 | Stack: TypeScript, Vite, Preact, Vitest, `web-ext`; unlisted AMO signing; releases on GitHub | Small, standard extension toolchain; signing is required for release Firefox |

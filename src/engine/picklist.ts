@@ -112,6 +112,11 @@ function countedEntries(deck: Deck): DeckEntry[] {
   return deck.entries.filter((e) => IN_DECK_BOARDS.has(e.board) && !skipReason(e));
 }
 
+/** The card names the collection lookup must cover: the target deck's counted lines. */
+export function namesToLookUp(deck: Deck): string[] {
+  return [...new Set(countedEntries(deck).map((e) => e.card.name))];
+}
+
 export function buildPicklist(input: PicklistInput): Picklist {
   const { target, sorter } = input;
   const printings = new Map<string, Printing>();

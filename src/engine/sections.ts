@@ -79,6 +79,10 @@ export const TYPE_SECTIONS: Readonly<Record<string, SectionId>> = {
   spellbook: "signatureSpellbook",
 };
 
+/** Moxfield deck folders the extension reads (§4.4, §6.3.2). */
+export const BUILT_FOLDER = "3 - Built";
+export const COLLECTIONS_FOLDER = "Collections";
+
 /** A `Collections` deck whose cards have fixed copies in a binder (§6.3.2). */
 export interface BinderDeckDef {
   /** Start of the Moxfield deck name; the rest (completion emoji, card counts) is ignored. */

@@ -1,0 +1,48 @@
+{
+  "manifest_version": 3,
+  "name": "Magic Pickle – Moxfield Probe (spike)",
+  "version": "0.1.0",
+  "description": "Throwaway spike: records and replays Moxfield API calls to validate the extension approach.",
+  "permissions": [
+    "webRequest",
+    "storage",
+    "tabs",
+    "scripting",
+    "clipboardWrite"
+  ],
+  "host_permissions": [
+    "https://moxfield.com/*",
+    "https://www.moxfield.com/*",
+    "https://api2.moxfield.com/*",
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "action": {
+    "default_title": "Open Moxfield probe"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://moxfield.com/*",
+        "https://www.moxfield.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "moxfield-probe@magic-pickle.local",
+      "strict_min_version": "128.0"
+    },
+    "gecko_android": {
+      "strict_min_version": "128.0"
+    }
+  }
+}

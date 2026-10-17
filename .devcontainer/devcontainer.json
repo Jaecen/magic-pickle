@@ -1,0 +1,7 @@
+{
+  "name": "magic-pickle",
+  "dockerComposeFile": "../compose.yaml",
+  "service": "dev",
+  "workspaceFolder": "/work",
+  "overrideCommand": true
+}

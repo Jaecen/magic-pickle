@@ -1,0 +1,8392 @@
+{
+"source": "https://api.scryfall.com/sets",
+"fetched": "2026-10-16",
+"data": [
+{
+"code": "mdd",
+"name": "Marvel: Darkhold Destiny",
+"released_at": "2027-04-09",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "tmdd",
+"name": "Marvel: Darkhold Destiny Tokens",
+"released_at": "2027-04-09",
+"set_type": "token",
+"parent_set_code": "mdd",
+"digital": false
+},
+{
+"code": "mdc",
+"name": "Darkhold Destiny Commander",
+"released_at": "2027-04-09",
+"set_type": "commander",
+"block_code": "cmd",
+"parent_set_code": "mdd",
+"digital": false
+},
+{
+"code": "tnau",
+"name": "Nauctis: The Sunken Realm Tokens",
+"released_at": "2027-02-05",
+"set_type": "token",
+"parent_set_code": "nau",
+"digital": false
+},
+{
+"code": "nau",
+"name": "Nauctis: The Sunken Realm",
+"released_at": "2027-02-05",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "pf27",
+"name": "MagicFest 2027",
+"released_at": "2027-01-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "sds",
+"name": "Stardates",
+"released_at": "2026-11-13",
+"set_type": "masterpiece",
+"parent_set_code": "trk",
+"digital": false
+},
+{
+"code": "trk",
+"name": "Star Trek",
+"released_at": "2026-11-13",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "trc",
+"name": "Star Trek Commander",
+"released_at": "2026-11-13",
+"set_type": "commander",
+"block_code": "cmd",
+"parent_set_code": "trk",
+"digital": false
+},
+{
+"code": "ttrk",
+"name": "Star Trek Tokens",
+"released_at": "2026-11-13",
+"set_type": "token",
+"parent_set_code": "trk",
+"digital": false
+},
+{
+"code": "mbc",
+"name": "Mystery Booster Commander Edition",
+"released_at": "2026-10-19",
+"set_type": "draft_innovation",
+"digital": false
+},
+{
+"code": "yfra",
+"name": "Alchemy: Reality Fracture",
+"released_at": "2026-10-13",
+"set_type": "alchemy",
+"parent_set_code": "fra",
+"digital": true
+},
+{
+"code": "tfra",
+"name": "Reality Fracture Tokens",
+"released_at": "2026-10-02",
+"set_type": "token",
+"parent_set_code": "fra",
+"digital": false
+},
+{
+"code": "tfrc",
+"name": "Reality Fracture Commander Tokens",
+"released_at": "2026-10-02",
+"set_type": "token",
+"parent_set_code": "frc",
+"digital": false
+},
+{
+"code": "frc",
+"name": "Reality Fracture Commander",
+"released_at": "2026-10-02",
+"set_type": "commander",
+"parent_set_code": "fra",
+"digital": false
+},
+{
+"code": "fra",
+"name": "Reality Fracture",
+"released_at": "2026-10-02",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "tfdc",
+"name": "Foundations Commander Tokens",
+"released_at": "2026-10-02",
+"set_type": "token",
+"parent_set_code": "fdc",
+"digital": false
+},
+{
+"code": "pfra",
+"name": "Reality Fracture Promos",
+"released_at": "2026-10-02",
+"set_type": "promo",
+"parent_set_code": "fra",
+"digital": false
+},
+{
+"code": "slz",
+"name": "The Zeta Set",
+"released_at": "2026-09-02",
+"set_type": "box",
+"digital": false
+},
+{
+"code": "hob",
+"name": "The Hobbit",
+"released_at": "2026-08-14",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "hoc",
+"name": "The Hobbit Eternal",
+"released_at": "2026-08-14",
+"set_type": "eternal",
+"parent_set_code": "hob",
+"digital": false
+},
+{
+"code": "thob",
+"name": "The Hobbit Tokens",
+"released_at": "2026-08-14",
+"set_type": "token",
+"parent_set_code": "hob",
+"digital": false
+},
+{
+"code": "tmsc",
+"name": "Marvel Super Heroes Commander Tokens",
+"released_at": "2026-06-26",
+"set_type": "token",
+"parent_set_code": "msc",
+"digital": false
+},
+{
+"code": "msc",
+"name": "Marvel Super Heroes Commander",
+"released_at": "2026-06-26",
+"set_type": "commander",
+"block_code": "cmd",
+"parent_set_code": "msh",
+"digital": false
+},
+{
+"code": "fmsc",
+"name": "Marvel Super Heroes Jumpstart Front Cards",
+"released_at": "2026-06-26",
+"set_type": "memorabilia",
+"parent_set_code": "msc",
+"digital": false
+},
+{
+"code": "msh",
+"name": "Marvel Super Heroes",
+"released_at": "2026-06-26",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "amsh",
+"name": "Marvel Super Heroes Art Series",
+"released_at": "2026-06-26",
+"set_type": "memorabilia",
+"parent_set_code": "msh",
+"digital": false
+},
+{
+"code": "tmsh",
+"name": "Marvel Super Heroes Tokens",
+"released_at": "2026-06-26",
+"set_type": "token",
+"parent_set_code": "msh",
+"digital": false
+},
+{
+"code": "ysos",
+"name": "Alchemy: Secrets of Strixhaven",
+"released_at": "2026-05-19",
+"set_type": "alchemy",
+"parent_set_code": "sos",
+"digital": true
+},
+{
+"code": "psos",
+"name": "Secrets of Strixhaven Promos",
+"released_at": "2026-04-24",
+"set_type": "promo",
+"parent_set_code": "sos",
+"digital": false
+},
+{
+"code": "asos",
+"name": "Secrets of Strixhaven Art Series",
+"released_at": "2026-04-24",
+"set_type": "memorabilia",
+"parent_set_code": "sos",
+"digital": false
+},
+{
+"code": "soa",
+"name": "Secrets of Strixhaven Mystical Archive",
+"released_at": "2026-04-24",
+"set_type": "masterpiece",
+"parent_set_code": "sos",
+"digital": false
+},
+{
+"code": "sos",
+"name": "Secrets of Strixhaven",
+"released_at": "2026-04-24",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "tsos",
+"name": "Secrets of Strixhaven Tokens",
+"released_at": "2026-04-24",
+"set_type": "token",
+"parent_set_code": "sos",
+"digital": false
+},
+{
+"code": "soc",
+"name": "Secrets of Strixhaven Commander",
+"released_at": "2026-04-24",
+"set_type": "commander",
+"block_code": "cmd",
+"parent_set_code": "sos",
+"digital": false
+},
+{
+"code": "tsoc",
+"name": "Secrets of Strixhaven Commander Tokens",
+"released_at": "2026-04-24",
+"set_type": "token",
+"parent_set_code": "soc",
+"digital": false
+},
+{
+"code": "ttmc",
+"name": "Teenage Mutant Ninja Turtles Eternal Tokens",
+"released_at": "2026-03-06",
+"set_type": "token",
+"parent_set_code": "tmc",
+"digital": false
+},
+{
+"code": "tmc",
+"name": "Teenage Mutant Ninja Turtles Eternal",
+"released_at": "2026-03-06",
+"set_type": "eternal",
+"block_code": "cmd",
+"parent_set_code": "tmt",
+"digital": false
+},
+{
+"code": "ftmc",
+"name": "Teenage Mutant Ninja Turtles Eternal Front Cards",
+"released_at": "2026-03-06",
+"set_type": "memorabilia",
+"parent_set_code": "tmc",
+"digital": false
+},
+{
+"code": "pza",
+"name": "Teenage Mutant Ninja Turtles Source Material",
+"released_at": "2026-03-06",
+"set_type": "masterpiece",
+"parent_set_code": "tmt",
+"digital": false
+},
+{
+"code": "atmt",
+"name": "Teenage Mutant Ninja Turtles Art Series",
+"released_at": "2026-03-06",
+"set_type": "memorabilia",
+"parent_set_code": "tmt",
+"digital": false
+},
+{
+"code": "tmt",
+"name": "Teenage Mutant Ninja Turtles",
+"released_at": "2026-03-06",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "ttmt",
+"name": "Teenage Mutant Ninja Turtles Tokens",
+"released_at": "2026-03-06",
+"set_type": "token",
+"parent_set_code": "tmt",
+"digital": false
+},
+{
+"code": "pl26",
+"name": "Year of the Horse 2026",
+"released_at": "2026-02-17",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "yecl",
+"name": "Alchemy: Lorwyn Eclipsed",
+"released_at": "2026-02-03",
+"set_type": "alchemy",
+"parent_set_code": "ecl",
+"digital": true
+},
+{
+"code": "pecl",
+"name": "Lorwyn Eclipsed Promos",
+"released_at": "2026-01-23",
+"set_type": "promo",
+"parent_set_code": "ecl",
+"digital": false
+},
+{
+"code": "tecl",
+"name": "Lorwyn Eclipsed Tokens",
+"released_at": "2026-01-23",
+"set_type": "token",
+"parent_set_code": "ecl",
+"digital": false
+},
+{
+"code": "aecl",
+"name": "Lorwyn Eclipsed Art Series",
+"released_at": "2026-01-23",
+"set_type": "memorabilia",
+"parent_set_code": "ecl",
+"digital": false
+},
+{
+"code": "tecc",
+"name": "Lorwyn Eclipsed Commander Tokens",
+"released_at": "2026-01-23",
+"set_type": "token",
+"parent_set_code": "ecc",
+"digital": false
+},
+{
+"code": "ecc",
+"name": "Lorwyn Eclipsed Commander",
+"released_at": "2026-01-23",
+"set_type": "commander",
+"block_code": "cmd",
+"parent_set_code": "ecl",
+"digital": false
+},
+{
+"code": "ecl",
+"name": "Lorwyn Eclipsed",
+"released_at": "2026-01-23",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "pf26",
+"name": "MagicFest 2026",
+"released_at": "2026-01-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "pw26",
+"name": "Wizards Play Network 2026",
+"released_at": "2026-01-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "afic",
+"name": "Final Fantasy Scene Box",
+"released_at": "2025-12-05",
+"set_type": "memorabilia",
+"parent_set_code": "fic",
+"digital": false
+},
+{
+"code": "ptla",
+"name": "Avatar: The Last Airbender Promos",
+"released_at": "2025-11-21",
+"set_type": "promo",
+"parent_set_code": "tla",
+"digital": false
+},
+{
+"code": "tla",
+"name": "Avatar: The Last Airbender",
+"released_at": "2025-11-21",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "tle",
+"name": "Avatar: The Last Airbender Eternal",
+"released_at": "2025-11-21",
+"set_type": "eternal",
+"parent_set_code": "tla",
+"digital": false
+},
+{
+"code": "ttla",
+"name": "Avatar: The Last Airbender Tokens",
+"released_at": "2025-11-21",
+"set_type": "token",
+"parent_set_code": "tla",
+"digital": false
+},
+{
+"code": "jtla",
+"name": "Avatar: The Last Airbender Jumpstart Front Cards",
+"released_at": "2025-11-21",
+"set_type": "memorabilia",
+"parent_set_code": "tla",
+"digital": false
+},
+{
+"code": "ttle",
+"name": "Avatar: The Last Airbender Eternal Tokens",
+"released_at": "2025-11-21",
+"set_type": "token",
+"parent_set_code": "tle",
+"digital": false
+},
+{
+"code": "atle",
+"name": "Avatar: the Last Airbender Eternal Art Series",
+"released_at": "2025-11-21",
+"set_type": "memorabilia",
+"parent_set_code": "tle",
+"digital": false
+},
+{
+"code": "ftla",
+"name": "Avatar: The Last Airbender Beginner Box Front Cards",
+"released_at": "2025-11-21",
+"set_type": "memorabilia",
+"parent_set_code": "tla",
+"digital": false
+},
+{
+"code": "atla",
+"name": "Avatar: the Last Airbender Art Series",
+"released_at": "2025-11-21",
+"set_type": "memorabilia",
+"parent_set_code": "tla",
+"digital": false
+},
+{
+"code": "lmar",
+"name": "Marvel Legends Series Inserts",
+"released_at": "2025-09-30",
+"set_type": "promo",
+"parent_set_code": "mar",
+"digital": false
+},
+{
+"code": "pspm",
+"name": "Marvel's Spider-Man Promos",
+"released_at": "2025-09-26",
+"set_type": "promo",
+"parent_set_code": "spm",
+"digital": false
+},
+{
+"code": "tspm",
+"name": "Marvel's Spider-Man Tokens",
+"released_at": "2025-09-26",
+"set_type": "token",
+"parent_set_code": "spm",
+"digital": false
+},
+{
+"code": "aspm",
+"name": "Marvel's Spider-Man Art Series",
+"released_at": "2025-09-26",
+"set_type": "memorabilia",
+"parent_set_code": "spm",
+"digital": false
+},
+{
+"code": "spm",
+"name": "Marvel's Spider-Man",
+"released_at": "2025-09-26",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "spe",
+"name": "Marvel's Spider-Man Eternal",
+"released_at": "2025-09-26",
+"set_type": "eternal",
+"parent_set_code": "spm",
+"digital": false
+},
+{
+"code": "mar",
+"name": "Marvel Universe",
+"released_at": "2025-09-26",
+"set_type": "masterpiece",
+"digital": false
+},
+{
+"code": "aa4",
+"name": "Arena Anthology 4",
+"released_at": "2025-09-23",
+"set_type": "box",
+"digital": true
+},
+{
+"code": "aa3",
+"name": "Arena Anthology 3",
+"released_at": "2025-09-23",
+"set_type": "box",
+"digital": true
+},
+{
+"code": "om1",
+"name": "Through the Omenpaths",
+"released_at": "2025-09-23",
+"set_type": "expansion",
+"parent_set_code": "spm",
+"digital": true
+},
+{
+"code": "omb",
+"name": "Through the Omenpaths Bonus Sheet",
+"released_at": "2025-09-23",
+"set_type": "masterpiece",
+"parent_set_code": "mar",
+"digital": true
+},
+{
+"code": "ph23",
+"name": "2023 Heroes of the Realm",
+"released_at": "2025-08-24",
+"set_type": "funny",
+"block_code": "htr",
+"digital": false
+},
+{
+"code": "aa2",
+"name": "Arena Anthology 2",
+"released_at": "2025-08-19",
+"set_type": "box",
+"digital": true
+},
+{
+"code": "yeoe",
+"name": "Alchemy: Edge of Eternities",
+"released_at": "2025-08-19",
+"set_type": "alchemy",
+"parent_set_code": "eoe",
+"digital": true
+},
+{
+"code": "aa1",
+"name": "Arena Anthology 1",
+"released_at": "2025-08-19",
+"set_type": "box",
+"digital": true
+},
+{
+"code": "aeoe",
+"name": "Edge of Eternities Art Series",
+"released_at": "2025-08-01",
+"set_type": "memorabilia",
+"parent_set_code": "eoe",
+"digital": false
+},
+{
+"code": "peoe",
+"name": "Edge of Eternities Promos",
+"released_at": "2025-08-01",
+"set_type": "promo",
+"parent_set_code": "eoe",
+"digital": false
+},
+{
+"code": "teoc",
+"name": "Edge of Eternities Commander Tokens",
+"released_at": "2025-08-01",
+"set_type": "token",
+"parent_set_code": "eoc",
+"digital": false
+},
+{
+"code": "pbig",
+"name": "The Big Score Promos",
+"released_at": "2025-08-01",
+"set_type": "promo",
+"parent_set_code": "big",
+"digital": false
+},
+{
+"code": "eoe",
+"name": "Edge of Eternities",
+"released_at": "2025-08-01",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "eos",
+"name": "Edge of Eternities: Stellar Sights",
+"released_at": "2025-08-01",
+"set_type": "masterpiece",
+"parent_set_code": "eoe",
+"digital": false
+},
+{
+"code": "eoc",
+"name": "Edge of Eternities Commander",
+"released_at": "2025-08-01",
+"set_type": "commander",
+"block_code": "cmd",
+"parent_set_code": "eoe",
+"digital": false
+},
+{
+"code": "teoe",
+"name": "Edge of Eternities Tokens",
+"released_at": "2025-08-01",
+"set_type": "token",
+"parent_set_code": "eoe",
+"digital": false
+},
+{
+"code": "tfin",
+"name": "Final Fantasy Tokens",
+"released_at": "2025-06-13",
+"set_type": "token",
+"parent_set_code": "fin",
+"digital": false
+},
+{
+"code": "rfin",
+"name": "Final Fantasy Regional Promos",
+"released_at": "2025-06-13",
+"set_type": "promo",
+"parent_set_code": "fin",
+"digital": false
+},
+{
+"code": "afin",
+"name": "Final Fantasy Art Series",
+"released_at": "2025-06-13",
+"set_type": "memorabilia",
+"parent_set_code": "fin",
+"digital": false
+},
+{
+"code": "fca",
+"name": "Final Fantasy: Through the Ages",
+"released_at": "2025-06-13",
+"set_type": "masterpiece",
+"parent_set_code": "fin",
+"digital": false
+},
+{
+"code": "fic",
+"name": "Final Fantasy Commander",
+"released_at": "2025-06-13",
+"set_type": "commander",
+"block_code": "cmd",
+"parent_set_code": "fin",
+"digital": false
+},
+{
+"code": "pfin",
+"name": "Final Fantasy Promos",
+"released_at": "2025-06-13",
+"set_type": "promo",
+"parent_set_code": "fin",
+"digital": false
+},
+{
+"code": "tfic",
+"name": "Final Fantasy Commander Tokens",
+"released_at": "2025-06-13",
+"set_type": "token",
+"parent_set_code": "fic",
+"digital": false
+},
+{
+"code": "fin",
+"name": "Final Fantasy",
+"released_at": "2025-06-13",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "pss5",
+"name": "FIN Standard Showdown",
+"released_at": "2025-06-13",
+"set_type": "promo",
+"parent_set_code": "fin",
+"digital": false
+},
+{
+"code": "wfin",
+"name": "FIN Asia WPN Promo Tokens",
+"released_at": "2025-06-13",
+"set_type": "token",
+"parent_set_code": "fin",
+"digital": false
+},
+{
+"code": "pa1",
+"name": "Pioneer Anthology 1",
+"released_at": "2025-05-05",
+"set_type": "box",
+"digital": true
+},
+{
+"code": "ytdm",
+"name": "Alchemy: Tarkir",
+"released_at": "2025-04-29",
+"set_type": "alchemy",
+"parent_set_code": "tdm",
+"digital": true
+},
+{
+"code": "ttdc",
+"name": "Tarkir: Dragonstorm Commander Tokens",
+"released_at": "2025-04-11",
+"set_type": "token",
+"parent_set_code": "tdc",
+"digital": false
+},
+{
+"code": "ptdm",
+"name": "Tarkir: Dragonstorm Promos",
+"released_at": "2025-04-11",
+"set_type": "promo",
+"parent_set_code": "tdm",
+"digital": false
+},
+{
+"code": "ttdm",
+"name": "Tarkir: Dragonstorm Tokens",
+"released_at": "2025-04-11",
+"set_type": "token",
+"parent_set_code": "tdm",
+"digital": false
+},
+{
+"code": "atdm",
+"name": "Tarkir: Dragonstorm Art Series",
+"released_at": "2025-04-11",
+"set_type": "memorabilia",
+"parent_set_code": "tdm",
+"digital": false
+},
+{
+"code": "tdc",
+"name": "Tarkir: Dragonstorm Commander",
+"released_at": "2025-04-11",
+"set_type": "commander",
+"block_code": "cmd",
+"parent_set_code": "tdm",
+"digital": false
+},
+{
+"code": "tdm",
+"name": "Tarkir: Dragonstorm",
+"released_at": "2025-04-11",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "plg25",
+"name": "Love Your LGS 2025",
+"released_at": "2025-03-26",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "ydft",
+"name": "Alchemy: Aetherdrift",
+"released_at": "2025-03-04",
+"set_type": "alchemy",
+"parent_set_code": "dft",
+"digital": true
+},
+{
+"code": "pssc",
+"name": "Secret Lair Showcase Planes",
+"released_at": "2025-02-21",
+"set_type": "memorabilia",
+"parent_set_code": "sld",
+"digital": false
+},
+{
+"code": "adft",
+"name": "Aetherdrift Art Series",
+"released_at": "2025-02-14",
+"set_type": "memorabilia",
+"parent_set_code": "dft",
+"digital": false
+},
+{
+"code": "pdft",
+"name": "Aetherdrift Promos",
+"released_at": "2025-02-14",
+"set_type": "promo",
+"parent_set_code": "dft",
+"digital": false
+},
+{
+"code": "tdrc",
+"name": "Aetherdrift Commander Tokens",
+"released_at": "2025-02-14",
+"set_type": "token",
+"parent_set_code": "drc",
+"digital": false
+},
+{
+"code": "dft",
+"name": "Aetherdrift",
+"released_at": "2025-02-14",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "pl25",
+"name": "Year of the Snake 2025",
+"released_at": "2025-02-14",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "tdft",
+"name": "Aetherdrift Tokens",
+"released_at": "2025-02-14",
+"set_type": "token",
+"parent_set_code": "dft",
+"digital": false
+},
+{
+"code": "drc",
+"name": "Aetherdrift Commander",
+"released_at": "2025-02-14",
+"set_type": "commander",
+"block_code": "cmd",
+"parent_set_code": "dft",
+"digital": false
+},
+{
+"code": "pjsc",
+"name": "Japan Standard Cup",
+"released_at": "2025-02-09",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "ainr",
+"name": "Innistrad Remastered Art Series",
+"released_at": "2025-01-24",
+"set_type": "memorabilia",
+"parent_set_code": "inr",
+"digital": false
+},
+{
+"code": "tinr",
+"name": "Innistrad Remastered Tokens",
+"released_at": "2025-01-24",
+"set_type": "token",
+"parent_set_code": "inr",
+"digital": false
+},
+{
+"code": "inr",
+"name": "Innistrad Remastered",
+"released_at": "2025-01-24",
+"set_type": "masters",
+"digital": false
+},
+{
+"code": "pspl",
+"name": "Spotlight Series",
+"released_at": "2025-01-03",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "pf25",
+"name": "MagicFest 2025",
+"released_at": "2025-01-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "pw25",
+"name": "Wizards Play Network 2025",
+"released_at": "2025-01-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "pio",
+"name": "Pioneer Masters",
+"released_at": "2024-12-10",
+"set_type": "masters",
+"digital": true
+},
+{
+"code": "pfdn",
+"name": "Foundations Promos",
+"released_at": "2024-11-15",
+"set_type": "promo",
+"parent_set_code": "fdn",
+"digital": false
+},
+{
+"code": "afdn",
+"name": "Foundations Art Series",
+"released_at": "2024-11-15",
+"set_type": "memorabilia",
+"parent_set_code": "fdn",
+"digital": false
+},
+{
+"code": "j25",
+"name": "Foundations Jumpstart",
+"released_at": "2024-11-15",
+"set_type": "draft_innovation",
+"parent_set_code": "fdn",
+"digital": false
+},
+{
+"code": "tfdn",
+"name": "Foundations Tokens",
+"released_at": "2024-11-15",
+"set_type": "token",
+"parent_set_code": "fdn",
+"digital": false
+},
+{
+"code": "fdc",
+"name": "Foundations Commander",
+"released_at": "2024-11-15",
+"set_type": "commander",
+"parent_set_code": "fdn",
+"digital": false
+},
+{
+"code": "ffdn",
+"name": "Foundations Front Cards",
+"released_at": "2024-11-15",
+"set_type": "memorabilia",
+"parent_set_code": "fdn",
+"digital": false
+},
+{
+"code": "fj25",
+"name": "Foundations Jumpstart Front Cards",
+"released_at": "2024-11-15",
+"set_type": "memorabilia",
+"parent_set_code": "j25",
+"digital": false
+},
+{
+"code": "fdn",
+"name": "Foundations",
+"released_at": "2024-11-15",
+"set_type": "core",
+"block_code": "lea",
+"digital": false
+},
+{
+"code": "pltc",
+"name": "Tales of Middle-earth Deluxe Commander Kit",
+"released_at": "2024-10-16",
+"set_type": "promo",
+"parent_set_code": "ltr",
+"digital": false
+},
+{
+"code": "ydsk",
+"name": "Alchemy: Duskmourn",
+"released_at": "2024-10-15",
+"set_type": "alchemy",
+"parent_set_code": "dsk",
+"digital": true
+},
+{
+"code": "pdsk",
+"name": "Duskmourn: House of Horror Promos",
+"released_at": "2024-09-27",
+"set_type": "promo",
+"parent_set_code": "dsk",
+"digital": false
+},
+{
+"code": "dsc",
+"name": "Duskmourn: House of Horror Commander",
+"released_at": "2024-09-27",
+"set_type": "commander",
+"block_code": "cmd",
+"parent_set_code": "dsk",
+"digital": false
+},
+{
+"code": "adsk",
+"name": "Duskmourn: House of Horror Art Series",
+"released_at": "2024-09-27",
+"set_type": "memorabilia",
+"parent_set_code": "dsk",
+"digital": false
+},
+{
+"code": "tdsc",
+"name": "Duskmourn Commander Tokens",
+"released_at": "2024-09-27",
+"set_type": "token",
+"parent_set_code": "dsc",
+"digital": false
+},
+{
+"code": "dsk",
+"name": "Duskmourn: House of Horror",
+"released_at": "2024-09-27",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "tdsk",
+"name": "Duskmourn: House of Horror Tokens",
+"released_at": "2024-09-27",
+"set_type": "token",
+"parent_set_code": "dsk",
+"digital": false
+},
+{
+"code": "yblb",
+"name": "Alchemy: Bloomburrow",
+"released_at": "2024-08-20",
+"set_type": "alchemy",
+"block_code": "y25",
+"parent_set_code": "blb",
+"digital": true
+},
+{
+"code": "plg24",
+"name": "Love Your LGS 2024",
+"released_at": "2024-08-06",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "ablb",
+"name": "Bloomburrow Art Series",
+"released_at": "2024-08-02",
+"set_type": "memorabilia",
+"parent_set_code": "blb",
+"digital": false
+},
+{
+"code": "tblb",
+"name": "Bloomburrow Tokens",
+"released_at": "2024-08-02",
+"set_type": "token",
+"parent_set_code": "blb",
+"digital": false
+},
+{
+"code": "pblb",
+"name": "Bloomburrow Promos",
+"released_at": "2024-08-02",
+"set_type": "promo",
+"parent_set_code": "blb",
+"digital": false
+},
+{
+"code": "tblc",
+"name": "Bloomburrow Commander Tokens",
+"released_at": "2024-08-02",
+"set_type": "token",
+"parent_set_code": "blc",
+"digital": false
+},
+{
+"code": "blc",
+"name": "Bloomburrow Commander",
+"released_at": "2024-08-02",
+"set_type": "commander",
+"block_code": "cmd",
+"parent_set_code": "blb",
+"digital": false
+},
+{
+"code": "blb",
+"name": "Bloomburrow",
+"released_at": "2024-08-02",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "pcbb",
+"name": "Cowboy Bebop",
+"released_at": "2024-08-02",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "mb2",
+"name": "Mystery Booster 2",
+"released_at": "2024-08-02",
+"set_type": "masters",
+"digital": false
+},
+{
+"code": "macr",
+"name": "Assassin's Creed Minigames",
+"released_at": "2024-07-05",
+"set_type": "minigame",
+"parent_set_code": "acr",
+"digital": false
+},
+{
+"code": "tacr",
+"name": "Assassin's Creed Tokens",
+"released_at": "2024-07-05",
+"set_type": "token",
+"parent_set_code": "acr",
+"digital": false
+},
+{
+"code": "aacr",
+"name": "Assassin's Creed Art Series",
+"released_at": "2024-07-05",
+"set_type": "memorabilia",
+"parent_set_code": "acr",
+"digital": false
+},
+{
+"code": "acr",
+"name": "Assassin's Creed",
+"released_at": "2024-07-05",
+"set_type": "draft_innovation",
+"digital": false
+},
+{
+"code": "smh3",
+"name": "Modern Horizons 3 Substitute Cards",
+"released_at": "2024-06-14",
+"set_type": "token",
+"parent_set_code": "mh3",
+"digital": false
+},
+{
+"code": "pmh3",
+"name": "Modern Horizons 3 Promos",
+"released_at": "2024-06-14",
+"set_type": "promo",
+"parent_set_code": "mh3",
+"digital": false
+},
+{
+"code": "mh3",
+"name": "Modern Horizons 3",
+"released_at": "2024-06-14",
+"set_type": "draft_innovation",
+"block_code": "mh1",
+"digital": false
+},
+{
+"code": "tmh3",
+"name": "Modern Horizons 3 Tokens",
+"released_at": "2024-06-14",
+"set_type": "token",
+"parent_set_code": "mh3",
+"digital": false
+},
+{
+"code": "tm3c",
+"name": "Modern Horizons 3 Commander Tokens",
+"released_at": "2024-06-14",
+"set_type": "token",
+"parent_set_code": "m3c",
+"digital": false
+},
+{
+"code": "m3c",
+"name": "Modern Horizons 3 Commander",
+"released_at": "2024-06-14",
+"set_type": "commander",
+"block_code": "cmd",
+"parent_set_code": "mh3",
+"digital": false
+},
+{
+"code": "h2r",
+"name": "Modern Horizons 2 Timeshifts",
+"released_at": "2024-06-14",
+"set_type": "draft_innovation",
+"parent_set_code": "mh3",
+"digital": false
+},
+{
+"code": "amh3",
+"name": "Modern Horizons 3 Art Series",
+"released_at": "2024-06-14",
+"set_type": "memorabilia",
+"parent_set_code": "mh3",
+"digital": false
+},
+{
+"code": "yotj",
+"name": "Alchemy: Outlaws of Thunder Junction",
+"released_at": "2024-05-07",
+"set_type": "alchemy",
+"block_code": "y24",
+"parent_set_code": "otj",
+"digital": true
+},
+{
+"code": "potj",
+"name": "Outlaws of Thunder Junction Promos",
+"released_at": "2024-04-19",
+"set_type": "promo",
+"parent_set_code": "otj",
+"digital": false
+},
+{
+"code": "aotj",
+"name": "Outlaws of Thunder Junction Art Series",
+"released_at": "2024-04-19",
+"set_type": "memorabilia",
+"parent_set_code": "otj",
+"digital": false
+},
+{
+"code": "totj",
+"name": "Outlaws of Thunder Junction Tokens",
+"released_at": "2024-04-19",
+"set_type": "token",
+"parent_set_code": "otj",
+"digital": false
+},
+{
+"code": "totp",
+"name": "Breaking News Tokens",
+"released_at": "2024-04-19",
+"set_type": "token",
+"parent_set_code": "otp",
+"digital": false
+},
+{
+"code": "big",
+"name": "The Big Score",
+"released_at": "2024-04-19",
+"set_type": "expansion",
+"block_code": "otj",
+"parent_set_code": "otj",
+"digital": false
+},
+{
+"code": "totc",
+"name": "Outlaws of Thunder Junction Commander Tokens",
+"released_at": "2024-04-19",
+"set_type": "token",
+"parent_set_code": "otc",
+"digital": false
+},
+{
+"code": "tbig",
+"name": "The Big Score Tokens",
+"released_at": "2024-04-19",
+"set_type": "token",
+"parent_set_code": "big",
+"digital": false
+},
+{
+"code": "otp",
+"name": "Breaking News",
+"released_at": "2024-04-19",
+"set_type": "masterpiece",
+"block_code": "otj",
+"parent_set_code": "otj",
+"digital": false
+},
+{
+"code": "otc",
+"name": "Outlaws of Thunder Junction Commander",
+"released_at": "2024-04-19",
+"set_type": "commander",
+"block_code": "cmd",
+"parent_set_code": "otj",
+"digital": false
+},
+{
+"code": "otj",
+"name": "Outlaws of Thunder Junction",
+"released_at": "2024-04-19",
+"set_type": "expansion",
+"block_code": "otj",
+"digital": false
+},
+{
+"code": "tpip",
+"name": "Fallout Tokens",
+"released_at": "2024-03-08",
+"set_type": "token",
+"parent_set_code": "pip",
+"digital": false
+},
+{
+"code": "pip",
+"name": "Fallout",
+"released_at": "2024-03-08",
+"set_type": "commander",
+"block_code": "cmd",
+"digital": false
+},
+{
+"code": "ymkm",
+"name": "Alchemy: Murders at Karlov Manor",
+"released_at": "2024-03-05",
+"set_type": "alchemy",
+"block_code": "y24",
+"parent_set_code": "mkm",
+"digital": true
+},
+{
+"code": "punk",
+"name": "Black Lotus Unknown Planechase",
+"released_at": "2024-02-24",
+"set_type": "funny",
+"parent_set_code": "unk",
+"digital": false
+},
+{
+"code": "fclu",
+"name": "Ravnica: Clue Edition Front Cards",
+"released_at": "2024-02-23",
+"set_type": "memorabilia",
+"parent_set_code": "clu",
+"digital": false
+},
+{
+"code": "clu",
+"name": "Ravnica: Clue Edition",
+"released_at": "2024-02-23",
+"set_type": "draft_innovation",
+"parent_set_code": "mkm",
+"digital": false
+},
+{
+"code": "pss4",
+"name": "MKM Standard Showdown",
+"released_at": "2024-02-10",
+"set_type": "promo",
+"parent_set_code": "mkm",
+"digital": false
+},
+{
+"code": "amkm",
+"name": "Murders at Karlov Manor Art Series",
+"released_at": "2024-02-09",
+"set_type": "memorabilia",
+"parent_set_code": "mkm",
+"digital": false
+},
+{
+"code": "pmkm",
+"name": "Murders at Karlov Manor Promos",
+"released_at": "2024-02-09",
+"set_type": "promo",
+"parent_set_code": "mkm",
+"digital": false
+},
+{
+"code": "tmkm",
+"name": "Murders at Karlov Manor Tokens",
+"released_at": "2024-02-09",
+"set_type": "token",
+"parent_set_code": "mkm",
+"digital": false
+},
+{
+"code": "tmkc",
+"name": "Murders at Karlov Manor Commander Tokens",
+"released_at": "2024-02-09",
+"set_type": "token",
+"parent_set_code": "mkc",
+"digital": false
+},
+{
+"code": "mkc",
+"name": "Murders at Karlov Manor Commander",
+"released_at": "2024-02-09",
+"set_type": "commander",
+"block_code": "cmd",
+"parent_set_code": "mkm",
+"digital": false
+},
+{
+"code": "wmkm",
+"name": "MKM Japanese Promo Tokens",
+"released_at": "2024-02-09",
+"set_type": "token",
+"parent_set_code": "mkm",
+"digital": false
+},
+{
+"code": "mkm",
+"name": "Murders at Karlov Manor",
+"released_at": "2024-02-09",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "pl24",
+"name": "Year of the Dragon 2024",
+"released_at": "2024-02-08",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "trvr",
+"name": "Ravnica Remastered Tokens",
+"released_at": "2024-01-12",
+"set_type": "token",
+"parent_set_code": "rvr",
+"digital": false
+},
+{
+"code": "rvr",
+"name": "Ravnica Remastered",
+"released_at": "2024-01-12",
+"set_type": "masters",
+"digital": false
+},
+{
+"code": "pw24",
+"name": "Wizards Play Network 2024",
+"released_at": "2024-01-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "pf24",
+"name": "MagicFest 2024",
+"released_at": "2024-01-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "ylci",
+"name": "Alchemy: Ixalan",
+"released_at": "2023-12-05",
+"set_type": "alchemy",
+"block_code": "y24",
+"parent_set_code": "lci",
+"digital": true
+},
+{
+"code": "alci",
+"name": "The Lost Caverns of Ixalan Art Series",
+"released_at": "2023-11-17",
+"set_type": "memorabilia",
+"parent_set_code": "lci",
+"digital": false
+},
+{
+"code": "plci",
+"name": "The Lost Caverns of Ixalan Promos",
+"released_at": "2023-11-17",
+"set_type": "promo",
+"parent_set_code": "lci",
+"digital": false
+},
+{
+"code": "spg",
+"name": "Special Guests",
+"released_at": "2023-11-17",
+"set_type": "masterpiece",
+"digital": false
+},
+{
+"code": "tlcc",
+"name": "The Lost Caverns of Ixalan Commander Tokens",
+"released_at": "2023-11-17",
+"set_type": "token",
+"parent_set_code": "lcc",
+"digital": false
+},
+{
+"code": "trex",
+"name": "Jurassic World Collection Tokens",
+"released_at": "2023-11-17",
+"set_type": "token",
+"parent_set_code": "rex",
+"digital": false
+},
+{
+"code": "rex",
+"name": "Jurassic World Collection",
+"released_at": "2023-11-17",
+"set_type": "eternal",
+"parent_set_code": "lci",
+"digital": false
+},
+{
+"code": "lcc",
+"name": "The Lost Caverns of Ixalan Commander",
+"released_at": "2023-11-17",
+"set_type": "commander",
+"block_code": "cmd",
+"parent_set_code": "lci",
+"digital": false
+},
+{
+"code": "lci",
+"name": "The Lost Caverns of Ixalan",
+"released_at": "2023-11-17",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "slci",
+"name": "The Lost Caverns of Ixalan Substitute Cards",
+"released_at": "2023-11-17",
+"set_type": "token",
+"parent_set_code": "lci",
+"digital": false
+},
+{
+"code": "tlci",
+"name": "The Lost Caverns of Ixalan Tokens",
+"released_at": "2023-11-17",
+"set_type": "token",
+"parent_set_code": "lci",
+"digital": false
+},
+{
+"code": "pmat",
+"name": "March of the Machine: The Aftermath Promos",
+"released_at": "2023-11-17",
+"set_type": "promo",
+"parent_set_code": "mat",
+"digital": false
+},
+{
+"code": "altc",
+"name": "Tales of Middle-earth Scene Box",
+"released_at": "2023-11-04",
+"set_type": "memorabilia",
+"parent_set_code": "ltc",
+"digital": false
+},
+{
+"code": "who",
+"name": "Doctor Who",
+"released_at": "2023-10-13",
+"set_type": "commander",
+"block_code": "cmd",
+"digital": false
+},
+{
+"code": "twho",
+"name": "Doctor Who Tokens",
+"released_at": "2023-10-13",
+"set_type": "token",
+"parent_set_code": "who",
+"digital": false
+},
+{
+"code": "ywoe",
+"name": "Alchemy: Wilds of Eldraine",
+"released_at": "2023-10-10",
+"set_type": "alchemy",
+"block_code": "y24",
+"parent_set_code": "woe",
+"digital": true
+},
+{
+"code": "pwoe",
+"name": "Wilds of Eldraine Promos",
+"released_at": "2023-09-08",
+"set_type": "promo",
+"parent_set_code": "woe",
+"digital": false
+},
+{
+"code": "twoe",
+"name": "Wilds of Eldraine Tokens",
+"released_at": "2023-09-08",
+"set_type": "token",
+"parent_set_code": "woe",
+"digital": false
+},
+{
+"code": "wwoe",
+"name": "WOE Japanese Promo Tokens",
+"released_at": "2023-09-08",
+"set_type": "token",
+"parent_set_code": "woe",
+"digital": false
+},
+{
+"code": "woc",
+"name": "Wilds of Eldraine Commander",
+"released_at": "2023-09-08",
+"set_type": "commander",
+"block_code": "cmd",
+"parent_set_code": "woe",
+"digital": false
+},
+{
+"code": "twoc",
+"name": "Wilds of Eldraine Commander Tokens",
+"released_at": "2023-09-08",
+"set_type": "token",
+"parent_set_code": "woc",
+"digital": false
+},
+{
+"code": "awoe",
+"name": "Wilds of Eldraine Art Series",
+"released_at": "2023-09-08",
+"set_type": "memorabilia",
+"parent_set_code": "woe",
+"digital": false
+},
+{
+"code": "wot",
+"name": "Wilds of Eldraine: Enchanting Tales",
+"released_at": "2023-09-08",
+"set_type": "masterpiece",
+"parent_set_code": "woe",
+"digital": false
+},
+{
+"code": "pmda",
+"name": "Magic × Duel Masters Promos",
+"released_at": "2023-09-08",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "ptsr",
+"name": "Time Spiral Remastered Promos",
+"released_at": "2023-09-08",
+"set_type": "promo",
+"parent_set_code": "tsr",
+"digital": false
+},
+{
+"code": "woe",
+"name": "Wilds of Eldraine",
+"released_at": "2023-09-08",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "p30t",
+"name": "30th Anniversary Celebration Tokyo",
+"released_at": "2023-09-01",
+"set_type": "promo",
+"parent_set_code": "30a",
+"digital": false
+},
+{
+"code": "acmm",
+"name": "Commander Masters Art Series",
+"released_at": "2023-08-04",
+"set_type": "memorabilia",
+"parent_set_code": "cmm",
+"digital": false
+},
+{
+"code": "tcmm",
+"name": "Commander Masters Tokens",
+"released_at": "2023-08-04",
+"set_type": "token",
+"parent_set_code": "cmm",
+"digital": false
+},
+{
+"code": "cmm",
+"name": "Commander Masters",
+"released_at": "2023-08-04",
+"set_type": "masters",
+"block_code": "cmd",
+"digital": false
+},
+{
+"code": "ph22",
+"name": "2022 Heroes of the Realm",
+"released_at": "2023-08-01",
+"set_type": "funny",
+"block_code": "htr",
+"digital": false
+},
+{
+"code": "ea3",
+"name": "Explorer Anthology 3",
+"released_at": "2023-07-18",
+"set_type": "box",
+"digital": true
+},
+{
+"code": "ha7",
+"name": "Historic Anthology 7",
+"released_at": "2023-07-18",
+"set_type": "box",
+"digital": true
+},
+{
+"code": "pf23",
+"name": "MagicFest 2023",
+"released_at": "2023-07-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "pltr",
+"name": "Tales of Middle-earth Promos",
+"released_at": "2023-06-23",
+"set_type": "promo",
+"parent_set_code": "ltr",
+"digital": false
+},
+{
+"code": "ltc",
+"name": "Tales of Middle-earth Commander",
+"released_at": "2023-06-23",
+"set_type": "commander",
+"block_code": "cmd",
+"parent_set_code": "ltr",
+"digital": false
+},
+{
+"code": "altr",
+"name": "Tales of Middle-earth Art Series",
+"released_at": "2023-06-23",
+"set_type": "memorabilia",
+"parent_set_code": "ltr",
+"digital": false
+},
+{
+"code": "tltc",
+"name": "Tales of Middle-earth Commander Tokens",
+"released_at": "2023-06-23",
+"set_type": "token",
+"parent_set_code": "ltc",
+"digital": false
+},
+{
+"code": "ltr",
+"name": "The Lord of the Rings: Tales of Middle-earth",
+"released_at": "2023-06-23",
+"set_type": "draft_innovation",
+"digital": false
+},
+{
+"code": "tltr",
+"name": "Tales of Middle-earth Tokens",
+"released_at": "2023-06-23",
+"set_type": "token",
+"parent_set_code": "ltr",
+"digital": false
+},
+{
+"code": "mltr",
+"name": "The Lord of the Rings: Tales of Middle-earth Minigames",
+"released_at": "2023-06-23",
+"set_type": "minigame",
+"parent_set_code": "ltr",
+"digital": false
+},
+{
+"code": "fltr",
+"name": "Tales of Middle-earth Front Cards",
+"released_at": "2023-06-23",
+"set_type": "memorabilia",
+"parent_set_code": "ltr",
+"digital": false
+},
+{
+"code": "mat",
+"name": "March of the Machine: The Aftermath",
+"released_at": "2023-05-12",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "fmom",
+"name": "March of the Machine Jumpstart Front Cards",
+"released_at": "2023-04-21",
+"set_type": "memorabilia",
+"parent_set_code": "mom",
+"digital": false
+},
+{
+"code": "tmoc",
+"name": "March of the Machine Commander Tokens",
+"released_at": "2023-04-21",
+"set_type": "token",
+"parent_set_code": "moc",
+"digital": false
+},
+{
+"code": "tmul",
+"name": "Multiverse Legends Tokens",
+"released_at": "2023-04-21",
+"set_type": "token",
+"parent_set_code": "mul",
+"digital": false
+},
+{
+"code": "wmom",
+"name": "MOM Japanese Promo Tokens",
+"released_at": "2023-04-21",
+"set_type": "token",
+"parent_set_code": "mom",
+"digital": false
+},
+{
+"code": "amom",
+"name": "March of the Machine Art Series",
+"released_at": "2023-04-21",
+"set_type": "memorabilia",
+"parent_set_code": "mom",
+"digital": false
+},
+{
+"code": "pmom",
+"name": "March of the Machine Promos",
+"released_at": "2023-04-21",
+"set_type": "promo",
+"parent_set_code": "mom",
+"digital": false
+},
+{
+"code": "smom",
+"name": "March of the Machine Substitute Cards",
+"released_at": "2023-04-21",
+"set_type": "token",
+"parent_set_code": "mom",
+"digital": false
+},
+{
+"code": "mul",
+"name": "Multiverse Legends",
+"released_at": "2023-04-21",
+"set_type": "masterpiece",
+"parent_set_code": "mom",
+"digital": false
+},
+{
+"code": "tmom",
+"name": "March of the Machine Tokens",
+"released_at": "2023-04-21",
+"set_type": "token",
+"parent_set_code": "mom",
+"digital": false
+},
+{
+"code": "mom",
+"name": "March of the Machine",
+"released_at": "2023-04-21",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "moc",
+"name": "March of the Machine Commander",
+"released_at": "2023-04-21",
+"set_type": "commander",
+"block_code": "cmd",
+"parent_set_code": "mom",
+"digital": false
+},
+{
+"code": "sis",
+"name": "Shadows of the Past",
+"released_at": "2023-03-21",
+"set_type": "masters",
+"parent_set_code": "sir",
+"digital": true
+},
+{
+"code": "sir",
+"name": "Shadows over Innistrad Remastered",
+"released_at": "2023-03-21",
+"set_type": "masters",
+"digital": true
+},
+{
+"code": "yone",
+"name": "Alchemy: Phyrexia",
+"released_at": "2023-02-28",
+"set_type": "alchemy",
+"block_code": "y23",
+"parent_set_code": "one",
+"digital": true
+},
+{
+"code": "slp",
+"name": "Secret Lair Promo",
+"released_at": "2023-02-17",
+"set_type": "promo",
+"parent_set_code": "sld",
+"digital": false
+},
+{
+"code": "unk",
+"name": "Unknown Event",
+"released_at": "2023-02-15",
+"set_type": "funny",
+"digital": false
+},
+{
+"code": "one",
+"name": "Phyrexia: All Will Be One",
+"released_at": "2023-02-10",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "fone",
+"name": "Phyrexia: All Will Be One Jumpstart Front Cards",
+"released_at": "2023-02-10",
+"set_type": "memorabilia",
+"parent_set_code": "one",
+"digital": false
+},
+{
+"code": "mone",
+"name": "Phyrexia: All Will Be One Minigames",
+"released_at": "2023-02-10",
+"set_type": "minigame",
+"parent_set_code": "one",
+"digital": false
+},
+{
+"code": "pone",
+"name": "Phyrexia: All Will Be One Promos",
+"released_at": "2023-02-10",
+"set_type": "promo",
+"parent_set_code": "one",
+"digital": false
+},
+{
+"code": "aone",
+"name": "Phyrexia: All Will Be One Art Series",
+"released_at": "2023-02-10",
+"set_type": "memorabilia",
+"parent_set_code": "one",
+"digital": false
+},
+{
+"code": "onc",
+"name": "Phyrexia: All Will Be One Commander",
+"released_at": "2023-02-10",
+"set_type": "commander",
+"block_code": "cmd",
+"parent_set_code": "one",
+"digital": false
+},
+{
+"code": "pl23",
+"name": "Year of the Rabbit 2023",
+"released_at": "2023-02-10",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "tonc",
+"name": "Phyrexia: All Will Be One Commander Tokens",
+"released_at": "2023-02-03",
+"set_type": "token",
+"parent_set_code": "onc",
+"digital": false
+},
+{
+"code": "tone",
+"name": "Phyrexia: All Will Be One Tokens",
+"released_at": "2023-02-03",
+"set_type": "token",
+"parent_set_code": "one",
+"digital": false
+},
+{
+"code": "wone",
+"name": "ONE Japanese Promo Tokens",
+"released_at": "2023-01-27",
+"set_type": "token",
+"parent_set_code": "one",
+"digital": false
+},
+{
+"code": "tdmr",
+"name": "Dominaria Remastered Tokens",
+"released_at": "2023-01-13",
+"set_type": "token",
+"parent_set_code": "dmr",
+"digital": false
+},
+{
+"code": "dmr",
+"name": "Dominaria Remastered",
+"released_at": "2023-01-13",
+"set_type": "masters",
+"digital": false
+},
+{
+"code": "pr23",
+"name": "Regional Championship Qualifiers 2023",
+"released_at": "2023-01-07",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "pw23",
+"name": "Wizards Play Network 2023",
+"released_at": "2023-01-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "p23",
+"name": "Judge Gift Cards 2023",
+"released_at": "2023-01-01",
+"set_type": "promo",
+"block_code": "jgp",
+"digital": false
+},
+{
+"code": "ybro",
+"name": "Alchemy: The Brothers' War",
+"released_at": "2022-12-13",
+"set_type": "alchemy",
+"block_code": "y23",
+"parent_set_code": "bro",
+"digital": true
+},
+{
+"code": "ea2",
+"name": "Explorer Anthology 2",
+"released_at": "2022-12-13",
+"set_type": "box",
+"digital": true
+},
+{
+"code": "tscd",
+"name": "Starter Commander Deck Tokens",
+"released_at": "2022-12-02",
+"set_type": "token",
+"parent_set_code": "scd",
+"digital": false
+},
+{
+"code": "scd",
+"name": "Starter Commander Decks",
+"released_at": "2022-12-02",
+"set_type": "commander",
+"block_code": "cmd",
+"digital": false
+},
+{
+"code": "fj22",
+"name": "Jumpstart 2022 Front Cards",
+"released_at": "2022-12-02",
+"set_type": "memorabilia",
+"parent_set_code": "j22",
+"digital": false
+},
+{
+"code": "j22",
+"name": "Jumpstart 2022",
+"released_at": "2022-12-02",
+"set_type": "draft_innovation",
+"digital": false
+},
+{
+"code": "30a",
+"name": "30th Anniversary Edition",
+"released_at": "2022-11-28",
+"set_type": "memorabilia",
+"digital": false
+},
+{
+"code": "t30a",
+"name": "30th Anniversary Tokens",
+"released_at": "2022-11-28",
+"set_type": "token",
+"parent_set_code": "30a",
+"digital": false
+},
+{
+"code": "pewk",
+"name": "Eternal Weekend",
+"released_at": "2022-11-26",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "brc",
+"name": "The Brothers' War Commander",
+"released_at": "2022-11-18",
+"set_type": "commander",
+"block_code": "cmd",
+"parent_set_code": "bro",
+"digital": false
+},
+{
+"code": "brr",
+"name": "The Brothers' War Retro Artifacts",
+"released_at": "2022-11-18",
+"set_type": "masterpiece",
+"parent_set_code": "bro",
+"digital": false
+},
+{
+"code": "pbro",
+"name": "The Brothers' War Promos",
+"released_at": "2022-11-18",
+"set_type": "promo",
+"parent_set_code": "bro",
+"digital": false
+},
+{
+"code": "tbot",
+"name": "Transformers Tokens",
+"released_at": "2022-11-18",
+"set_type": "token",
+"parent_set_code": "bot",
+"digital": false
+},
+{
+"code": "bot",
+"name": "Transformers",
+"released_at": "2022-11-18",
+"set_type": "eternal",
+"parent_set_code": "bro",
+"digital": false
+},
+{
+"code": "ptbro",
+"name": "The Brothers' War Southeast Asia Tokens",
+"released_at": "2022-11-18",
+"set_type": "token",
+"parent_set_code": "bro",
+"digital": false
+},
+{
+"code": "sbro",
+"name": "The Brothers' War Substitute Cards",
+"released_at": "2022-11-18",
+"set_type": "token",
+"parent_set_code": "bro",
+"digital": false
+},
+{
+"code": "mbro",
+"name": "The Brothers' War Minigames",
+"released_at": "2022-11-18",
+"set_type": "minigame",
+"parent_set_code": "bro",
+"digital": false
+},
+{
+"code": "abro",
+"name": "The Brothers' War Art Series",
+"released_at": "2022-11-18",
+"set_type": "memorabilia",
+"parent_set_code": "bro",
+"digital": false
+},
+{
+"code": "tbrc",
+"name": "The Brothers' War Commander Tokens",
+"released_at": "2022-11-18",
+"set_type": "token",
+"parent_set_code": "brc",
+"digital": false
+},
+{
+"code": "fbro",
+"name": "The Brothers' War Jumpstart Front Cards",
+"released_at": "2022-11-18",
+"set_type": "memorabilia",
+"parent_set_code": "bro",
+"digital": false
+},
+{
+"code": "tbro",
+"name": "The Brothers' War Tokens",
+"released_at": "2022-11-18",
+"set_type": "token",
+"parent_set_code": "bro",
+"digital": false
+},
+{
+"code": "bro",
+"name": "The Brothers' War",
+"released_at": "2022-11-18",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "slc",
+"name": "Secret Lair Countdown",
+"released_at": "2022-11-01",
+"set_type": "box",
+"parent_set_code": "sld",
+"digital": false
+},
+{
+"code": "tgn3",
+"name": "Game Night: Free-for-All Tokens",
+"released_at": "2022-10-14",
+"set_type": "token",
+"parent_set_code": "gn3",
+"digital": false
+},
+{
+"code": "gn3",
+"name": "Game Night: Free-for-All",
+"released_at": "2022-10-14",
+"set_type": "box",
+"digital": false
+},
+{
+"code": "ulst",
+"name": "The List (Unfinity Foil Edition)",
+"released_at": "2022-10-07",
+"set_type": "funny",
+"parent_set_code": "plst",
+"digital": false
+},
+{
+"code": "unf",
+"name": "Unfinity",
+"released_at": "2022-10-07",
+"set_type": "funny",
+"digital": false
+},
+{
+"code": "sunf",
+"name": "Unfinity Sticker Sheets",
+"released_at": "2022-10-07",
+"set_type": "funny",
+"parent_set_code": "unf",
+"digital": false
+},
+{
+"code": "tunf",
+"name": "Unfinity Tokens",
+"released_at": "2022-10-07",
+"set_type": "token",
+"parent_set_code": "unf",
+"digital": false
+},
+{
+"code": "t40k",
+"name": "Warhammer 40,000 Tokens",
+"released_at": "2022-10-07",
+"set_type": "token",
+"parent_set_code": "40k",
+"digital": false
+},
+{
+"code": "40k",
+"name": "Warhammer 40,000 Commander",
+"released_at": "2022-10-07",
+"set_type": "commander",
+"block_code": "cmd",
+"digital": false
+},
+{
+"code": "ydmu",
+"name": "Alchemy: Dominaria",
+"released_at": "2022-10-05",
+"set_type": "alchemy",
+"block_code": "y23",
+"parent_set_code": "dmu",
+"digital": true
+},
+{
+"code": "prcq",
+"name": "Regional Championship Qualifiers 2022",
+"released_at": "2022-10-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "p30h",
+"name": "30th Anniversary History Promos",
+"released_at": "2022-09-09",
+"set_type": "promo",
+"parent_set_code": "30a",
+"digital": false
+},
+{
+"code": "pdmu",
+"name": "Dominaria United Promos",
+"released_at": "2022-09-09",
+"set_type": "promo",
+"parent_set_code": "dmu",
+"digital": false
+},
+{
+"code": "ptdmu",
+"name": "Dominaria United Southeast Asia Tokens",
+"released_at": "2022-09-09",
+"set_type": "token",
+"parent_set_code": "dmu",
+"digital": false
+},
+{
+"code": "dmc",
+"name": "Dominaria United Commander",
+"released_at": "2022-09-09",
+"set_type": "commander",
+"block_code": "cmd",
+"parent_set_code": "dmu",
+"digital": false
+},
+{
+"code": "wdmu",
+"name": "DMU Japanese Promo Tokens",
+"released_at": "2022-09-09",
+"set_type": "token",
+"parent_set_code": "dmu",
+"digital": false
+},
+{
+"code": "fdmu",
+"name": "Dominaria United Jumpstart Front Cards",
+"released_at": "2022-09-09",
+"set_type": "memorabilia",
+"parent_set_code": "dmu",
+"digital": false
+},
+{
+"code": "tdmc",
+"name": "Dominaria United Commander Tokens",
+"released_at": "2022-09-09",
+"set_type": "token",
+"parent_set_code": "dmc",
+"digital": false
+},
+{
+"code": "tdmu",
+"name": "Dominaria United Tokens",
+"released_at": "2022-09-09",
+"set_type": "token",
+"parent_set_code": "dmu",
+"digital": false
+},
+{
+"code": "mdmu",
+"name": "Dominaria United Minigames",
+"released_at": "2022-09-09",
+"set_type": "minigame",
+"parent_set_code": "dmu",
+"digital": false
+},
+{
+"code": "dmu",
+"name": "Dominaria United",
+"released_at": "2022-09-09",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "admu",
+"name": "Dominaria United Art Series",
+"released_at": "2022-09-09",
+"set_type": "memorabilia",
+"parent_set_code": "dmu",
+"digital": false
+},
+{
+"code": "p30a",
+"name": "30th Anniversary Play Promos",
+"released_at": "2022-09-02",
+"set_type": "promo",
+"parent_set_code": "30a",
+"digital": false
+},
+{
+"code": "p30m",
+"name": "30th Anniversary Misc Promos",
+"released_at": "2022-09-02",
+"set_type": "promo",
+"parent_set_code": "30a",
+"digital": false
+},
+{
+"code": "ph21",
+"name": "2021 Heroes of the Realm",
+"released_at": "2022-08-01",
+"set_type": "funny",
+"block_code": "htr",
+"digital": false
+},
+{
+"code": "psvc",
+"name": "Summer Vacation Promos 2022",
+"released_at": "2022-08-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "ha6",
+"name": "Historic Anthology 6",
+"released_at": "2022-07-28",
+"set_type": "box",
+"digital": true
+},
+{
+"code": "ea1",
+"name": "Explorer Anthology 1",
+"released_at": "2022-07-28",
+"set_type": "box",
+"digital": true
+},
+{
+"code": "sch",
+"name": "Store Championships",
+"released_at": "2022-07-09",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "t2x2",
+"name": "Double Masters 2022 Tokens",
+"released_at": "2022-07-08",
+"set_type": "token",
+"parent_set_code": "2x2",
+"digital": false
+},
+{
+"code": "2x2",
+"name": "Double Masters 2022",
+"released_at": "2022-07-08",
+"set_type": "masters",
+"digital": false
+},
+{
+"code": "hbg",
+"name": "Alchemy Horizons: Baldur's Gate",
+"released_at": "2022-07-07",
+"set_type": "alchemy",
+"block_code": "y22",
+"digital": true
+},
+{
+"code": "plg22",
+"name": "Love Your LGS 2022",
+"released_at": "2022-07-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "pclb",
+"name": "Battle for Baldur's Gate Promos",
+"released_at": "2022-06-10",
+"set_type": "promo",
+"parent_set_code": "clb",
+"digital": false
+},
+{
+"code": "mclb",
+"name": "Commander Legends: Battle for Baldur's Gate Minigames",
+"released_at": "2022-06-10",
+"set_type": "minigame",
+"parent_set_code": "clb",
+"digital": false
+},
+{
+"code": "clb",
+"name": "Commander Legends: Battle for Baldur's Gate",
+"released_at": "2022-06-10",
+"set_type": "draft_innovation",
+"block_code": "cmd",
+"digital": false
+},
+{
+"code": "aclb",
+"name": "Battle for Baldur's Gate Art Series",
+"released_at": "2022-06-10",
+"set_type": "memorabilia",
+"parent_set_code": "clb",
+"digital": false
+},
+{
+"code": "oclb",
+"name": "Battle for Baldur's Gate Oversized Cards",
+"released_at": "2022-06-10",
+"set_type": "memorabilia",
+"parent_set_code": "clb",
+"digital": false
+},
+{
+"code": "tclb",
+"name": "Battle for Baldur's Gate Tokens",
+"released_at": "2022-06-10",
+"set_type": "token",
+"parent_set_code": "clb",
+"digital": false
+},
+{
+"code": "ysnc",
+"name": "Alchemy: New Capenna",
+"released_at": "2022-06-02",
+"set_type": "alchemy",
+"block_code": "y22",
+"parent_set_code": "snc",
+"digital": true
+},
+{
+"code": "ptsnc",
+"name": "Streets of New Capenna Southeast Asia Tokens",
+"released_at": "2022-04-30",
+"set_type": "promo",
+"parent_set_code": "psnc",
+"digital": false
+},
+{
+"code": "pncc",
+"name": "New Capenna Commander Promos",
+"released_at": "2022-04-29",
+"set_type": "promo",
+"parent_set_code": "ncc",
+"digital": false
+},
+{
+"code": "tsnc",
+"name": "Streets of New Capenna Tokens",
+"released_at": "2022-04-29",
+"set_type": "token",
+"parent_set_code": "snc",
+"digital": false
+},
+{
+"code": "snc",
+"name": "Streets of New Capenna",
+"released_at": "2022-04-29",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "ncc",
+"name": "New Capenna Commander",
+"released_at": "2022-04-29",
+"set_type": "commander",
+"block_code": "cmd",
+"parent_set_code": "snc",
+"digital": false
+},
+{
+"code": "tncc",
+"name": "New Capenna Commander Tokens",
+"released_at": "2022-04-29",
+"set_type": "token",
+"parent_set_code": "ncc",
+"digital": false
+},
+{
+"code": "psnc",
+"name": "Streets of New Capenna Promos",
+"released_at": "2022-04-29",
+"set_type": "promo",
+"parent_set_code": "snc",
+"digital": false
+},
+{
+"code": "msnc",
+"name": "Streets of New Capenna Minigames",
+"released_at": "2022-04-29",
+"set_type": "minigame",
+"parent_set_code": "snc",
+"digital": false
+},
+{
+"code": "asnc",
+"name": "New Capenna Art Series",
+"released_at": "2022-04-29",
+"set_type": "memorabilia",
+"parent_set_code": "snc",
+"digital": false
+},
+{
+"code": "gdy",
+"name": "Game Day Promos",
+"released_at": "2022-04-08",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "q07",
+"name": "Challenger Decks 2022",
+"released_at": "2022-04-01",
+"set_type": "box",
+"digital": false
+},
+{
+"code": "yneo",
+"name": "Alchemy: Kamigawa",
+"released_at": "2022-03-17",
+"set_type": "alchemy",
+"block_code": "y22",
+"parent_set_code": "neo",
+"digital": true
+},
+{
+"code": "pw22",
+"name": "Wizards Play Network 2022",
+"released_at": "2022-03-05",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "slx",
+"name": "Universes Within",
+"released_at": "2022-03-03",
+"set_type": "masters",
+"parent_set_code": "sld",
+"digital": false
+},
+{
+"code": "pl22",
+"name": "Year of the Tiger 2022",
+"released_at": "2022-02-25",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "pneo",
+"name": "Kamigawa: Neon Dynasty Promos",
+"released_at": "2022-02-18",
+"set_type": "promo",
+"parent_set_code": "neo",
+"digital": false
+},
+{
+"code": "mneo",
+"name": "Kamigawa: Neon Dynasty Minigames",
+"released_at": "2022-02-18",
+"set_type": "minigame",
+"parent_set_code": "neo",
+"digital": false
+},
+{
+"code": "sneo",
+"name": "Kamigawa: Neon Dynasty Substitute Cards",
+"released_at": "2022-02-18",
+"set_type": "token",
+"parent_set_code": "neo",
+"digital": false
+},
+{
+"code": "tneo",
+"name": "Kamigawa: Neon Dynasty Tokens",
+"released_at": "2022-02-18",
+"set_type": "token",
+"parent_set_code": "neo",
+"digital": false
+},
+{
+"code": "neo",
+"name": "Kamigawa: Neon Dynasty",
+"released_at": "2022-02-18",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "tnec",
+"name": "Neon Dynasty Commander Tokens",
+"released_at": "2022-02-18",
+"set_type": "token",
+"parent_set_code": "nec",
+"digital": false
+},
+{
+"code": "nec",
+"name": "Neon Dynasty Commander",
+"released_at": "2022-02-18",
+"set_type": "commander",
+"block_code": "cmd",
+"parent_set_code": "neo",
+"digital": false
+},
+{
+"code": "aneo",
+"name": "Neon Dynasty Art Series",
+"released_at": "2022-02-18",
+"set_type": "memorabilia",
+"parent_set_code": "neo",
+"digital": false
+},
+{
+"code": "cc2",
+"name": "Commander Collection: Black",
+"released_at": "2022-01-28",
+"set_type": "arsenal",
+"digital": false
+},
+{
+"code": "dbl",
+"name": "Innistrad: Double Feature",
+"released_at": "2022-01-28",
+"set_type": "draft_innovation",
+"digital": false
+},
+{
+"code": "p22",
+"name": "Judge Gift Cards 2022",
+"released_at": "2022-01-01",
+"set_type": "promo",
+"block_code": "jgp",
+"digital": false
+},
+{
+"code": "ymid",
+"name": "Alchemy: Innistrad",
+"released_at": "2021-12-09",
+"set_type": "alchemy",
+"block_code": "y22",
+"digital": true
+},
+{
+"code": "pvow",
+"name": "Innistrad: Crimson Vow Promos",
+"released_at": "2021-11-19",
+"set_type": "promo",
+"parent_set_code": "vow",
+"digital": false
+},
+{
+"code": "ovoc",
+"name": "Crimson Vow Commander Display Commanders",
+"released_at": "2021-11-19",
+"set_type": "memorabilia",
+"block_code": "dbl",
+"parent_set_code": "voc",
+"digital": false
+},
+{
+"code": "tvoc",
+"name": "Crimson Vow Commander Tokens",
+"released_at": "2021-11-19",
+"set_type": "token",
+"block_code": "dbl",
+"parent_set_code": "voc",
+"digital": false
+},
+{
+"code": "tvow",
+"name": "Innistrad: Crimson Vow Tokens",
+"released_at": "2021-11-19",
+"set_type": "token",
+"block_code": "dbl",
+"parent_set_code": "vow",
+"digital": false
+},
+{
+"code": "mvow",
+"name": "Innistrad: Crimson Vow Minigames",
+"released_at": "2021-11-19",
+"set_type": "minigame",
+"parent_set_code": "vow",
+"digital": false
+},
+{
+"code": "svow",
+"name": "Innistrad: Crimson Vow Substitute Cards",
+"released_at": "2021-11-19",
+"set_type": "token",
+"parent_set_code": "vow",
+"digital": false
+},
+{
+"code": "avow",
+"name": "Crimson Vow Art Series",
+"released_at": "2021-11-19",
+"set_type": "memorabilia",
+"block_code": "dbl",
+"parent_set_code": "vow",
+"digital": false
+},
+{
+"code": "vow",
+"name": "Innistrad: Crimson Vow",
+"released_at": "2021-11-19",
+"set_type": "expansion",
+"block_code": "dbl",
+"digital": false
+},
+{
+"code": "voc",
+"name": "Crimson Vow Commander",
+"released_at": "2021-11-19",
+"set_type": "commander",
+"block_code": "cmd",
+"parent_set_code": "vow",
+"digital": false
+},
+{
+"code": "q06",
+"name": "Pioneer Challenger Decks 2021",
+"released_at": "2021-10-15",
+"set_type": "box",
+"digital": false
+},
+{
+"code": "smid",
+"name": "Innistrad: Midnight Hunt Substitute Cards",
+"released_at": "2021-09-24",
+"set_type": "token",
+"block_code": "dbl",
+"parent_set_code": "mid",
+"digital": false
+},
+{
+"code": "omic",
+"name": "Midnight Hunt Commander Display Commanders",
+"released_at": "2021-09-24",
+"set_type": "memorabilia",
+"block_code": "cmd",
+"parent_set_code": "mic",
+"digital": false
+},
+{
+"code": "tmic",
+"name": "Midnight Hunt Commander Tokens",
+"released_at": "2021-09-24",
+"set_type": "token",
+"block_code": "cmd",
+"parent_set_code": "mic",
+"digital": false
+},
+{
+"code": "amid",
+"name": "Midnight Hunt Art Series",
+"released_at": "2021-09-24",
+"set_type": "memorabilia",
+"block_code": "dbl",
+"parent_set_code": "mid",
+"digital": false
+},
+{
+"code": "tmid",
+"name": "Innistrad: Midnight Hunt Tokens",
+"released_at": "2021-09-24",
+"set_type": "token",
+"block_code": "dbl",
+"parent_set_code": "mid",
+"digital": false
+},
+{
+"code": "mic",
+"name": "Midnight Hunt Commander",
+"released_at": "2021-09-24",
+"set_type": "commander",
+"block_code": "cmd",
+"parent_set_code": "mid",
+"digital": false
+},
+{
+"code": "pmid",
+"name": "Innistrad: Midnight Hunt Promos",
+"released_at": "2021-09-24",
+"set_type": "promo",
+"block_code": "dbl",
+"parent_set_code": "mid",
+"digital": false
+},
+{
+"code": "mid",
+"name": "Innistrad: Midnight Hunt",
+"released_at": "2021-09-24",
+"set_type": "expansion",
+"block_code": "dbl",
+"digital": false
+},
+{
+"code": "mmid",
+"name": "Innistrad: Midnight Hunt Minigames",
+"released_at": "2021-09-24",
+"set_type": "minigame",
+"parent_set_code": "mid",
+"digital": false
+},
+{
+"code": "j21",
+"name": "Jumpstart: Historic Horizons",
+"released_at": "2021-08-26",
+"set_type": "draft_innovation",
+"digital": true
+},
+{
+"code": "cmb2",
+"name": "Mystery Booster Playtest Cards 2021",
+"released_at": "2021-08-20",
+"set_type": "funny",
+"digital": false
+},
+{
+"code": "ph20",
+"name": "2020 Heroes of the Realm",
+"released_at": "2021-08-01",
+"set_type": "funny",
+"block_code": "htr",
+"digital": false
+},
+{
+"code": "pafr",
+"name": "Adventures in the Forgotten Realms Promos",
+"released_at": "2021-07-23",
+"set_type": "promo",
+"parent_set_code": "afr",
+"digital": false
+},
+{
+"code": "oafc",
+"name": "Forgotten Realms Commander Display Commanders",
+"released_at": "2021-07-23",
+"set_type": "memorabilia",
+"parent_set_code": "afc",
+"digital": false
+},
+{
+"code": "oafr",
+"name": "Forgotten Realms Oversized Cards",
+"released_at": "2021-07-23",
+"set_type": "memorabilia",
+"parent_set_code": "afr",
+"digital": false
+},
+{
+"code": "afc",
+"name": "Forgotten Realms Commander",
+"released_at": "2021-07-23",
+"set_type": "commander",
+"block_code": "cmd",
+"parent_set_code": "afr",
+"digital": false
+},
+{
+"code": "aafr",
+"name": "Adventures in the Forgotten Realms Art Series",
+"released_at": "2021-07-23",
+"set_type": "memorabilia",
+"parent_set_code": "afr",
+"digital": false
+},
+{
+"code": "tafc",
+"name": "Forgotten Realms Commander Tokens",
+"released_at": "2021-07-23",
+"set_type": "token",
+"parent_set_code": "afc",
+"digital": false
+},
+{
+"code": "tafr",
+"name": "Adventures in the Forgotten Realms Tokens",
+"released_at": "2021-07-23",
+"set_type": "token",
+"parent_set_code": "afr",
+"digital": false
+},
+{
+"code": "mafr",
+"name": "Adventures in the Forgotten Realms Minigames",
+"released_at": "2021-07-23",
+"set_type": "minigame",
+"parent_set_code": "afr",
+"digital": false
+},
+{
+"code": "afr",
+"name": "Adventures in the Forgotten Realms",
+"released_at": "2021-07-23",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "plg21",
+"name": "Love Your LGS 2021",
+"released_at": "2021-06-22",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "tmh2",
+"name": "Modern Horizons 2 Tokens",
+"released_at": "2021-06-18",
+"set_type": "token",
+"parent_set_code": "mh2",
+"digital": false
+},
+{
+"code": "pmh2",
+"name": "Modern Horizons 2 Promos",
+"released_at": "2021-06-18",
+"set_type": "promo",
+"parent_set_code": "mh2",
+"digital": false
+},
+{
+"code": "mmh2",
+"name": "Modern Horizons 2 Minigames",
+"released_at": "2021-06-18",
+"set_type": "minigame",
+"parent_set_code": "mh2",
+"digital": false
+},
+{
+"code": "amh2",
+"name": "Modern Horizons 2 Art Series",
+"released_at": "2021-06-18",
+"set_type": "memorabilia",
+"parent_set_code": "mh2",
+"digital": false
+},
+{
+"code": "pw21",
+"name": "Wizards Play Network 2021",
+"released_at": "2021-06-18",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "h1r",
+"name": "Modern Horizons 1 Timeshifts",
+"released_at": "2021-06-18",
+"set_type": "draft_innovation",
+"parent_set_code": "mh2",
+"digital": false
+},
+{
+"code": "mh2",
+"name": "Modern Horizons 2",
+"released_at": "2021-06-18",
+"set_type": "draft_innovation",
+"block_code": "mh1",
+"digital": false
+},
+{
+"code": "ha5",
+"name": "Historic Anthology 5",
+"released_at": "2021-05-27",
+"set_type": "box",
+"digital": true
+},
+{
+"code": "pstx",
+"name": "Strixhaven: School of Mages Promos",
+"released_at": "2021-04-23",
+"set_type": "promo",
+"parent_set_code": "stx",
+"digital": false
+},
+{
+"code": "tstx",
+"name": "Strixhaven: School of Mages Tokens",
+"released_at": "2021-04-23",
+"set_type": "token",
+"parent_set_code": "stx",
+"digital": false
+},
+{
+"code": "tc21",
+"name": "Commander 2021 Tokens",
+"released_at": "2021-04-23",
+"set_type": "token",
+"parent_set_code": "c21",
+"digital": false
+},
+{
+"code": "sstx",
+"name": "Strixhaven: School of Mages Substitute Cards",
+"released_at": "2021-04-23",
+"set_type": "token",
+"parent_set_code": "stx",
+"digital": false
+},
+{
+"code": "mstx",
+"name": "Strixhaven: School of Mages Minigames",
+"released_at": "2021-04-23",
+"set_type": "minigame",
+"parent_set_code": "stx",
+"digital": false
+},
+{
+"code": "sta",
+"name": "Strixhaven Mystical Archive",
+"released_at": "2021-04-23",
+"set_type": "masterpiece",
+"parent_set_code": "stx",
+"digital": false
+},
+{
+"code": "stx",
+"name": "Strixhaven: School of Mages",
+"released_at": "2021-04-23",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "c21",
+"name": "Commander 2021",
+"released_at": "2021-04-23",
+"set_type": "commander",
+"block_code": "cmd",
+"digital": false
+},
+{
+"code": "oc21",
+"name": "Commander 2021 Display Commanders",
+"released_at": "2021-04-23",
+"set_type": "memorabilia",
+"parent_set_code": "c21",
+"digital": false
+},
+{
+"code": "astx",
+"name": "Strixhaven Art Series",
+"released_at": "2021-04-23",
+"set_type": "memorabilia",
+"parent_set_code": "stx",
+"digital": false
+},
+{
+"code": "ttsr",
+"name": "Time Spiral Remastered Tokens",
+"released_at": "2021-03-19",
+"set_type": "token",
+"parent_set_code": "tsr",
+"digital": false
+},
+{
+"code": "tsr",
+"name": "Time Spiral Remastered",
+"released_at": "2021-03-19",
+"set_type": "masters",
+"digital": false
+},
+{
+"code": "ha4",
+"name": "Historic Anthology 4",
+"released_at": "2021-03-11",
+"set_type": "box",
+"digital": true
+},
+{
+"code": "pkhm",
+"name": "Kaldheim Promos",
+"released_at": "2021-02-05",
+"set_type": "promo",
+"parent_set_code": "khm",
+"digital": false
+},
+{
+"code": "mkhm",
+"name": "Kaldheim Minigames",
+"released_at": "2021-02-05",
+"set_type": "minigame",
+"parent_set_code": "khm",
+"digital": false
+},
+{
+"code": "skhm",
+"name": "Kaldheim Substitute Cards",
+"released_at": "2021-02-05",
+"set_type": "token",
+"parent_set_code": "khm",
+"digital": false
+},
+{
+"code": "khc",
+"name": "Kaldheim Commander",
+"released_at": "2021-02-05",
+"set_type": "commander",
+"block_code": "cmd",
+"parent_set_code": "khm",
+"digital": false
+},
+{
+"code": "tkhm",
+"name": "Kaldheim Tokens",
+"released_at": "2021-02-05",
+"set_type": "token",
+"parent_set_code": "khm",
+"digital": false
+},
+{
+"code": "tkhc",
+"name": "Kaldheim Commander Tokens",
+"released_at": "2021-02-05",
+"set_type": "token",
+"parent_set_code": "khc",
+"digital": false
+},
+{
+"code": "akhm",
+"name": "Kaldheim Art Series",
+"released_at": "2021-02-05",
+"set_type": "memorabilia",
+"parent_set_code": "khm",
+"digital": false
+},
+{
+"code": "khm",
+"name": "Kaldheim",
+"released_at": "2021-02-05",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "pl21",
+"name": "Year of the Ox 2021",
+"released_at": "2021-01-25",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "pj21",
+"name": "Judge Gift Cards 2021",
+"released_at": "2021-01-01",
+"set_type": "promo",
+"block_code": "jgp",
+"digital": false
+},
+{
+"code": "cc1",
+"name": "Commander Collection: Green",
+"released_at": "2020-12-04",
+"set_type": "arsenal",
+"digital": false
+},
+{
+"code": "pcmr",
+"name": "Commander Legends Promos",
+"released_at": "2020-11-20",
+"set_type": "promo",
+"parent_set_code": "cmr",
+"digital": false
+},
+{
+"code": "tcmr",
+"name": "Commander Legends Tokens",
+"released_at": "2020-11-20",
+"set_type": "token",
+"parent_set_code": "cmr",
+"digital": false
+},
+{
+"code": "cmr",
+"name": "Commander Legends",
+"released_at": "2020-11-20",
+"set_type": "draft_innovation",
+"block_code": "cmd",
+"digital": false
+},
+{
+"code": "klr",
+"name": "Kaladesh Remastered",
+"released_at": "2020-11-12",
+"set_type": "masters",
+"digital": true
+},
+{
+"code": "plst",
+"name": "The List",
+"released_at": "2020-09-26",
+"set_type": "masters",
+"digital": false
+},
+{
+"code": "pznr",
+"name": "Zendikar Rising Promos",
+"released_at": "2020-09-25",
+"set_type": "promo",
+"parent_set_code": "znr",
+"digital": false
+},
+{
+"code": "tznc",
+"name": "Zendikar Rising Commander Tokens",
+"released_at": "2020-09-25",
+"set_type": "token",
+"parent_set_code": "znc",
+"digital": false
+},
+{
+"code": "aznr",
+"name": "Zendikar Rising Art Series",
+"released_at": "2020-09-25",
+"set_type": "memorabilia",
+"parent_set_code": "znr",
+"digital": false
+},
+{
+"code": "znr",
+"name": "Zendikar Rising",
+"released_at": "2020-09-25",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "sznr",
+"name": "Zendikar Rising Substitute Cards",
+"released_at": "2020-09-25",
+"set_type": "token",
+"parent_set_code": "znr",
+"digital": false
+},
+{
+"code": "znc",
+"name": "Zendikar Rising Commander",
+"released_at": "2020-09-25",
+"set_type": "commander",
+"block_code": "cmd",
+"parent_set_code": "znr",
+"digital": false
+},
+{
+"code": "mznr",
+"name": "Zendikar Rising Minigames",
+"released_at": "2020-09-25",
+"set_type": "minigame",
+"parent_set_code": "znr",
+"digital": false
+},
+{
+"code": "tznr",
+"name": "Zendikar Rising Tokens",
+"released_at": "2020-09-25",
+"set_type": "token",
+"parent_set_code": "znr",
+"digital": false
+},
+{
+"code": "zne",
+"name": "Zendikar Rising Expeditions",
+"released_at": "2020-09-25",
+"set_type": "masterpiece",
+"parent_set_code": "znr",
+"digital": false
+},
+{
+"code": "anb",
+"name": "Arena Beginner Set",
+"released_at": "2020-08-13",
+"set_type": "starter",
+"digital": true
+},
+{
+"code": "akr",
+"name": "Amonkhet Remastered",
+"released_at": "2020-08-13",
+"set_type": "masters",
+"digital": true
+},
+{
+"code": "2xm",
+"name": "Double Masters",
+"released_at": "2020-08-07",
+"set_type": "masters",
+"digital": false
+},
+{
+"code": "t2xm",
+"name": "Double Masters Tokens",
+"released_at": "2020-08-07",
+"set_type": "token",
+"parent_set_code": "2xm",
+"digital": false
+},
+{
+"code": "ph19",
+"name": "2019 Heroes of the Realm",
+"released_at": "2020-08-01",
+"set_type": "funny",
+"block_code": "htr",
+"digital": false
+},
+{
+"code": "ajmp",
+"name": "Jumpstart Arena Exclusives",
+"released_at": "2020-07-17",
+"set_type": "starter",
+"parent_set_code": "jmp",
+"digital": true
+},
+{
+"code": "jmp",
+"name": "Jumpstart",
+"released_at": "2020-07-17",
+"set_type": "draft_innovation",
+"digital": false
+},
+{
+"code": "pm21",
+"name": "Core Set 2021 Promos",
+"released_at": "2020-07-03",
+"set_type": "promo",
+"parent_set_code": "m21",
+"digital": false
+},
+{
+"code": "tm21",
+"name": "Core Set 2021 Tokens",
+"released_at": "2020-07-03",
+"set_type": "token",
+"parent_set_code": "m21",
+"digital": false
+},
+{
+"code": "m21",
+"name": "Core Set 2021",
+"released_at": "2020-07-03",
+"set_type": "core",
+"block_code": "lea",
+"digital": false
+},
+{
+"code": "ss3",
+"name": "Signature Spellbook: Chandra",
+"released_at": "2020-06-26",
+"set_type": "spellbook",
+"digital": false
+},
+{
+"code": "fjmp",
+"name": "Jumpstart Front Cards",
+"released_at": "2020-06-18",
+"set_type": "memorabilia",
+"parent_set_code": "jmp",
+"digital": false
+},
+{
+"code": "slu",
+"name": "Secret Lair: Ultimate Edition",
+"released_at": "2020-05-29",
+"set_type": "box",
+"parent_set_code": "sld",
+"digital": false
+},
+{
+"code": "ha3",
+"name": "Historic Anthology 3",
+"released_at": "2020-05-21",
+"set_type": "box",
+"digital": true
+},
+{
+"code": "plg20",
+"name": "Love Your LGS 2020",
+"released_at": "2020-05-18",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "piko",
+"name": "Ikoria: Lair of Behemoths Promos",
+"released_at": "2020-04-24",
+"set_type": "promo",
+"parent_set_code": "iko",
+"digital": false
+},
+{
+"code": "iko",
+"name": "Ikoria: Lair of Behemoths",
+"released_at": "2020-04-24",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "tiko",
+"name": "Ikoria: Lair of Behemoths Tokens",
+"released_at": "2020-04-24",
+"set_type": "token",
+"parent_set_code": "iko",
+"digital": false
+},
+{
+"code": "oc20",
+"name": "Commander 2020 Oversized",
+"released_at": "2020-04-17",
+"set_type": "memorabilia",
+"parent_set_code": "c20",
+"digital": false
+},
+{
+"code": "tc20",
+"name": "Commander 2020 Tokens",
+"released_at": "2020-04-17",
+"set_type": "token",
+"block_code": "cmd",
+"parent_set_code": "c20",
+"digital": false
+},
+{
+"code": "c20",
+"name": "Commander 2020",
+"released_at": "2020-04-17",
+"set_type": "commander",
+"block_code": "cmd",
+"digital": false
+},
+{
+"code": "ha2",
+"name": "Historic Anthology 2",
+"released_at": "2020-03-12",
+"set_type": "box",
+"digital": true
+},
+{
+"code": "tund",
+"name": "Unsanctioned Tokens",
+"released_at": "2020-02-29",
+"set_type": "token",
+"parent_set_code": "und",
+"digital": false
+},
+{
+"code": "und",
+"name": "Unsanctioned",
+"released_at": "2020-02-29",
+"set_type": "funny",
+"digital": false
+},
+{
+"code": "pthb",
+"name": "Theros Beyond Death Promos",
+"released_at": "2020-01-24",
+"set_type": "promo",
+"parent_set_code": "thb",
+"digital": false
+},
+{
+"code": "tthb",
+"name": "Theros Beyond Death Tokens",
+"released_at": "2020-01-24",
+"set_type": "token",
+"parent_set_code": "thb",
+"digital": false
+},
+{
+"code": "thb",
+"name": "Theros Beyond Death",
+"released_at": "2020-01-24",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "j20",
+"name": "Judge Gift Cards 2020",
+"released_at": "2020-01-01",
+"set_type": "promo",
+"block_code": "jgp",
+"digital": false
+},
+{
+"code": "pf20",
+"name": "MagicFest 2020",
+"released_at": "2020-01-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "sld",
+"name": "Secret Lair Drop",
+"released_at": "2019-12-02",
+"set_type": "box",
+"digital": false
+},
+{
+"code": "ha1",
+"name": "Historic Anthology 1",
+"released_at": "2019-11-21",
+"set_type": "box",
+"digital": true
+},
+{
+"code": "tgn2",
+"name": "Game Night 2019 Tokens",
+"released_at": "2019-11-15",
+"set_type": "token",
+"parent_set_code": "gn2",
+"digital": false
+},
+{
+"code": "gn2",
+"name": "Game Night 2019",
+"released_at": "2019-11-15",
+"set_type": "box",
+"digital": false
+},
+{
+"code": "cmb1",
+"name": "Mystery Booster Playtest Cards 2019",
+"released_at": "2019-11-07",
+"set_type": "funny",
+"digital": false
+},
+{
+"code": "ptg",
+"name": "Ponies: The Galloping",
+"released_at": "2019-10-22",
+"set_type": "funny",
+"digital": false
+},
+{
+"code": "peld",
+"name": "Throne of Eldraine Promos",
+"released_at": "2019-10-04",
+"set_type": "promo",
+"parent_set_code": "eld",
+"digital": false
+},
+{
+"code": "teld",
+"name": "Throne of Eldraine Tokens",
+"released_at": "2019-10-04",
+"set_type": "token",
+"parent_set_code": "eld",
+"digital": false
+},
+{
+"code": "eld",
+"name": "Throne of Eldraine",
+"released_at": "2019-10-04",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "pwcs",
+"name": "Planeswalker Championship Promos",
+"released_at": "2019-10-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "c19",
+"name": "Commander 2019",
+"released_at": "2019-08-23",
+"set_type": "commander",
+"block_code": "cmd",
+"digital": false
+},
+{
+"code": "oc19",
+"name": "Commander 2019 Oversized",
+"released_at": "2019-08-23",
+"set_type": "memorabilia",
+"block_code": "cmd",
+"parent_set_code": "c19",
+"digital": false
+},
+{
+"code": "tc19",
+"name": "Commander 2019 Tokens",
+"released_at": "2019-08-01",
+"set_type": "token",
+"block_code": "cmd",
+"parent_set_code": "c19",
+"digital": false
+},
+{
+"code": "ph18",
+"name": "2018 Heroes of the Realm",
+"released_at": "2019-08-01",
+"set_type": "funny",
+"block_code": "htr",
+"digital": false
+},
+{
+"code": "ps19",
+"name": "San Diego Comic-Con 2019",
+"released_at": "2019-07-18",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "ppp1",
+"name": "M20 Promo Packs",
+"released_at": "2019-07-12",
+"set_type": "promo",
+"block_code": "lea",
+"parent_set_code": "m20",
+"digital": false
+},
+{
+"code": "tm20",
+"name": "Core Set 2020 Tokens",
+"released_at": "2019-07-12",
+"set_type": "token",
+"parent_set_code": "m20",
+"digital": false
+},
+{
+"code": "pm20",
+"name": "Core Set 2020 Promos",
+"released_at": "2019-07-12",
+"set_type": "promo",
+"parent_set_code": "m20",
+"digital": false
+},
+{
+"code": "m20",
+"name": "Core Set 2020",
+"released_at": "2019-07-12",
+"set_type": "core",
+"block_code": "lea",
+"digital": false
+},
+{
+"code": "ss2",
+"name": "Signature Spellbook: Gideon",
+"released_at": "2019-06-28",
+"set_type": "spellbook",
+"digital": false
+},
+{
+"code": "pmh1",
+"name": "Modern Horizons Promos",
+"released_at": "2019-06-14",
+"set_type": "promo",
+"parent_set_code": "mh1",
+"digital": false
+},
+{
+"code": "mh1",
+"name": "Modern Horizons",
+"released_at": "2019-06-14",
+"set_type": "draft_innovation",
+"block_code": "mh1",
+"digital": false
+},
+{
+"code": "amh1",
+"name": "Modern Horizons Art Series",
+"released_at": "2019-06-14",
+"set_type": "memorabilia",
+"parent_set_code": "mh1",
+"digital": false
+},
+{
+"code": "tmh1",
+"name": "Modern Horizons Tokens",
+"released_at": "2019-05-30",
+"set_type": "token",
+"parent_set_code": "mh1",
+"digital": false
+},
+{
+"code": "pwar",
+"name": "War of the Spark Promos",
+"released_at": "2019-05-03",
+"set_type": "promo",
+"parent_set_code": "war",
+"digital": false
+},
+{
+"code": "twar",
+"name": "War of the Spark Tokens",
+"released_at": "2019-05-03",
+"set_type": "token",
+"block_code": "grn",
+"parent_set_code": "war",
+"digital": false
+},
+{
+"code": "war",
+"name": "War of the Spark",
+"released_at": "2019-05-03",
+"set_type": "expansion",
+"block_code": "grn",
+"digital": false
+},
+{
+"code": "j19",
+"name": "Judge Gift Cards 2019",
+"released_at": "2019-04-10",
+"set_type": "promo",
+"block_code": "jgp",
+"digital": false
+},
+{
+"code": "prw2",
+"name": "RNA Ravnica Weekend",
+"released_at": "2019-02-16",
+"set_type": "promo",
+"block_code": "grn",
+"parent_set_code": "rna",
+"digital": false
+},
+{
+"code": "gk2",
+"name": "RNA Guild Kit",
+"released_at": "2019-02-15",
+"set_type": "box",
+"digital": false
+},
+{
+"code": "tgk2",
+"name": "RNA Guild Kit Tokens",
+"released_at": "2019-02-15",
+"set_type": "token",
+"parent_set_code": "gk2",
+"digital": false
+},
+{
+"code": "prna",
+"name": "Ravnica Allegiance Promos",
+"released_at": "2019-01-25",
+"set_type": "promo",
+"block_code": "grn",
+"parent_set_code": "rna",
+"digital": false
+},
+{
+"code": "rna",
+"name": "Ravnica Allegiance",
+"released_at": "2019-01-25",
+"set_type": "expansion",
+"block_code": "grn",
+"digital": false
+},
+{
+"code": "trna",
+"name": "Ravnica Allegiance Tokens",
+"released_at": "2019-01-25",
+"set_type": "token",
+"block_code": "grn",
+"parent_set_code": "rna",
+"digital": false
+},
+{
+"code": "pf19",
+"name": "MagicFest 2019",
+"released_at": "2019-01-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "puma",
+"name": "Ultimate Box Topper",
+"released_at": "2018-12-07",
+"set_type": "masterpiece",
+"parent_set_code": "uma",
+"digital": false
+},
+{
+"code": "uma",
+"name": "Ultimate Masters",
+"released_at": "2018-12-07",
+"set_type": "masters",
+"digital": false
+},
+{
+"code": "tuma",
+"name": "Ultimate Masters Tokens",
+"released_at": "2018-12-07",
+"set_type": "token",
+"parent_set_code": "uma",
+"digital": false
+},
+{
+"code": "gnt",
+"name": "Game Night",
+"released_at": "2018-11-16",
+"set_type": "box",
+"digital": false
+},
+{
+"code": "g18",
+"name": "M19 Gift Pack",
+"released_at": "2018-11-16",
+"set_type": "box",
+"parent_set_code": "m19",
+"digital": false
+},
+{
+"code": "prwk",
+"name": "GRN Ravnica Weekend",
+"released_at": "2018-11-09",
+"set_type": "promo",
+"block_code": "grn",
+"parent_set_code": "grn",
+"digital": false
+},
+{
+"code": "gk1",
+"name": "GRN Guild Kit",
+"released_at": "2018-11-02",
+"set_type": "box",
+"digital": false
+},
+{
+"code": "tgk1",
+"name": "GRN Guild Kit Tokens",
+"released_at": "2018-11-02",
+"set_type": "token",
+"parent_set_code": "gk1",
+"digital": false
+},
+{
+"code": "pgrn",
+"name": "Guilds of Ravnica Promos",
+"released_at": "2018-10-05",
+"set_type": "promo",
+"block_code": "grn",
+"parent_set_code": "grn",
+"digital": false
+},
+{
+"code": "tgrn",
+"name": "Guilds of Ravnica Tokens",
+"released_at": "2018-10-05",
+"set_type": "token",
+"block_code": "grn",
+"parent_set_code": "grn",
+"digital": false
+},
+{
+"code": "grn",
+"name": "Guilds of Ravnica",
+"released_at": "2018-10-05",
+"set_type": "expansion",
+"block_code": "grn",
+"digital": false
+},
+{
+"code": "med",
+"name": "Mythic Edition",
+"released_at": "2018-10-05",
+"set_type": "masterpiece",
+"digital": false
+},
+{
+"code": "tmed",
+"name": "Mythic Edition Tokens",
+"released_at": "2018-10-05",
+"set_type": "token",
+"parent_set_code": "med",
+"digital": false
+},
+{
+"code": "c18",
+"name": "Commander 2018",
+"released_at": "2018-08-10",
+"set_type": "commander",
+"block_code": "cmd",
+"digital": false
+},
+{
+"code": "oc18",
+"name": "Commander 2018 Oversized",
+"released_at": "2018-08-10",
+"set_type": "memorabilia",
+"block_code": "cmd",
+"parent_set_code": "c18",
+"digital": false
+},
+{
+"code": "tc18",
+"name": "Commander 2018 Tokens",
+"released_at": "2018-08-09",
+"set_type": "token",
+"block_code": "cmd",
+"parent_set_code": "c18",
+"digital": false
+},
+{
+"code": "ph17",
+"name": "2017 Heroes of the Realm",
+"released_at": "2018-08-01",
+"set_type": "funny",
+"block_code": "htr",
+"digital": false
+},
+{
+"code": "ps18",
+"name": "San Diego Comic-Con 2018",
+"released_at": "2018-07-19",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "xana",
+"name": "Arena New Player Experience Extras",
+"released_at": "2018-07-14",
+"set_type": "memorabilia",
+"parent_set_code": "ana",
+"digital": true
+},
+{
+"code": "ana",
+"name": "Arena New Player Experience",
+"released_at": "2018-07-14",
+"set_type": "starter",
+"digital": true
+},
+{
+"code": "pana",
+"name": "MTG Arena Promos",
+"released_at": "2018-07-14",
+"set_type": "promo",
+"digital": true
+},
+{
+"code": "oana",
+"name": "Arena New Player Experience Cards",
+"released_at": "2018-07-14",
+"set_type": "starter",
+"parent_set_code": "ana",
+"digital": true
+},
+{
+"code": "pm19",
+"name": "Core Set 2019 Promos",
+"released_at": "2018-07-13",
+"set_type": "promo",
+"parent_set_code": "m19",
+"digital": false
+},
+{
+"code": "pss3",
+"name": "M19 Standard Showdown",
+"released_at": "2018-07-13",
+"set_type": "promo",
+"parent_set_code": "m19",
+"digital": false
+},
+{
+"code": "tm19",
+"name": "Core Set 2019 Tokens",
+"released_at": "2018-07-13",
+"set_type": "token",
+"parent_set_code": "m19",
+"digital": false
+},
+{
+"code": "m19",
+"name": "Core Set 2019",
+"released_at": "2018-07-13",
+"set_type": "core",
+"block_code": "lea",
+"digital": false
+},
+{
+"code": "gs1",
+"name": "Global Series Jiang Yanggu & Mu Yanling",
+"released_at": "2018-06-22",
+"set_type": "duel_deck",
+"digital": false
+},
+{
+"code": "ss1",
+"name": "Signature Spellbook: Jace",
+"released_at": "2018-06-15",
+"set_type": "spellbook",
+"digital": false
+},
+{
+"code": "pbbd",
+"name": "Battlebond Promos",
+"released_at": "2018-06-08",
+"set_type": "promo",
+"parent_set_code": "bbd",
+"digital": false
+},
+{
+"code": "tbbd",
+"name": "Battlebond Tokens",
+"released_at": "2018-06-08",
+"set_type": "token",
+"parent_set_code": "bbd",
+"digital": false
+},
+{
+"code": "bbd",
+"name": "Battlebond",
+"released_at": "2018-06-08",
+"set_type": "draft_innovation",
+"digital": false
+},
+{
+"code": "tcm2",
+"name": "Commander Anthology Volume II Tokens",
+"released_at": "2018-06-08",
+"set_type": "token",
+"block_code": "cmd",
+"parent_set_code": "cm2",
+"digital": false
+},
+{
+"code": "cm2",
+"name": "Commander Anthology Volume II",
+"released_at": "2018-06-08",
+"set_type": "commander",
+"block_code": "cmd",
+"digital": false
+},
+{
+"code": "pdom",
+"name": "Dominaria Promos",
+"released_at": "2018-04-27",
+"set_type": "promo",
+"parent_set_code": "dom",
+"digital": false
+},
+{
+"code": "tdom",
+"name": "Dominaria Tokens",
+"released_at": "2018-04-27",
+"set_type": "token",
+"parent_set_code": "dom",
+"digital": false
+},
+{
+"code": "dom",
+"name": "Dominaria",
+"released_at": "2018-04-27",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "tddu",
+"name": "Duel Decks: Elves vs. Inventors Tokens",
+"released_at": "2018-04-06",
+"set_type": "token",
+"parent_set_code": "ddu",
+"digital": false
+},
+{
+"code": "ddu",
+"name": "Duel Decks: Elves vs. Inventors",
+"released_at": "2018-04-06",
+"set_type": "duel_deck",
+"digital": false
+},
+{
+"code": "a25",
+"name": "Masters 25",
+"released_at": "2018-03-16",
+"set_type": "masters",
+"digital": false
+},
+{
+"code": "ta25",
+"name": "Masters 25 Tokens",
+"released_at": "2018-03-16",
+"set_type": "token",
+"parent_set_code": "a25",
+"digital": false
+},
+{
+"code": "plny",
+"name": "Lunar New Year 2018",
+"released_at": "2018-02-16",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "pnat",
+"name": "Nationals Promos",
+"released_at": "2018-01-25",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "trix",
+"name": "Rivals of Ixalan Tokens",
+"released_at": "2018-01-19",
+"set_type": "token",
+"block_code": "xln",
+"parent_set_code": "rix",
+"digital": false
+},
+{
+"code": "prix",
+"name": "Rivals of Ixalan Promos",
+"released_at": "2018-01-19",
+"set_type": "promo",
+"block_code": "xln",
+"parent_set_code": "rix",
+"digital": false
+},
+{
+"code": "rix",
+"name": "Rivals of Ixalan",
+"released_at": "2018-01-19",
+"set_type": "expansion",
+"block_code": "xln",
+"digital": false
+},
+{
+"code": "j18",
+"name": "Judge Gift Cards 2018",
+"released_at": "2018-01-01",
+"set_type": "promo",
+"block_code": "jgp",
+"digital": false
+},
+{
+"code": "f18",
+"name": "Friday Night Magic 2018",
+"released_at": "2017-12-27",
+"set_type": "promo",
+"block_code": "fnm",
+"digital": false
+},
+{
+"code": "pust",
+"name": "Unstable Promos",
+"released_at": "2017-12-08",
+"set_type": "promo",
+"parent_set_code": "ust",
+"digital": false
+},
+{
+"code": "tust",
+"name": "Unstable Tokens",
+"released_at": "2017-12-08",
+"set_type": "token",
+"parent_set_code": "ust",
+"digital": false
+},
+{
+"code": "ust",
+"name": "Unstable",
+"released_at": "2017-12-08",
+"set_type": "funny",
+"digital": false
+},
+{
+"code": "tima",
+"name": "Iconic Masters Tokens",
+"released_at": "2017-11-29",
+"set_type": "token",
+"parent_set_code": "ima",
+"digital": false
+},
+{
+"code": "v17",
+"name": "From the Vault: Transform",
+"released_at": "2017-11-24",
+"set_type": "from_the_vault",
+"block_code": "ftv",
+"digital": false
+},
+{
+"code": "e02",
+"name": "Explorers of Ixalan",
+"released_at": "2017-11-24",
+"set_type": "box",
+"digital": false
+},
+{
+"code": "pxtc",
+"name": "XLN Treasure Chest",
+"released_at": "2017-11-24",
+"set_type": "promo",
+"block_code": "xln",
+"parent_set_code": "xln",
+"digital": false
+},
+{
+"code": "ima",
+"name": "Iconic Masters",
+"released_at": "2017-11-17",
+"set_type": "masters",
+"digital": false
+},
+{
+"code": "ddt",
+"name": "Duel Decks: Merfolk vs. Goblins",
+"released_at": "2017-10-24",
+"set_type": "duel_deck",
+"digital": false
+},
+{
+"code": "tddt",
+"name": "Duel Decks: Merfolk vs. Goblins Tokens",
+"released_at": "2017-10-24",
+"set_type": "token",
+"parent_set_code": "ddt",
+"digital": false
+},
+{
+"code": "g17",
+"name": "2017 Gift Pack",
+"released_at": "2017-10-20",
+"set_type": "box",
+"digital": false
+},
+{
+"code": "pxln",
+"name": "Ixalan Promos",
+"released_at": "2017-09-29",
+"set_type": "promo",
+"block_code": "xln",
+"parent_set_code": "xln",
+"digital": false
+},
+{
+"code": "xln",
+"name": "Ixalan",
+"released_at": "2017-09-29",
+"set_type": "expansion",
+"block_code": "xln",
+"digital": false
+},
+{
+"code": "txln",
+"name": "Ixalan Tokens",
+"released_at": "2017-09-29",
+"set_type": "token",
+"block_code": "xln",
+"parent_set_code": "xln",
+"digital": false
+},
+{
+"code": "pss2",
+"name": "XLN Standard Showdown",
+"released_at": "2017-09-29",
+"set_type": "promo",
+"block_code": "xln",
+"parent_set_code": "xln",
+"digital": false
+},
+{
+"code": "h17",
+"name": "HasCon 2017",
+"released_at": "2017-09-20",
+"set_type": "funny",
+"digital": false
+},
+{
+"code": "phtr",
+"name": "2016 Heroes of the Realm",
+"released_at": "2017-09-20",
+"set_type": "funny",
+"block_code": "htr",
+"digital": false
+},
+{
+"code": "te01",
+"name": "Archenemy: Nicol Bolas Tokens",
+"released_at": "2017-09-08",
+"set_type": "token",
+"parent_set_code": "e01",
+"digital": false
+},
+{
+"code": "oc17",
+"name": "Commander 2017 Oversized",
+"released_at": "2017-08-25",
+"set_type": "memorabilia",
+"block_code": "cmd",
+"parent_set_code": "c17",
+"digital": false
+},
+{
+"code": "c17",
+"name": "Commander 2017",
+"released_at": "2017-08-25",
+"set_type": "commander",
+"block_code": "cmd",
+"digital": false
+},
+{
+"code": "tc17",
+"name": "Commander 2017 Tokens",
+"released_at": "2017-08-25",
+"set_type": "token",
+"block_code": "cmd",
+"parent_set_code": "c17",
+"digital": false
+},
+{
+"code": "ps17",
+"name": "San Diego Comic-Con 2017",
+"released_at": "2017-07-20",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "phou",
+"name": "Hour of Devastation Promos",
+"released_at": "2017-07-14",
+"set_type": "promo",
+"block_code": "akh",
+"parent_set_code": "hou",
+"digital": false
+},
+{
+"code": "hou",
+"name": "Hour of Devastation",
+"released_at": "2017-07-14",
+"set_type": "expansion",
+"block_code": "akh",
+"digital": false
+},
+{
+"code": "thou",
+"name": "Hour of Devastation Tokens",
+"released_at": "2017-07-14",
+"set_type": "token",
+"block_code": "akh",
+"parent_set_code": "hou",
+"digital": false
+},
+{
+"code": "oe01",
+"name": "Archenemy: Nicol Bolas Schemes",
+"released_at": "2017-06-16",
+"set_type": "archenemy",
+"parent_set_code": "e01",
+"digital": false
+},
+{
+"code": "e01",
+"name": "Archenemy: Nicol Bolas",
+"released_at": "2017-06-16",
+"set_type": "archenemy",
+"digital": false
+},
+{
+"code": "tcma",
+"name": "Commander Anthology Tokens",
+"released_at": "2017-06-09",
+"set_type": "token",
+"block_code": "cmd",
+"parent_set_code": "cma",
+"digital": false
+},
+{
+"code": "cma",
+"name": "Commander Anthology",
+"released_at": "2017-06-09",
+"set_type": "commander",
+"block_code": "cmd",
+"digital": false
+},
+{
+"code": "pakh",
+"name": "Amonkhet Promos",
+"released_at": "2017-04-28",
+"set_type": "promo",
+"block_code": "akh",
+"parent_set_code": "akh",
+"digital": false
+},
+{
+"code": "takh",
+"name": "Amonkhet Tokens",
+"released_at": "2017-04-28",
+"set_type": "token",
+"block_code": "akh",
+"parent_set_code": "akh",
+"digital": false
+},
+{
+"code": "mp2",
+"name": "Amonkhet Invocations",
+"released_at": "2017-04-28",
+"set_type": "masterpiece",
+"block_code": "akh",
+"parent_set_code": "akh",
+"digital": false
+},
+{
+"code": "akh",
+"name": "Amonkhet",
+"released_at": "2017-04-28",
+"set_type": "expansion",
+"block_code": "akh",
+"digital": false
+},
+{
+"code": "w17",
+"name": "Welcome Deck 2017",
+"released_at": "2017-04-15",
+"set_type": "starter",
+"digital": false
+},
+{
+"code": "tdds",
+"name": "Duel Decks: Mind vs. Might Tokens",
+"released_at": "2017-03-31",
+"set_type": "token",
+"parent_set_code": "dds",
+"digital": false
+},
+{
+"code": "dds",
+"name": "Duel Decks: Mind vs. Might",
+"released_at": "2017-03-31",
+"set_type": "duel_deck",
+"digital": false
+},
+{
+"code": "mm3",
+"name": "Modern Masters 2017",
+"released_at": "2017-03-17",
+"set_type": "masters",
+"digital": false
+},
+{
+"code": "tmm3",
+"name": "Modern Masters 2017 Tokens",
+"released_at": "2017-03-17",
+"set_type": "token",
+"parent_set_code": "mm3",
+"digital": false
+},
+{
+"code": "paer",
+"name": "Aether Revolt Promos",
+"released_at": "2017-01-20",
+"set_type": "promo",
+"block_code": "kld",
+"parent_set_code": "aer",
+"digital": false
+},
+{
+"code": "taer",
+"name": "Aether Revolt Tokens",
+"released_at": "2017-01-20",
+"set_type": "token",
+"block_code": "kld",
+"parent_set_code": "aer",
+"digital": false
+},
+{
+"code": "aer",
+"name": "Aether Revolt",
+"released_at": "2017-01-20",
+"set_type": "expansion",
+"block_code": "kld",
+"digital": false
+},
+{
+"code": "l17",
+"name": "League Tokens 2017",
+"released_at": "2017-01-01",
+"set_type": "token",
+"digital": false
+},
+{
+"code": "j17",
+"name": "Judge Gift Cards 2017",
+"released_at": "2017-01-01",
+"set_type": "promo",
+"block_code": "jgp",
+"digital": false
+},
+{
+"code": "f17",
+"name": "Friday Night Magic 2017",
+"released_at": "2017-01-01",
+"set_type": "promo",
+"block_code": "fnm",
+"digital": false
+},
+{
+"code": "tpca",
+"name": "Planechase Anthology Tokens",
+"released_at": "2016-11-25",
+"set_type": "token",
+"parent_set_code": "pca",
+"digital": false
+},
+{
+"code": "pca",
+"name": "Planechase Anthology",
+"released_at": "2016-11-25",
+"set_type": "planechase",
+"digital": false
+},
+{
+"code": "opca",
+"name": "Planechase Anthology Planes",
+"released_at": "2016-11-25",
+"set_type": "planechase",
+"parent_set_code": "pca",
+"digital": false
+},
+{
+"code": "pz2",
+"name": "Treasure Chest",
+"released_at": "2016-11-16",
+"set_type": "treasure_chest",
+"digital": true
+},
+{
+"code": "oc16",
+"name": "Commander 2016 Oversized",
+"released_at": "2016-11-11",
+"set_type": "memorabilia",
+"block_code": "cmd",
+"parent_set_code": "c16",
+"digital": false
+},
+{
+"code": "tc16",
+"name": "Commander 2016 Tokens",
+"released_at": "2016-11-11",
+"set_type": "token",
+"block_code": "cmd",
+"parent_set_code": "c16",
+"digital": false
+},
+{
+"code": "c16",
+"name": "Commander 2016",
+"released_at": "2016-11-11",
+"set_type": "commander",
+"block_code": "cmd",
+"digital": false
+},
+{
+"code": "ps16",
+"name": "San Diego Comic-Con 2016",
+"released_at": "2016-10-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "pkld",
+"name": "Kaladesh Promos",
+"released_at": "2016-09-30",
+"set_type": "promo",
+"block_code": "kld",
+"parent_set_code": "kld",
+"digital": false
+},
+{
+"code": "kld",
+"name": "Kaladesh",
+"released_at": "2016-09-30",
+"set_type": "expansion",
+"block_code": "kld",
+"digital": false
+},
+{
+"code": "tkld",
+"name": "Kaladesh Tokens",
+"released_at": "2016-09-30",
+"set_type": "token",
+"block_code": "kld",
+"parent_set_code": "kld",
+"digital": false
+},
+{
+"code": "mps",
+"name": "Kaladesh Inventions",
+"released_at": "2016-09-30",
+"set_type": "masterpiece",
+"block_code": "kld",
+"parent_set_code": "kld",
+"digital": false
+},
+{
+"code": "ddr",
+"name": "Duel Decks: Nissa vs. Ob Nixilis",
+"released_at": "2016-09-02",
+"set_type": "duel_deck",
+"digital": false
+},
+{
+"code": "tcn2",
+"name": "Conspiracy: Take the Crown Tokens",
+"released_at": "2016-08-26",
+"set_type": "token",
+"block_code": "cns",
+"parent_set_code": "cn2",
+"digital": false
+},
+{
+"code": "cn2",
+"name": "Conspiracy: Take the Crown",
+"released_at": "2016-08-26",
+"set_type": "draft_innovation",
+"block_code": "cns",
+"digital": false
+},
+{
+"code": "v16",
+"name": "From the Vault: Lore",
+"released_at": "2016-08-19",
+"set_type": "from_the_vault",
+"block_code": "ftv",
+"digital": false
+},
+{
+"code": "pemn",
+"name": "Eldritch Moon Promos",
+"released_at": "2016-07-22",
+"set_type": "promo",
+"block_code": "soi",
+"parent_set_code": "emn",
+"digital": false
+},
+{
+"code": "emn",
+"name": "Eldritch Moon",
+"released_at": "2016-07-22",
+"set_type": "expansion",
+"block_code": "soi",
+"digital": false
+},
+{
+"code": "temn",
+"name": "Eldritch Moon Tokens",
+"released_at": "2016-07-22",
+"set_type": "token",
+"block_code": "soi",
+"parent_set_code": "emn",
+"digital": false
+},
+{
+"code": "tema",
+"name": "Eternal Masters Tokens",
+"released_at": "2016-06-10",
+"set_type": "token",
+"parent_set_code": "ema",
+"digital": false
+},
+{
+"code": "ema",
+"name": "Eternal Masters",
+"released_at": "2016-06-10",
+"set_type": "masters",
+"digital": false
+},
+{
+"code": "psoi",
+"name": "Shadows over Innistrad Promos",
+"released_at": "2016-04-08",
+"set_type": "promo",
+"block_code": "soi",
+"parent_set_code": "soi",
+"digital": false
+},
+{
+"code": "tsoi",
+"name": "Shadows over Innistrad Tokens",
+"released_at": "2016-04-08",
+"set_type": "token",
+"block_code": "soi",
+"parent_set_code": "soi",
+"digital": false
+},
+{
+"code": "soi",
+"name": "Shadows over Innistrad",
+"released_at": "2016-04-08",
+"set_type": "expansion",
+"block_code": "soi",
+"digital": false
+},
+{
+"code": "w16",
+"name": "Welcome Deck 2016",
+"released_at": "2016-04-08",
+"set_type": "starter",
+"digital": false
+},
+{
+"code": "ddq",
+"name": "Duel Decks: Blessed vs. Cursed",
+"released_at": "2016-02-26",
+"set_type": "duel_deck",
+"digital": false
+},
+{
+"code": "togw",
+"name": "Oath of the Gatewatch Tokens",
+"released_at": "2016-01-22",
+"set_type": "token",
+"block_code": "bfz",
+"parent_set_code": "ogw",
+"digital": false
+},
+{
+"code": "pogw",
+"name": "Oath of the Gatewatch Promos",
+"released_at": "2016-01-22",
+"set_type": "promo",
+"block_code": "bfz",
+"parent_set_code": "ogw",
+"digital": false
+},
+{
+"code": "ogw",
+"name": "Oath of the Gatewatch",
+"released_at": "2016-01-22",
+"set_type": "expansion",
+"block_code": "bfz",
+"digital": false
+},
+{
+"code": "l16",
+"name": "League Tokens 2016",
+"released_at": "2016-01-01",
+"set_type": "token",
+"digital": false
+},
+{
+"code": "j16",
+"name": "Judge Gift Cards 2016",
+"released_at": "2016-01-01",
+"set_type": "promo",
+"block_code": "jgp",
+"digital": false
+},
+{
+"code": "f16",
+"name": "Friday Night Magic 2016",
+"released_at": "2016-01-01",
+"set_type": "promo",
+"block_code": "fnm",
+"digital": false
+},
+{
+"code": "pz1",
+"name": "Legendary Cube Prize Pack",
+"released_at": "2015-11-18",
+"set_type": "treasure_chest",
+"digital": true
+},
+{
+"code": "oc15",
+"name": "Commander 2015 Oversized",
+"released_at": "2015-11-13",
+"set_type": "memorabilia",
+"block_code": "cmd",
+"parent_set_code": "c15",
+"digital": false
+},
+{
+"code": "c15",
+"name": "Commander 2015",
+"released_at": "2015-11-13",
+"set_type": "commander",
+"block_code": "cmd",
+"digital": false
+},
+{
+"code": "tc15",
+"name": "Commander 2015 Tokens",
+"released_at": "2015-11-13",
+"set_type": "token",
+"block_code": "cmd",
+"parent_set_code": "c15",
+"digital": false
+},
+{
+"code": "tbfz",
+"name": "Battle for Zendikar Tokens",
+"released_at": "2015-10-02",
+"set_type": "token",
+"block_code": "bfz",
+"parent_set_code": "bfz",
+"digital": false
+},
+{
+"code": "pbfz",
+"name": "Battle for Zendikar Promos",
+"released_at": "2015-10-02",
+"set_type": "promo",
+"block_code": "bfz",
+"parent_set_code": "bfz",
+"digital": false
+},
+{
+"code": "pss1",
+"name": "BFZ Standard Series",
+"released_at": "2015-10-02",
+"set_type": "promo",
+"block_code": "bfz",
+"parent_set_code": "bfz",
+"digital": false
+},
+{
+"code": "exp",
+"name": "Zendikar Expeditions",
+"released_at": "2015-10-02",
+"set_type": "masterpiece",
+"block_code": "bfz",
+"parent_set_code": "bfz",
+"digital": false
+},
+{
+"code": "bfz",
+"name": "Battle for Zendikar",
+"released_at": "2015-10-02",
+"set_type": "expansion",
+"block_code": "bfz",
+"digital": false
+},
+{
+"code": "ddp",
+"name": "Duel Decks: Zendikar vs. Eldrazi",
+"released_at": "2015-08-28",
+"set_type": "duel_deck",
+"digital": false
+},
+{
+"code": "v15",
+"name": "From the Vault: Angels",
+"released_at": "2015-08-21",
+"set_type": "from_the_vault",
+"block_code": "ftv",
+"digital": false
+},
+{
+"code": "cp3",
+"name": "Magic Origins Clash Pack",
+"released_at": "2015-07-17",
+"set_type": "starter",
+"parent_set_code": "ori",
+"digital": false
+},
+{
+"code": "pori",
+"name": "Magic Origins Promos",
+"released_at": "2015-07-17",
+"set_type": "promo",
+"parent_set_code": "ori",
+"digital": false
+},
+{
+"code": "ori",
+"name": "Magic Origins",
+"released_at": "2015-07-17",
+"set_type": "core",
+"block_code": "lea",
+"digital": false
+},
+{
+"code": "tori",
+"name": "Magic Origins Tokens",
+"released_at": "2015-07-17",
+"set_type": "token",
+"parent_set_code": "ori",
+"digital": false
+},
+{
+"code": "ps15",
+"name": "San Diego Comic-Con 2015",
+"released_at": "2015-07-09",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "mm2",
+"name": "Modern Masters 2015",
+"released_at": "2015-05-22",
+"set_type": "masters",
+"digital": false
+},
+{
+"code": "tmm2",
+"name": "Modern Masters 2015 Tokens",
+"released_at": "2015-05-22",
+"set_type": "token",
+"parent_set_code": "mm2",
+"digital": false
+},
+{
+"code": "tpr",
+"name": "Tempest Remastered",
+"released_at": "2015-05-06",
+"set_type": "masters",
+"digital": true
+},
+{
+"code": "ptkdf",
+"name": "Tarkir Dragonfury",
+"released_at": "2015-04-03",
+"set_type": "promo",
+"block_code": "ktk",
+"parent_set_code": "dtk",
+"digital": false
+},
+{
+"code": "pdtk",
+"name": "Dragons of Tarkir Promos",
+"released_at": "2015-03-27",
+"set_type": "promo",
+"block_code": "ktk",
+"parent_set_code": "dtk",
+"digital": false
+},
+{
+"code": "dtk",
+"name": "Dragons of Tarkir",
+"released_at": "2015-03-27",
+"set_type": "expansion",
+"block_code": "ktk",
+"digital": false
+},
+{
+"code": "tdtk",
+"name": "Dragons of Tarkir Tokens",
+"released_at": "2015-03-27",
+"set_type": "token",
+"block_code": "ktk",
+"parent_set_code": "dtk",
+"digital": false
+},
+{
+"code": "ddo",
+"name": "Duel Decks: Elspeth vs. Kiora",
+"released_at": "2015-02-27",
+"set_type": "duel_deck",
+"digital": false
+},
+{
+"code": "pfrf",
+"name": "Fate Reforged Promos",
+"released_at": "2015-01-23",
+"set_type": "promo",
+"block_code": "ktk",
+"parent_set_code": "frf",
+"digital": false
+},
+{
+"code": "cp2",
+"name": "Fate Reforged Clash Pack",
+"released_at": "2015-01-23",
+"set_type": "starter",
+"block_code": "ktk",
+"parent_set_code": "frf",
+"digital": false
+},
+{
+"code": "frf",
+"name": "Fate Reforged",
+"released_at": "2015-01-23",
+"set_type": "expansion",
+"block_code": "ktk",
+"digital": false
+},
+{
+"code": "tfrf",
+"name": "Fate Reforged Tokens",
+"released_at": "2015-01-23",
+"set_type": "token",
+"block_code": "ktk",
+"parent_set_code": "frf",
+"digital": false
+},
+{
+"code": "ugin",
+"name": "Ugin's Fate",
+"released_at": "2015-01-17",
+"set_type": "promo",
+"block_code": "ktk",
+"parent_set_code": "frf",
+"digital": false
+},
+{
+"code": "l15",
+"name": "League Tokens 2015",
+"released_at": "2015-01-01",
+"set_type": "token",
+"digital": false
+},
+{
+"code": "f15",
+"name": "Friday Night Magic 2015",
+"released_at": "2015-01-01",
+"set_type": "promo",
+"block_code": "fnm",
+"digital": false
+},
+{
+"code": "j15",
+"name": "Judge Gift Cards 2015",
+"released_at": "2015-01-01",
+"set_type": "promo",
+"block_code": "jgp",
+"digital": false
+},
+{
+"code": "tjvc",
+"name": "Duel Decks Anthology: Jace vs. Chandra Tokens",
+"released_at": "2014-12-05",
+"set_type": "token",
+"parent_set_code": "jvc",
+"digital": false
+},
+{
+"code": "tdvd",
+"name": "Duel Decks Anthology: Divine vs. Demonic Tokens",
+"released_at": "2014-12-05",
+"set_type": "token",
+"parent_set_code": "dvd",
+"digital": false
+},
+{
+"code": "tgvl",
+"name": "Duel Decks Anthology: Garruk vs. Liliana Tokens",
+"released_at": "2014-12-05",
+"set_type": "token",
+"parent_set_code": "gvl",
+"digital": false
+},
+{
+"code": "dvd",
+"name": "Duel Decks Anthology: Divine vs. Demonic",
+"released_at": "2014-12-05",
+"set_type": "duel_deck",
+"digital": false
+},
+{
+"code": "evg",
+"name": "Duel Decks Anthology: Elves vs. Goblins",
+"released_at": "2014-12-05",
+"set_type": "duel_deck",
+"digital": false
+},
+{
+"code": "tevg",
+"name": "Duel Decks Anthology: Elves vs. Goblins Tokens",
+"released_at": "2014-12-05",
+"set_type": "token",
+"parent_set_code": "evg",
+"digital": false
+},
+{
+"code": "gvl",
+"name": "Duel Decks Anthology: Garruk vs. Liliana",
+"released_at": "2014-12-05",
+"set_type": "duel_deck",
+"digital": false
+},
+{
+"code": "jvc",
+"name": "Duel Decks Anthology: Jace vs. Chandra",
+"released_at": "2014-12-05",
+"set_type": "duel_deck",
+"digital": false
+},
+{
+"code": "oc14",
+"name": "Commander 2014 Oversized",
+"released_at": "2014-11-07",
+"set_type": "memorabilia",
+"block_code": "cmd",
+"parent_set_code": "c14",
+"digital": false
+},
+{
+"code": "c14",
+"name": "Commander 2014",
+"released_at": "2014-11-07",
+"set_type": "commander",
+"block_code": "cmd",
+"digital": false
+},
+{
+"code": "tc14",
+"name": "Commander 2014 Tokens",
+"released_at": "2014-11-07",
+"set_type": "token",
+"block_code": "cmd",
+"parent_set_code": "c14",
+"digital": false
+},
+{
+"code": "pktk",
+"name": "Khans of Tarkir Promos",
+"released_at": "2014-09-26",
+"set_type": "promo",
+"block_code": "ktk",
+"parent_set_code": "ktk",
+"digital": false
+},
+{
+"code": "ktk",
+"name": "Khans of Tarkir",
+"released_at": "2014-09-26",
+"set_type": "expansion",
+"block_code": "ktk",
+"digital": false
+},
+{
+"code": "tktk",
+"name": "Khans of Tarkir Tokens",
+"released_at": "2014-09-26",
+"set_type": "token",
+"block_code": "ktk",
+"parent_set_code": "ktk",
+"digital": false
+},
+{
+"code": "ddn",
+"name": "Duel Decks: Speed vs. Cunning",
+"released_at": "2014-09-05",
+"set_type": "duel_deck",
+"digital": false
+},
+{
+"code": "v14",
+"name": "From the Vault: Annihilation",
+"released_at": "2014-08-22",
+"set_type": "from_the_vault",
+"block_code": "ftv",
+"digital": false
+},
+{
+"code": "tm15",
+"name": "Magic 2015 Tokens",
+"released_at": "2014-07-18",
+"set_type": "token",
+"parent_set_code": "m15",
+"digital": false
+},
+{
+"code": "cp1",
+"name": "Magic 2015 Clash Pack",
+"released_at": "2014-07-18",
+"set_type": "starter",
+"parent_set_code": "m15",
+"digital": false
+},
+{
+"code": "m15",
+"name": "Magic 2015",
+"released_at": "2014-07-18",
+"set_type": "core",
+"block_code": "lea",
+"digital": false
+},
+{
+"code": "pm15",
+"name": "Magic 2015 Promos",
+"released_at": "2014-07-17",
+"set_type": "promo",
+"parent_set_code": "m15",
+"digital": false
+},
+{
+"code": "ppc1",
+"name": "M15 Prerelease Challenge",
+"released_at": "2014-07-12",
+"set_type": "memorabilia",
+"parent_set_code": "m15",
+"digital": false
+},
+{
+"code": "pdp15",
+"name": "Duels of the Planeswalkers 2015 Promos",
+"released_at": "2014-07-09",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "ps14",
+"name": "San Diego Comic-Con 2014",
+"released_at": "2014-07-08",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "vma",
+"name": "Vintage Masters",
+"released_at": "2014-06-16",
+"set_type": "masters",
+"digital": true
+},
+{
+"code": "pcns",
+"name": "Conspiracy Promos",
+"released_at": "2014-06-06",
+"set_type": "promo",
+"block_code": "cns",
+"parent_set_code": "cns",
+"digital": false
+},
+{
+"code": "cns",
+"name": "Conspiracy",
+"released_at": "2014-06-06",
+"set_type": "draft_innovation",
+"block_code": "cns",
+"digital": false
+},
+{
+"code": "tcns",
+"name": "Conspiracy Tokens",
+"released_at": "2014-06-06",
+"set_type": "token",
+"block_code": "cns",
+"parent_set_code": "cns",
+"digital": false
+},
+{
+"code": "md1",
+"name": "Modern Event Deck 2014",
+"released_at": "2014-05-30",
+"set_type": "box",
+"digital": false
+},
+{
+"code": "tmd1",
+"name": "Modern Event Deck 2014 Tokens",
+"released_at": "2014-05-30",
+"set_type": "token",
+"parent_set_code": "md1",
+"digital": false
+},
+{
+"code": "tdag",
+"name": "Defeat a God",
+"released_at": "2014-05-25",
+"set_type": "memorabilia",
+"block_code": "ths",
+"parent_set_code": "jou",
+"digital": false
+},
+{
+"code": "jou",
+"name": "Journey into Nyx",
+"released_at": "2014-05-02",
+"set_type": "expansion",
+"block_code": "ths",
+"digital": false
+},
+{
+"code": "tjou",
+"name": "Journey into Nyx Tokens",
+"released_at": "2014-05-02",
+"set_type": "token",
+"block_code": "ths",
+"parent_set_code": "jou",
+"digital": false
+},
+{
+"code": "thp3",
+"name": "Journey into Nyx Hero's Path",
+"released_at": "2014-05-02",
+"set_type": "memorabilia",
+"block_code": "ths",
+"parent_set_code": "jou",
+"digital": false
+},
+{
+"code": "pjou",
+"name": "Journey into Nyx Promos",
+"released_at": "2014-04-26",
+"set_type": "promo",
+"block_code": "ths",
+"parent_set_code": "jou",
+"digital": false
+},
+{
+"code": "ddm",
+"name": "Duel Decks: Jace vs. Vraska",
+"released_at": "2014-03-14",
+"set_type": "duel_deck",
+"digital": false
+},
+{
+"code": "tddm",
+"name": "Duel Decks: Jace vs. Vraska Tokens",
+"released_at": "2014-03-14",
+"set_type": "token",
+"parent_set_code": "ddm",
+"digital": false
+},
+{
+"code": "tbth",
+"name": "Battle the Horde",
+"released_at": "2014-03-01",
+"set_type": "memorabilia",
+"block_code": "ths",
+"parent_set_code": "bng",
+"digital": false
+},
+{
+"code": "bng",
+"name": "Born of the Gods",
+"released_at": "2014-02-07",
+"set_type": "expansion",
+"block_code": "ths",
+"digital": false
+},
+{
+"code": "tbng",
+"name": "Born of the Gods Tokens",
+"released_at": "2014-02-07",
+"set_type": "token",
+"block_code": "ths",
+"parent_set_code": "bng",
+"digital": false
+},
+{
+"code": "thp2",
+"name": "Born of the Gods Hero's Path",
+"released_at": "2014-02-07",
+"set_type": "memorabilia",
+"block_code": "ths",
+"parent_set_code": "bng",
+"digital": false
+},
+{
+"code": "pbng",
+"name": "Born of the Gods Promos",
+"released_at": "2014-02-01",
+"set_type": "promo",
+"block_code": "ths",
+"parent_set_code": "bng",
+"digital": false
+},
+{
+"code": "l14",
+"name": "League Tokens 2014",
+"released_at": "2014-01-01",
+"set_type": "token",
+"digital": false
+},
+{
+"code": "f14",
+"name": "Friday Night Magic 2014",
+"released_at": "2014-01-01",
+"set_type": "promo",
+"block_code": "fnm",
+"digital": false
+},
+{
+"code": "j14",
+"name": "Judge Gift Cards 2014",
+"released_at": "2014-01-01",
+"set_type": "promo",
+"block_code": "jgp",
+"digital": false
+},
+{
+"code": "oc13",
+"name": "Commander 2013 Oversized",
+"released_at": "2013-11-01",
+"set_type": "memorabilia",
+"block_code": "cmd",
+"parent_set_code": "c13",
+"digital": false
+},
+{
+"code": "c13",
+"name": "Commander 2013",
+"released_at": "2013-11-01",
+"set_type": "commander",
+"block_code": "cmd",
+"digital": false
+},
+{
+"code": "tfth",
+"name": "Face the Hydra",
+"released_at": "2013-10-19",
+"set_type": "memorabilia",
+"block_code": "ths",
+"parent_set_code": "ths",
+"digital": false
+},
+{
+"code": "tths",
+"name": "Theros Tokens",
+"released_at": "2013-09-27",
+"set_type": "token",
+"block_code": "ths",
+"parent_set_code": "ths",
+"digital": false
+},
+{
+"code": "ths",
+"name": "Theros",
+"released_at": "2013-09-27",
+"set_type": "expansion",
+"block_code": "ths",
+"digital": false
+},
+{
+"code": "thp1",
+"name": "Theros Hero's Path",
+"released_at": "2013-09-27",
+"set_type": "memorabilia",
+"block_code": "ths",
+"parent_set_code": "ths",
+"digital": false
+},
+{
+"code": "pths",
+"name": "Theros Promos",
+"released_at": "2013-09-21",
+"set_type": "promo",
+"block_code": "ths",
+"parent_set_code": "ths",
+"digital": false
+},
+{
+"code": "tddl",
+"name": "Duel Decks: Heroes vs. Monsters Tokens",
+"released_at": "2013-09-06",
+"set_type": "token",
+"parent_set_code": "ddl",
+"digital": false
+},
+{
+"code": "ddl",
+"name": "Duel Decks: Heroes vs. Monsters",
+"released_at": "2013-09-06",
+"set_type": "duel_deck",
+"digital": false
+},
+{
+"code": "v13",
+"name": "From the Vault: Twenty",
+"released_at": "2013-08-23",
+"set_type": "from_the_vault",
+"block_code": "ftv",
+"digital": false
+},
+{
+"code": "tm14",
+"name": "Magic 2014 Tokens",
+"released_at": "2013-07-19",
+"set_type": "token",
+"parent_set_code": "m14",
+"digital": false
+},
+{
+"code": "m14",
+"name": "Magic 2014",
+"released_at": "2013-07-19",
+"set_type": "core",
+"block_code": "lea",
+"digital": false
+},
+{
+"code": "pm14",
+"name": "Magic 2014 Promos",
+"released_at": "2013-07-18",
+"set_type": "promo",
+"parent_set_code": "m14",
+"digital": false
+},
+{
+"code": "psdc",
+"name": "San Diego Comic-Con 2013",
+"released_at": "2013-07-18",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "mma",
+"name": "Modern Masters",
+"released_at": "2013-06-07",
+"set_type": "masters",
+"digital": false
+},
+{
+"code": "tmma",
+"name": "Modern Masters Tokens",
+"released_at": "2013-06-07",
+"set_type": "token",
+"parent_set_code": "mma",
+"digital": false
+},
+{
+"code": "dgm",
+"name": "Dragon's Maze",
+"released_at": "2013-05-03",
+"set_type": "expansion",
+"block_code": "rtr",
+"digital": false
+},
+{
+"code": "tdgm",
+"name": "Dragon's Maze Tokens",
+"released_at": "2013-05-03",
+"set_type": "token",
+"block_code": "rtr",
+"parent_set_code": "dgm",
+"digital": false
+},
+{
+"code": "pdgm",
+"name": "Dragon's Maze Promos",
+"released_at": "2013-04-27",
+"set_type": "promo",
+"block_code": "rtr",
+"parent_set_code": "dgm",
+"digital": false
+},
+{
+"code": "wmc",
+"name": "World Magic Cup Qualifiers",
+"released_at": "2013-04-06",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "tddk",
+"name": "Duel Decks: Sorin vs. Tibalt Tokens",
+"released_at": "2013-03-15",
+"set_type": "token",
+"parent_set_code": "ddk",
+"digital": false
+},
+{
+"code": "ddk",
+"name": "Duel Decks: Sorin vs. Tibalt",
+"released_at": "2013-03-15",
+"set_type": "duel_deck",
+"digital": false
+},
+{
+"code": "gtc",
+"name": "Gatecrash",
+"released_at": "2013-02-01",
+"set_type": "expansion",
+"block_code": "rtr",
+"digital": false
+},
+{
+"code": "tgtc",
+"name": "Gatecrash Tokens",
+"released_at": "2013-02-01",
+"set_type": "token",
+"block_code": "rtr",
+"parent_set_code": "gtc",
+"digital": false
+},
+{
+"code": "pgtc",
+"name": "Gatecrash Promos",
+"released_at": "2013-01-26",
+"set_type": "promo",
+"block_code": "rtr",
+"parent_set_code": "gtc",
+"digital": false
+},
+{
+"code": "pdp14",
+"name": "Duels of the Planeswalkers 2014 Promos",
+"released_at": "2013-01-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "l13",
+"name": "League Tokens 2013",
+"released_at": "2013-01-01",
+"set_type": "token",
+"digital": false
+},
+{
+"code": "f13",
+"name": "Friday Night Magic 2013",
+"released_at": "2013-01-01",
+"set_type": "promo",
+"block_code": "fnm",
+"digital": false
+},
+{
+"code": "j13",
+"name": "Judge Gift Cards 2013",
+"released_at": "2013-01-01",
+"set_type": "promo",
+"block_code": "jgp",
+"digital": false
+},
+{
+"code": "ocm1",
+"name": "Commander's Arsenal Oversized",
+"released_at": "2012-11-02",
+"set_type": "memorabilia",
+"block_code": "cmd",
+"parent_set_code": "cm1",
+"digital": false
+},
+{
+"code": "cm1",
+"name": "Commander's Arsenal",
+"released_at": "2012-11-02",
+"set_type": "arsenal",
+"block_code": "cmd",
+"digital": false
+},
+{
+"code": "rtr",
+"name": "Return to Ravnica",
+"released_at": "2012-10-05",
+"set_type": "expansion",
+"block_code": "rtr",
+"digital": false
+},
+{
+"code": "prtr",
+"name": "Return to Ravnica Promos",
+"released_at": "2012-10-05",
+"set_type": "promo",
+"block_code": "rtr",
+"parent_set_code": "rtr",
+"digital": false
+},
+{
+"code": "trtr",
+"name": "Return to Ravnica Tokens",
+"released_at": "2012-10-05",
+"set_type": "token",
+"block_code": "rtr",
+"parent_set_code": "rtr",
+"digital": false
+},
+{
+"code": "ddj",
+"name": "Duel Decks: Izzet vs. Golgari",
+"released_at": "2012-09-07",
+"set_type": "duel_deck",
+"digital": false
+},
+{
+"code": "tddj",
+"name": "Duel Decks: Izzet vs. Golgari Tokens",
+"released_at": "2012-09-07",
+"set_type": "token",
+"parent_set_code": "ddj",
+"digital": false
+},
+{
+"code": "v12",
+"name": "From the Vault: Realms",
+"released_at": "2012-08-31",
+"set_type": "from_the_vault",
+"block_code": "ftv",
+"digital": false
+},
+{
+"code": "m13",
+"name": "Magic 2013",
+"released_at": "2012-07-13",
+"set_type": "core",
+"block_code": "lea",
+"digital": false
+},
+{
+"code": "tm13",
+"name": "Magic 2013 Tokens",
+"released_at": "2012-07-13",
+"set_type": "token",
+"parent_set_code": "m13",
+"digital": false
+},
+{
+"code": "pm13",
+"name": "Magic 2013 Promos",
+"released_at": "2012-07-12",
+"set_type": "promo",
+"parent_set_code": "m13",
+"digital": false
+},
+{
+"code": "opc2",
+"name": "Planechase 2012 Planes",
+"released_at": "2012-06-01",
+"set_type": "planechase",
+"parent_set_code": "pc2",
+"digital": false
+},
+{
+"code": "pc2",
+"name": "Planechase 2012",
+"released_at": "2012-06-01",
+"set_type": "planechase",
+"digital": false
+},
+{
+"code": "avr",
+"name": "Avacyn Restored",
+"released_at": "2012-05-04",
+"set_type": "expansion",
+"block_code": "isd",
+"digital": false
+},
+{
+"code": "tavr",
+"name": "Avacyn Restored Tokens",
+"released_at": "2012-05-04",
+"set_type": "token",
+"block_code": "isd",
+"parent_set_code": "avr",
+"digital": false
+},
+{
+"code": "phel",
+"name": "Open the Helvault",
+"released_at": "2012-04-28",
+"set_type": "memorabilia",
+"parent_set_code": "avr",
+"digital": false
+},
+{
+"code": "pavr",
+"name": "Avacyn Restored Promos",
+"released_at": "2012-04-28",
+"set_type": "promo",
+"block_code": "isd",
+"parent_set_code": "avr",
+"digital": false
+},
+{
+"code": "ddi",
+"name": "Duel Decks: Venser vs. Koth",
+"released_at": "2012-03-30",
+"set_type": "duel_deck",
+"digital": false
+},
+{
+"code": "tddi",
+"name": "Duel Decks: Venser vs. Koth Tokens",
+"released_at": "2012-03-30",
+"set_type": "token",
+"parent_set_code": "ddi",
+"digital": false
+},
+{
+"code": "dka",
+"name": "Dark Ascension",
+"released_at": "2012-02-03",
+"set_type": "expansion",
+"block_code": "isd",
+"digital": false
+},
+{
+"code": "tdka",
+"name": "Dark Ascension Tokens",
+"released_at": "2012-02-03",
+"set_type": "token",
+"block_code": "isd",
+"parent_set_code": "dka",
+"digital": false
+},
+{
+"code": "pdka",
+"name": "Dark Ascension Promos",
+"released_at": "2012-01-28",
+"set_type": "promo",
+"block_code": "isd",
+"parent_set_code": "dka",
+"digital": false
+},
+{
+"code": "pw12",
+"name": "Wizards Play Network 2012",
+"released_at": "2012-01-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "pdp13",
+"name": "Duels of the Planeswalkers 2013 Promos",
+"released_at": "2012-01-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "pidw",
+"name": "IDW Comics Inserts",
+"released_at": "2012-01-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "l12",
+"name": "League Tokens 2012",
+"released_at": "2012-01-01",
+"set_type": "token",
+"digital": false
+},
+{
+"code": "f12",
+"name": "Friday Night Magic 2012",
+"released_at": "2012-01-01",
+"set_type": "promo",
+"block_code": "fnm",
+"digital": false
+},
+{
+"code": "j12",
+"name": "Judge Gift Cards 2012",
+"released_at": "2012-01-01",
+"set_type": "promo",
+"block_code": "jgp",
+"digital": false
+},
+{
+"code": "pd3",
+"name": "Premium Deck Series: Graveborn",
+"released_at": "2011-11-18",
+"set_type": "premium_deck",
+"digital": false
+},
+{
+"code": "isd",
+"name": "Innistrad",
+"released_at": "2011-09-30",
+"set_type": "expansion",
+"block_code": "isd",
+"digital": false
+},
+{
+"code": "tisd",
+"name": "Innistrad Tokens",
+"released_at": "2011-09-30",
+"set_type": "token",
+"block_code": "isd",
+"parent_set_code": "isd",
+"digital": false
+},
+{
+"code": "pisd",
+"name": "Innistrad Promos",
+"released_at": "2011-09-24",
+"set_type": "promo",
+"block_code": "isd",
+"parent_set_code": "isd",
+"digital": false
+},
+{
+"code": "tddh",
+"name": "Duel Decks: Ajani vs. Nicol Bolas Tokens",
+"released_at": "2011-09-02",
+"set_type": "token",
+"parent_set_code": "ddh",
+"digital": false
+},
+{
+"code": "ddh",
+"name": "Duel Decks: Ajani vs. Nicol Bolas",
+"released_at": "2011-09-02",
+"set_type": "duel_deck",
+"digital": false
+},
+{
+"code": "v11",
+"name": "From the Vault: Legends",
+"released_at": "2011-08-26",
+"set_type": "from_the_vault",
+"block_code": "ftv",
+"digital": false
+},
+{
+"code": "tm12",
+"name": "Magic 2012 Tokens",
+"released_at": "2011-07-15",
+"set_type": "token",
+"parent_set_code": "m12",
+"digital": false
+},
+{
+"code": "m12",
+"name": "Magic 2012",
+"released_at": "2011-07-15",
+"set_type": "core",
+"block_code": "lea",
+"digital": false
+},
+{
+"code": "pm12",
+"name": "Magic 2012 Promos",
+"released_at": "2011-07-14",
+"set_type": "promo",
+"parent_set_code": "m12",
+"digital": false
+},
+{
+"code": "ocmd",
+"name": "Commander 2011 Oversized",
+"released_at": "2011-06-17",
+"set_type": "memorabilia",
+"block_code": "cmd",
+"parent_set_code": "cmd",
+"digital": false
+},
+{
+"code": "cmd",
+"name": "Commander 2011",
+"released_at": "2011-06-17",
+"set_type": "commander",
+"block_code": "cmd",
+"digital": false
+},
+{
+"code": "pcmd",
+"name": "Commander 2011 Launch Party",
+"released_at": "2011-06-17",
+"set_type": "memorabilia",
+"block_code": "cmd",
+"parent_set_code": "cmd",
+"digital": false
+},
+{
+"code": "td2",
+"name": "Duel Decks: Mirrodin Pure vs. New Phyrexia",
+"released_at": "2011-05-14",
+"set_type": "duel_deck",
+"digital": true
+},
+{
+"code": "tnph",
+"name": "New Phyrexia Tokens",
+"released_at": "2011-05-13",
+"set_type": "token",
+"block_code": "som",
+"parent_set_code": "nph",
+"digital": false
+},
+{
+"code": "nph",
+"name": "New Phyrexia",
+"released_at": "2011-05-13",
+"set_type": "expansion",
+"block_code": "som",
+"digital": false
+},
+{
+"code": "pnph",
+"name": "New Phyrexia Promos",
+"released_at": "2011-05-12",
+"set_type": "promo",
+"block_code": "som",
+"parent_set_code": "nph",
+"digital": false
+},
+{
+"code": "tddg",
+"name": "Duel Decks: Knights vs. Dragons Tokens",
+"released_at": "2011-04-01",
+"set_type": "token",
+"parent_set_code": "ddg",
+"digital": false
+},
+{
+"code": "ddg",
+"name": "Duel Decks: Knights vs. Dragons",
+"released_at": "2011-04-01",
+"set_type": "duel_deck",
+"digital": false
+},
+{
+"code": "mbs",
+"name": "Mirrodin Besieged",
+"released_at": "2011-02-04",
+"set_type": "expansion",
+"block_code": "som",
+"digital": false
+},
+{
+"code": "tmbs",
+"name": "Mirrodin Besieged Tokens",
+"released_at": "2011-02-04",
+"set_type": "token",
+"block_code": "som",
+"parent_set_code": "mbs",
+"digital": false
+},
+{
+"code": "pmbs",
+"name": "Mirrodin Besieged Promos",
+"released_at": "2011-02-03",
+"set_type": "promo",
+"block_code": "som",
+"parent_set_code": "mbs",
+"digital": false
+},
+{
+"code": "me4",
+"name": "Masters Edition IV",
+"released_at": "2011-01-10",
+"set_type": "masters",
+"digital": true
+},
+{
+"code": "pmps11",
+"name": "Magic Premiere Shop 2011",
+"released_at": "2011-01-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "pw11",
+"name": "Wizards Play Network 2011",
+"released_at": "2011-01-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "pdp12",
+"name": "Duels of the Planeswalkers 2012 Promos",
+"released_at": "2011-01-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "olgc",
+"name": "Legacy Championship",
+"released_at": "2011-01-01",
+"set_type": "memorabilia",
+"digital": false
+},
+{
+"code": "f11",
+"name": "Friday Night Magic 2011",
+"released_at": "2011-01-01",
+"set_type": "promo",
+"block_code": "fnm",
+"digital": false
+},
+{
+"code": "p11",
+"name": "Magic Player Rewards 2011",
+"released_at": "2011-01-01",
+"set_type": "promo",
+"block_code": "mpr",
+"digital": false
+},
+{
+"code": "g11",
+"name": "Judge Gift Cards 2011",
+"released_at": "2011-01-01",
+"set_type": "promo",
+"block_code": "jgp",
+"digital": false
+},
+{
+"code": "ps11",
+"name": "Salvat 2011",
+"released_at": "2011-01-01",
+"set_type": "box",
+"digital": false
+},
+{
+"code": "pd2",
+"name": "Premium Deck Series: Fire and Lightning",
+"released_at": "2010-11-19",
+"set_type": "premium_deck",
+"digital": false
+},
+{
+"code": "td0",
+"name": "Magic Online Theme Decks",
+"released_at": "2010-11-08",
+"set_type": "box",
+"digital": true
+},
+{
+"code": "tsom",
+"name": "Scars of Mirrodin Tokens",
+"released_at": "2010-10-01",
+"set_type": "token",
+"block_code": "som",
+"parent_set_code": "som",
+"digital": false
+},
+{
+"code": "som",
+"name": "Scars of Mirrodin",
+"released_at": "2010-10-01",
+"set_type": "expansion",
+"block_code": "som",
+"digital": false
+},
+{
+"code": "psom",
+"name": "Scars of Mirrodin Promos",
+"released_at": "2010-09-30",
+"set_type": "promo",
+"block_code": "som",
+"parent_set_code": "som",
+"digital": false
+},
+{
+"code": "ddf",
+"name": "Duel Decks: Elspeth vs. Tezzeret",
+"released_at": "2010-09-03",
+"set_type": "duel_deck",
+"digital": false
+},
+{
+"code": "tddf",
+"name": "Duel Decks: Elspeth vs. Tezzeret Tokens",
+"released_at": "2010-09-03",
+"set_type": "token",
+"parent_set_code": "ddf",
+"digital": false
+},
+{
+"code": "v10",
+"name": "From the Vault: Relics",
+"released_at": "2010-08-27",
+"set_type": "from_the_vault",
+"block_code": "ftv",
+"digital": false
+},
+{
+"code": "m11",
+"name": "Magic 2011",
+"released_at": "2010-07-16",
+"set_type": "core",
+"block_code": "lea",
+"digital": false
+},
+{
+"code": "tm11",
+"name": "Magic 2011 Tokens",
+"released_at": "2010-07-16",
+"set_type": "token",
+"parent_set_code": "m11",
+"digital": false
+},
+{
+"code": "pm11",
+"name": "Magic 2011 Promos",
+"released_at": "2010-07-15",
+"set_type": "promo",
+"parent_set_code": "m11",
+"digital": false
+},
+{
+"code": "oarc",
+"name": "Archenemy Schemes",
+"released_at": "2010-06-18",
+"set_type": "archenemy",
+"parent_set_code": "arc",
+"digital": false
+},
+{
+"code": "arc",
+"name": "Archenemy",
+"released_at": "2010-06-18",
+"set_type": "archenemy",
+"digital": false
+},
+{
+"code": "dpa",
+"name": "Duels of the Planeswalkers",
+"released_at": "2010-06-04",
+"set_type": "box",
+"digital": false
+},
+{
+"code": "proe",
+"name": "Rise of the Eldrazi Promos",
+"released_at": "2010-04-23",
+"set_type": "promo",
+"block_code": "zen",
+"parent_set_code": "roe",
+"digital": false
+},
+{
+"code": "troe",
+"name": "Rise of the Eldrazi Tokens",
+"released_at": "2010-04-23",
+"set_type": "token",
+"block_code": "zen",
+"parent_set_code": "roe",
+"digital": false
+},
+{
+"code": "roe",
+"name": "Rise of the Eldrazi",
+"released_at": "2010-04-23",
+"set_type": "expansion",
+"block_code": "zen",
+"digital": false
+},
+{
+"code": "tdde",
+"name": "Duel Decks: Phyrexia vs. the Coalition Tokens",
+"released_at": "2010-03-19",
+"set_type": "token",
+"parent_set_code": "dde",
+"digital": false
+},
+{
+"code": "dde",
+"name": "Duel Decks: Phyrexia vs. the Coalition",
+"released_at": "2010-03-19",
+"set_type": "duel_deck",
+"digital": false
+},
+{
+"code": "pwwk",
+"name": "Worldwake Promos",
+"released_at": "2010-02-05",
+"set_type": "promo",
+"block_code": "zen",
+"parent_set_code": "wwk",
+"digital": false
+},
+{
+"code": "twwk",
+"name": "Worldwake Tokens",
+"released_at": "2010-02-05",
+"set_type": "token",
+"block_code": "zen",
+"parent_set_code": "wwk",
+"digital": false
+},
+{
+"code": "wwk",
+"name": "Worldwake",
+"released_at": "2010-02-05",
+"set_type": "expansion",
+"block_code": "zen",
+"digital": false
+},
+{
+"code": "pdp10",
+"name": "Duels of the Planeswalkers 2010 Promos",
+"released_at": "2010-01-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "pmps10",
+"name": "Magic Premiere Shop 2010",
+"released_at": "2010-01-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "f10",
+"name": "Friday Night Magic 2010",
+"released_at": "2010-01-01",
+"set_type": "promo",
+"block_code": "fnm",
+"digital": false
+},
+{
+"code": "p10",
+"name": "Magic Player Rewards 2010",
+"released_at": "2010-01-01",
+"set_type": "promo",
+"block_code": "mpr",
+"digital": false
+},
+{
+"code": "g10",
+"name": "Judge Gift Cards 2010",
+"released_at": "2010-01-01",
+"set_type": "promo",
+"block_code": "jgp",
+"digital": false
+},
+{
+"code": "h09",
+"name": "Premium Deck Series: Slivers",
+"released_at": "2009-11-20",
+"set_type": "premium_deck",
+"digital": false
+},
+{
+"code": "tddd",
+"name": "Duel Decks: Garruk vs. Liliana Tokens",
+"released_at": "2009-10-30",
+"set_type": "token",
+"parent_set_code": "ddd",
+"digital": false
+},
+{
+"code": "ddd",
+"name": "Duel Decks: Garruk vs. Liliana",
+"released_at": "2009-10-30",
+"set_type": "duel_deck",
+"digital": false
+},
+{
+"code": "pzen",
+"name": "Zendikar Promos",
+"released_at": "2009-10-02",
+"set_type": "promo",
+"block_code": "zen",
+"parent_set_code": "zen",
+"digital": false
+},
+{
+"code": "tzen",
+"name": "Zendikar Tokens",
+"released_at": "2009-10-02",
+"set_type": "token",
+"block_code": "zen",
+"parent_set_code": "zen",
+"digital": false
+},
+{
+"code": "zen",
+"name": "Zendikar",
+"released_at": "2009-10-02",
+"set_type": "expansion",
+"block_code": "zen",
+"digital": false
+},
+{
+"code": "me3",
+"name": "Masters Edition III",
+"released_at": "2009-09-07",
+"set_type": "masters",
+"digital": true
+},
+{
+"code": "ohop",
+"name": "Planechase Planes",
+"released_at": "2009-09-04",
+"set_type": "planechase",
+"parent_set_code": "hop",
+"digital": false
+},
+{
+"code": "hop",
+"name": "Planechase",
+"released_at": "2009-09-04",
+"set_type": "planechase",
+"digital": false
+},
+{
+"code": "phop",
+"name": "Planechase Promos",
+"released_at": "2009-09-04",
+"set_type": "promo",
+"parent_set_code": "hop",
+"digital": false
+},
+{
+"code": "v09",
+"name": "From the Vault: Exiled",
+"released_at": "2009-08-28",
+"set_type": "from_the_vault",
+"block_code": "ftv",
+"digital": false
+},
+{
+"code": "tm10",
+"name": "Magic 2010 Tokens",
+"released_at": "2009-07-17",
+"set_type": "token",
+"parent_set_code": "m10",
+"digital": false
+},
+{
+"code": "m10",
+"name": "Magic 2010",
+"released_at": "2009-07-17",
+"set_type": "core",
+"block_code": "lea",
+"digital": false
+},
+{
+"code": "pm10",
+"name": "Magic 2010 Promos",
+"released_at": "2009-07-16",
+"set_type": "promo",
+"parent_set_code": "m10",
+"digital": false
+},
+{
+"code": "parb",
+"name": "Alara Reborn Promos",
+"released_at": "2009-04-30",
+"set_type": "promo",
+"block_code": "ala",
+"parent_set_code": "arb",
+"digital": false
+},
+{
+"code": "arb",
+"name": "Alara Reborn",
+"released_at": "2009-04-30",
+"set_type": "expansion",
+"block_code": "ala",
+"digital": false
+},
+{
+"code": "tarb",
+"name": "Alara Reborn Tokens",
+"released_at": "2009-04-30",
+"set_type": "token",
+"block_code": "ala",
+"parent_set_code": "arb",
+"digital": false
+},
+{
+"code": "ddc",
+"name": "Duel Decks: Divine vs. Demonic",
+"released_at": "2009-04-10",
+"set_type": "duel_deck",
+"digital": false
+},
+{
+"code": "tddc",
+"name": "Duel Decks: Divine vs. Demonic Tokens",
+"released_at": "2009-04-10",
+"set_type": "token",
+"parent_set_code": "ddc",
+"digital": false
+},
+{
+"code": "purl",
+"name": "URL/Convention Promos",
+"released_at": "2009-02-08",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "pcon",
+"name": "Conflux Promos",
+"released_at": "2009-02-06",
+"set_type": "promo",
+"block_code": "ala",
+"parent_set_code": "con",
+"digital": false
+},
+{
+"code": "tcon",
+"name": "Conflux Tokens",
+"released_at": "2009-02-06",
+"set_type": "token",
+"block_code": "ala",
+"parent_set_code": "con",
+"digital": false
+},
+{
+"code": "con",
+"name": "Conflux",
+"released_at": "2009-02-06",
+"set_type": "expansion",
+"block_code": "ala",
+"digital": false
+},
+{
+"code": "pdtp",
+"name": "Duels of the Planeswalkers 2009 Promos",
+"released_at": "2009-01-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "pmps09",
+"name": "Magic Premiere Shop 2009",
+"released_at": "2009-01-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "g09",
+"name": "Judge Gift Cards 2009",
+"released_at": "2009-01-01",
+"set_type": "promo",
+"block_code": "jgp",
+"digital": false
+},
+{
+"code": "p09",
+"name": "Magic Player Rewards 2009",
+"released_at": "2009-01-01",
+"set_type": "promo",
+"block_code": "mpr",
+"digital": false
+},
+{
+"code": "f09",
+"name": "Friday Night Magic 2009",
+"released_at": "2009-01-01",
+"set_type": "promo",
+"block_code": "fnm",
+"digital": false
+},
+{
+"code": "dd2",
+"name": "Duel Decks: Jace vs. Chandra",
+"released_at": "2008-11-07",
+"set_type": "duel_deck",
+"digital": false
+},
+{
+"code": "tdd2",
+"name": "Duel Decks: Jace vs. Chandra Tokens",
+"released_at": "2008-11-07",
+"set_type": "token",
+"parent_set_code": "dd2",
+"digital": false
+},
+{
+"code": "pala",
+"name": "Shards of Alara Promos",
+"released_at": "2008-10-03",
+"set_type": "promo",
+"block_code": "ala",
+"parent_set_code": "ala",
+"digital": false
+},
+{
+"code": "ala",
+"name": "Shards of Alara",
+"released_at": "2008-10-03",
+"set_type": "expansion",
+"block_code": "ala",
+"digital": false
+},
+{
+"code": "tala",
+"name": "Shards of Alara Tokens",
+"released_at": "2008-10-03",
+"set_type": "token",
+"block_code": "ala",
+"parent_set_code": "ala",
+"digital": false
+},
+{
+"code": "me2",
+"name": "Masters Edition II",
+"released_at": "2008-09-22",
+"set_type": "masters",
+"digital": true
+},
+{
+"code": "drb",
+"name": "From the Vault: Dragons",
+"released_at": "2008-08-29",
+"set_type": "from_the_vault",
+"block_code": "ftv",
+"digital": false
+},
+{
+"code": "peve",
+"name": "Eventide Promos",
+"released_at": "2008-07-25",
+"set_type": "promo",
+"block_code": "shm",
+"parent_set_code": "eve",
+"digital": false
+},
+{
+"code": "teve",
+"name": "Eventide Tokens",
+"released_at": "2008-07-25",
+"set_type": "token",
+"block_code": "shm",
+"parent_set_code": "eve",
+"digital": false
+},
+{
+"code": "eve",
+"name": "Eventide",
+"released_at": "2008-07-25",
+"set_type": "expansion",
+"block_code": "shm",
+"digital": false
+},
+{
+"code": "pshm",
+"name": "Shadowmoor Promos",
+"released_at": "2008-05-02",
+"set_type": "promo",
+"block_code": "shm",
+"parent_set_code": "shm",
+"digital": false
+},
+{
+"code": "shm",
+"name": "Shadowmoor",
+"released_at": "2008-05-02",
+"set_type": "expansion",
+"block_code": "shm",
+"digital": false
+},
+{
+"code": "tshm",
+"name": "Shadowmoor Tokens",
+"released_at": "2008-05-02",
+"set_type": "token",
+"block_code": "shm",
+"parent_set_code": "shm",
+"digital": false
+},
+{
+"code": "p15a",
+"name": "15th Anniversary Cards",
+"released_at": "2008-04-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "pmor",
+"name": "Morningtide Promos",
+"released_at": "2008-02-01",
+"set_type": "promo",
+"block_code": "lrw",
+"parent_set_code": "mor",
+"digital": false
+},
+{
+"code": "mor",
+"name": "Morningtide",
+"released_at": "2008-02-01",
+"set_type": "expansion",
+"block_code": "lrw",
+"digital": false
+},
+{
+"code": "tmor",
+"name": "Morningtide Tokens",
+"released_at": "2008-02-01",
+"set_type": "token",
+"block_code": "lrw",
+"parent_set_code": "mor",
+"digital": false
+},
+{
+"code": "pmps08",
+"name": "Magic Premiere Shop 2008",
+"released_at": "2008-01-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "p08",
+"name": "Magic Player Rewards 2008",
+"released_at": "2008-01-01",
+"set_type": "promo",
+"block_code": "mpr",
+"digital": false
+},
+{
+"code": "g08",
+"name": "Judge Gift Cards 2008",
+"released_at": "2008-01-01",
+"set_type": "promo",
+"block_code": "jgp",
+"digital": false
+},
+{
+"code": "f08",
+"name": "Friday Night Magic 2008",
+"released_at": "2008-01-01",
+"set_type": "promo",
+"block_code": "fnm",
+"digital": false
+},
+{
+"code": "tdd1",
+"name": "Duel Decks: Elves vs. Goblins Tokens",
+"released_at": "2007-11-16",
+"set_type": "token",
+"parent_set_code": "dd1",
+"digital": false
+},
+{
+"code": "dd1",
+"name": "Duel Decks: Elves vs. Goblins",
+"released_at": "2007-11-16",
+"set_type": "duel_deck",
+"digital": false
+},
+{
+"code": "plrw",
+"name": "Lorwyn Promos",
+"released_at": "2007-10-12",
+"set_type": "promo",
+"block_code": "lrw",
+"parent_set_code": "lrw",
+"digital": false
+},
+{
+"code": "tlrw",
+"name": "Lorwyn Tokens",
+"released_at": "2007-10-12",
+"set_type": "token",
+"block_code": "lrw",
+"parent_set_code": "lrw",
+"digital": false
+},
+{
+"code": "lrw",
+"name": "Lorwyn",
+"released_at": "2007-10-12",
+"set_type": "expansion",
+"block_code": "lrw",
+"digital": false
+},
+{
+"code": "me1",
+"name": "Masters Edition",
+"released_at": "2007-09-10",
+"set_type": "masters",
+"digital": true
+},
+{
+"code": "10e",
+"name": "Tenth Edition",
+"released_at": "2007-07-13",
+"set_type": "core",
+"block_code": "lea",
+"digital": false
+},
+{
+"code": "p10e",
+"name": "Tenth Edition Promos",
+"released_at": "2007-07-13",
+"set_type": "promo",
+"parent_set_code": "10e",
+"digital": false
+},
+{
+"code": "t10e",
+"name": "Tenth Edition Tokens",
+"released_at": "2007-07-13",
+"set_type": "token",
+"parent_set_code": "10e",
+"digital": false
+},
+{
+"code": "pfut",
+"name": "Future Sight Promos",
+"released_at": "2007-05-04",
+"set_type": "promo",
+"block_code": "tsp",
+"parent_set_code": "fut",
+"digital": false
+},
+{
+"code": "fut",
+"name": "Future Sight",
+"released_at": "2007-05-04",
+"set_type": "expansion",
+"block_code": "tsp",
+"digital": false
+},
+{
+"code": "pgpx",
+"name": "Grand Prix Promos",
+"released_at": "2007-02-24",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "ppro",
+"name": "Pro Tour Promos",
+"released_at": "2007-02-09",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "pplc",
+"name": "Planar Chaos Promos",
+"released_at": "2007-02-02",
+"set_type": "promo",
+"block_code": "tsp",
+"parent_set_code": "plc",
+"digital": false
+},
+{
+"code": "plc",
+"name": "Planar Chaos",
+"released_at": "2007-02-02",
+"set_type": "expansion",
+"block_code": "tsp",
+"digital": false
+},
+{
+"code": "p07",
+"name": "Magic Player Rewards 2007",
+"released_at": "2007-01-01",
+"set_type": "promo",
+"block_code": "mpr",
+"digital": false
+},
+{
+"code": "g07",
+"name": "Judge Gift Cards 2007",
+"released_at": "2007-01-01",
+"set_type": "promo",
+"block_code": "jgp",
+"digital": false
+},
+{
+"code": "f07",
+"name": "Friday Night Magic 2007",
+"released_at": "2007-01-01",
+"set_type": "promo",
+"block_code": "fnm",
+"digital": false
+},
+{
+"code": "pmps07",
+"name": "Magic Premiere Shop 2007",
+"released_at": "2007-01-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "hho",
+"name": "Happy Holidays",
+"released_at": "2006-12-31",
+"set_type": "funny",
+"digital": false
+},
+{
+"code": "ptsp",
+"name": "Time Spiral Promos",
+"released_at": "2006-10-06",
+"set_type": "promo",
+"block_code": "tsp",
+"parent_set_code": "tsp",
+"digital": false
+},
+{
+"code": "tsp",
+"name": "Time Spiral",
+"released_at": "2006-10-06",
+"set_type": "expansion",
+"block_code": "tsp",
+"digital": false
+},
+{
+"code": "tsb",
+"name": "Time Spiral Timeshifted",
+"released_at": "2006-10-06",
+"set_type": "expansion",
+"block_code": "tsp",
+"parent_set_code": "tsp",
+"digital": false
+},
+{
+"code": "pcsp",
+"name": "Coldsnap Promos",
+"released_at": "2006-07-21",
+"set_type": "promo",
+"block_code": "ice",
+"parent_set_code": "csp",
+"digital": false
+},
+{
+"code": "cst",
+"name": "Coldsnap Theme Decks",
+"released_at": "2006-07-21",
+"set_type": "box",
+"block_code": "ice",
+"parent_set_code": "csp",
+"digital": false
+},
+{
+"code": "csp",
+"name": "Coldsnap",
+"released_at": "2006-07-21",
+"set_type": "expansion",
+"block_code": "ice",
+"digital": false
+},
+{
+"code": "pdis",
+"name": "Dissension Promos",
+"released_at": "2006-05-05",
+"set_type": "promo",
+"block_code": "rav",
+"parent_set_code": "dis",
+"digital": false
+},
+{
+"code": "dis",
+"name": "Dissension",
+"released_at": "2006-05-05",
+"set_type": "expansion",
+"block_code": "rav",
+"digital": false
+},
+{
+"code": "pcmp",
+"name": "Champs and States",
+"released_at": "2006-03-18",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "pgpt",
+"name": "Guildpact Promos",
+"released_at": "2006-02-03",
+"set_type": "promo",
+"block_code": "rav",
+"parent_set_code": "gpt",
+"digital": false
+},
+{
+"code": "gpt",
+"name": "Guildpact",
+"released_at": "2006-02-03",
+"set_type": "expansion",
+"block_code": "rav",
+"digital": false
+},
+{
+"code": "pmps06",
+"name": "Magic Premiere Shop 2006",
+"released_at": "2006-01-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "pal06",
+"name": "Arena League 2006",
+"released_at": "2006-01-01",
+"set_type": "promo",
+"block_code": "parl",
+"digital": false
+},
+{
+"code": "pjas",
+"name": "Junior APAC Series",
+"released_at": "2006-01-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "phuk",
+"name": "Hachette UK",
+"released_at": "2006-01-01",
+"set_type": "box",
+"digital": false
+},
+{
+"code": "dci",
+"name": "DCI Promos",
+"released_at": "2006-01-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "p06",
+"name": "Magic Player Rewards 2006",
+"released_at": "2006-01-01",
+"set_type": "promo",
+"block_code": "mpr",
+"digital": false
+},
+{
+"code": "g06",
+"name": "Judge Gift Cards 2006",
+"released_at": "2006-01-01",
+"set_type": "promo",
+"block_code": "jgp",
+"digital": false
+},
+{
+"code": "f06",
+"name": "Friday Night Magic 2006",
+"released_at": "2006-01-01",
+"set_type": "promo",
+"block_code": "fnm",
+"digital": false
+},
+{
+"code": "p2hg",
+"name": "Two-Headed Giant Tournament",
+"released_at": "2005-12-09",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "prav",
+"name": "Ravnica: City of Guilds Promos",
+"released_at": "2005-10-07",
+"set_type": "promo",
+"block_code": "rav",
+"parent_set_code": "rav",
+"digital": false
+},
+{
+"code": "pmps",
+"name": "Magic Premiere Shop 2005",
+"released_at": "2005-10-07",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "rav",
+"name": "Ravnica: City of Guilds",
+"released_at": "2005-10-07",
+"set_type": "expansion",
+"block_code": "rav",
+"digital": false
+},
+{
+"code": "psal",
+"name": "Salvat 2005",
+"released_at": "2005-08-22",
+"set_type": "box",
+"digital": false
+},
+{
+"code": "p9ed",
+"name": "Ninth Edition Promos",
+"released_at": "2005-07-29",
+"set_type": "promo",
+"block_code": "lea",
+"parent_set_code": "9ed",
+"digital": false
+},
+{
+"code": "9ed",
+"name": "Ninth Edition",
+"released_at": "2005-07-29",
+"set_type": "core",
+"block_code": "lea",
+"digital": false
+},
+{
+"code": "psok",
+"name": "Saviors of Kamigawa Promos",
+"released_at": "2005-06-03",
+"set_type": "promo",
+"block_code": "chk",
+"parent_set_code": "sok",
+"digital": false
+},
+{
+"code": "sok",
+"name": "Saviors of Kamigawa",
+"released_at": "2005-06-03",
+"set_type": "expansion",
+"block_code": "chk",
+"digital": false
+},
+{
+"code": "pbok",
+"name": "Betrayers of Kamigawa Promos",
+"released_at": "2005-02-04",
+"set_type": "promo",
+"block_code": "chk",
+"parent_set_code": "bok",
+"digital": false
+},
+{
+"code": "bok",
+"name": "Betrayers of Kamigawa",
+"released_at": "2005-02-04",
+"set_type": "expansion",
+"block_code": "chk",
+"digital": false
+},
+{
+"code": "pal05",
+"name": "Arena League 2005",
+"released_at": "2005-01-01",
+"set_type": "promo",
+"block_code": "parl",
+"digital": false
+},
+{
+"code": "pjse",
+"name": "Junior Series Europe",
+"released_at": "2005-01-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "p05",
+"name": "Magic Player Rewards 2005",
+"released_at": "2005-01-01",
+"set_type": "promo",
+"block_code": "mpr",
+"digital": false
+},
+{
+"code": "f05",
+"name": "Friday Night Magic 2005",
+"released_at": "2005-01-01",
+"set_type": "promo",
+"block_code": "fnm",
+"digital": false
+},
+{
+"code": "g05",
+"name": "Judge Gift Cards 2005",
+"released_at": "2005-01-01",
+"set_type": "promo",
+"block_code": "jgp",
+"digital": false
+},
+{
+"code": "punh",
+"name": "Unhinged Promos",
+"released_at": "2004-11-19",
+"set_type": "promo",
+"parent_set_code": "unh",
+"digital": false
+},
+{
+"code": "unh",
+"name": "Unhinged",
+"released_at": "2004-11-19",
+"set_type": "funny",
+"digital": false
+},
+{
+"code": "pchk",
+"name": "Champions of Kamigawa Promos",
+"released_at": "2004-10-01",
+"set_type": "promo",
+"block_code": "chk",
+"parent_set_code": "chk",
+"digital": false
+},
+{
+"code": "chk",
+"name": "Champions of Kamigawa",
+"released_at": "2004-10-01",
+"set_type": "expansion",
+"block_code": "chk",
+"digital": false
+},
+{
+"code": "wc04",
+"name": "World Championship Decks 2004",
+"released_at": "2004-09-01",
+"set_type": "memorabilia",
+"digital": false
+},
+{
+"code": "pmrd",
+"name": "Mirrodin Promos",
+"released_at": "2004-06-04",
+"set_type": "promo",
+"block_code": "mrd",
+"parent_set_code": "mrd",
+"digital": false
+},
+{
+"code": "p5dn",
+"name": "Fifth Dawn Promos",
+"released_at": "2004-06-04",
+"set_type": "promo",
+"block_code": "mrd",
+"parent_set_code": "5dn",
+"digital": false
+},
+{
+"code": "5dn",
+"name": "Fifth Dawn",
+"released_at": "2004-06-04",
+"set_type": "expansion",
+"block_code": "mrd",
+"digital": false
+},
+{
+"code": "pdst",
+"name": "Darksteel Promos",
+"released_at": "2004-02-06",
+"set_type": "promo",
+"block_code": "mrd",
+"parent_set_code": "dst",
+"digital": false
+},
+{
+"code": "dst",
+"name": "Darksteel",
+"released_at": "2004-02-06",
+"set_type": "expansion",
+"block_code": "mrd",
+"digital": false
+},
+{
+"code": "pal04",
+"name": "Arena League 2004",
+"released_at": "2004-01-01",
+"set_type": "promo",
+"block_code": "parl",
+"digital": false
+},
+{
+"code": "p04",
+"name": "Magic Player Rewards 2004",
+"released_at": "2004-01-01",
+"set_type": "promo",
+"block_code": "mpr",
+"digital": false
+},
+{
+"code": "g04",
+"name": "Judge Gift Cards 2004",
+"released_at": "2004-01-01",
+"set_type": "promo",
+"block_code": "jgp",
+"digital": false
+},
+{
+"code": "f04",
+"name": "Friday Night Magic 2004",
+"released_at": "2004-01-01",
+"set_type": "promo",
+"block_code": "fnm",
+"digital": false
+},
+{
+"code": "mrd",
+"name": "Mirrodin",
+"released_at": "2003-10-02",
+"set_type": "expansion",
+"block_code": "mrd",
+"digital": false
+},
+{
+"code": "wc03",
+"name": "World Championship Decks 2003",
+"released_at": "2003-08-06",
+"set_type": "memorabilia",
+"digital": false
+},
+{
+"code": "p8ed",
+"name": "Eighth Edition Promos",
+"released_at": "2003-07-28",
+"set_type": "promo",
+"block_code": "lea",
+"parent_set_code": "8ed",
+"digital": false
+},
+{
+"code": "8ed",
+"name": "Eighth Edition",
+"released_at": "2003-07-28",
+"set_type": "core",
+"block_code": "lea",
+"digital": false
+},
+{
+"code": "pscg",
+"name": "Scourge Promos",
+"released_at": "2003-05-26",
+"set_type": "promo",
+"block_code": "ons",
+"parent_set_code": "scg",
+"digital": false
+},
+{
+"code": "scg",
+"name": "Scourge",
+"released_at": "2003-05-26",
+"set_type": "expansion",
+"block_code": "ons",
+"digital": false
+},
+{
+"code": "plgn",
+"name": "Legions Promos",
+"released_at": "2003-02-03",
+"set_type": "promo",
+"block_code": "ons",
+"parent_set_code": "lgn",
+"digital": false
+},
+{
+"code": "lgn",
+"name": "Legions",
+"released_at": "2003-02-03",
+"set_type": "expansion",
+"block_code": "ons",
+"digital": false
+},
+{
+"code": "pmoa",
+"name": "Magic Online Avatars",
+"released_at": "2003-01-01",
+"set_type": "vanguard",
+"digital": true
+},
+{
+"code": "pjjt",
+"name": "Japan Junior Tournament",
+"released_at": "2003-01-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "pal03",
+"name": "Arena League 2003",
+"released_at": "2003-01-01",
+"set_type": "promo",
+"block_code": "parl",
+"digital": false
+},
+{
+"code": "g03",
+"name": "Judge Gift Cards 2003",
+"released_at": "2003-01-01",
+"set_type": "promo",
+"block_code": "jgp",
+"digital": false
+},
+{
+"code": "p03",
+"name": "Magic Player Rewards 2003",
+"released_at": "2003-01-01",
+"set_type": "promo",
+"block_code": "mpr",
+"digital": false
+},
+{
+"code": "ovnt",
+"name": "Vintage Championship",
+"released_at": "2003-01-01",
+"set_type": "memorabilia",
+"digital": false
+},
+{
+"code": "f03",
+"name": "Friday Night Magic 2003",
+"released_at": "2003-01-01",
+"set_type": "promo",
+"block_code": "fnm",
+"digital": false
+},
+{
+"code": "wc02",
+"name": "World Championship Decks 2002",
+"released_at": "2002-12-01",
+"set_type": "memorabilia",
+"digital": false
+},
+{
+"code": "ons",
+"name": "Onslaught",
+"released_at": "2002-10-07",
+"set_type": "expansion",
+"block_code": "ons",
+"digital": false
+},
+{
+"code": "pons",
+"name": "Onslaught Promos",
+"released_at": "2002-09-28",
+"set_type": "promo",
+"block_code": "ons",
+"parent_set_code": "ons",
+"digital": false
+},
+{
+"code": "jp1",
+"name": "Hobby Japan Promos",
+"released_at": "2002-07-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "prm",
+"name": "Magic Online Promos",
+"released_at": "2002-06-24",
+"set_type": "promo",
+"digital": true
+},
+{
+"code": "pjud",
+"name": "Judgment Promos",
+"released_at": "2002-05-27",
+"set_type": "promo",
+"block_code": "ody",
+"parent_set_code": "jud",
+"digital": false
+},
+{
+"code": "jud",
+"name": "Judgment",
+"released_at": "2002-05-27",
+"set_type": "expansion",
+"block_code": "ody",
+"digital": false
+},
+{
+"code": "ptor",
+"name": "Torment Promos",
+"released_at": "2002-02-04",
+"set_type": "promo",
+"block_code": "ody",
+"parent_set_code": "tor",
+"digital": false
+},
+{
+"code": "tor",
+"name": "Torment",
+"released_at": "2002-02-04",
+"set_type": "expansion",
+"block_code": "ody",
+"digital": false
+},
+{
+"code": "pal02",
+"name": "Arena League 2002",
+"released_at": "2002-01-01",
+"set_type": "promo",
+"block_code": "parl",
+"digital": false
+},
+{
+"code": "pr2",
+"name": "Magic Player Rewards 2002",
+"released_at": "2002-01-01",
+"set_type": "promo",
+"block_code": "mpr",
+"digital": false
+},
+{
+"code": "g02",
+"name": "Judge Gift Cards 2002",
+"released_at": "2002-01-01",
+"set_type": "promo",
+"block_code": "jgp",
+"digital": false
+},
+{
+"code": "f02",
+"name": "Friday Night Magic 2002",
+"released_at": "2002-01-01",
+"set_type": "promo",
+"block_code": "fnm",
+"digital": false
+},
+{
+"code": "dkm",
+"name": "Deckmasters",
+"released_at": "2001-12-01",
+"set_type": "box",
+"digital": false
+},
+{
+"code": "pody",
+"name": "Odyssey Promos",
+"released_at": "2001-10-01",
+"set_type": "promo",
+"block_code": "ody",
+"parent_set_code": "ody",
+"digital": false
+},
+{
+"code": "ody",
+"name": "Odyssey",
+"released_at": "2001-10-01",
+"set_type": "expansion",
+"block_code": "ody",
+"digital": false
+},
+{
+"code": "wc01",
+"name": "World Championship Decks 2001",
+"released_at": "2001-08-08",
+"set_type": "memorabilia",
+"digital": false
+},
+{
+"code": "psdg",
+"name": "Sega Dreamcast Cards",
+"released_at": "2001-06-28",
+"set_type": "box",
+"digital": true
+},
+{
+"code": "papc",
+"name": "Apocalypse Promos",
+"released_at": "2001-06-04",
+"set_type": "promo",
+"block_code": "inv",
+"parent_set_code": "apc",
+"digital": false
+},
+{
+"code": "apc",
+"name": "Apocalypse",
+"released_at": "2001-06-04",
+"set_type": "expansion",
+"block_code": "inv",
+"digital": false
+},
+{
+"code": "7ed",
+"name": "Seventh Edition",
+"released_at": "2001-04-11",
+"set_type": "core",
+"block_code": "lea",
+"digital": false
+},
+{
+"code": "ppls",
+"name": "Planeshift Promos",
+"released_at": "2001-02-05",
+"set_type": "promo",
+"block_code": "inv",
+"parent_set_code": "pls",
+"digital": false
+},
+{
+"code": "pls",
+"name": "Planeshift",
+"released_at": "2001-02-05",
+"set_type": "expansion",
+"block_code": "inv",
+"digital": false
+},
+{
+"code": "pal01",
+"name": "Arena League 2001",
+"released_at": "2001-01-01",
+"set_type": "promo",
+"block_code": "parl",
+"digital": false
+},
+{
+"code": "mpr",
+"name": "Magic Player Rewards 2001",
+"released_at": "2001-01-01",
+"set_type": "promo",
+"block_code": "mpr",
+"digital": false
+},
+{
+"code": "f01",
+"name": "Friday Night Magic 2001",
+"released_at": "2001-01-01",
+"set_type": "promo",
+"block_code": "fnm",
+"digital": false
+},
+{
+"code": "g01",
+"name": "Judge Gift Cards 2001",
+"released_at": "2001-01-01",
+"set_type": "promo",
+"block_code": "jgp",
+"digital": false
+},
+{
+"code": "pinv",
+"name": "Invasion Promos",
+"released_at": "2000-10-02",
+"set_type": "promo",
+"block_code": "inv",
+"parent_set_code": "inv",
+"digital": false
+},
+{
+"code": "inv",
+"name": "Invasion",
+"released_at": "2000-10-02",
+"set_type": "expansion",
+"block_code": "inv",
+"digital": false
+},
+{
+"code": "btd",
+"name": "Beatdown Box Set",
+"released_at": "2000-10-01",
+"set_type": "box",
+"digital": false
+},
+{
+"code": "wc00",
+"name": "World Championship Decks 2000",
+"released_at": "2000-08-02",
+"set_type": "memorabilia",
+"digital": false
+},
+{
+"code": "ppcy",
+"name": "Prophecy Promos",
+"released_at": "2000-06-05",
+"set_type": "promo",
+"block_code": "mmq",
+"parent_set_code": "pcy",
+"digital": false
+},
+{
+"code": "pcy",
+"name": "Prophecy",
+"released_at": "2000-06-05",
+"set_type": "expansion",
+"block_code": "mmq",
+"digital": false
+},
+{
+"code": "s00",
+"name": "Starter 2000",
+"released_at": "2000-04-01",
+"set_type": "starter",
+"digital": false
+},
+{
+"code": "pnem",
+"name": "Nemesis Promos",
+"released_at": "2000-02-14",
+"set_type": "promo",
+"block_code": "mmq",
+"parent_set_code": "nem",
+"digital": false
+},
+{
+"code": "nem",
+"name": "Nemesis",
+"released_at": "2000-02-14",
+"set_type": "expansion",
+"block_code": "mmq",
+"digital": false
+},
+{
+"code": "pelp",
+"name": "European Land Program",
+"released_at": "2000-02-05",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "pal00",
+"name": "Arena League 2000",
+"released_at": "2000-01-01",
+"set_type": "promo",
+"block_code": "parl",
+"digital": false
+},
+{
+"code": "fnm",
+"name": "Friday Night Magic 2000",
+"released_at": "2000-01-01",
+"set_type": "promo",
+"block_code": "fnm",
+"digital": false
+},
+{
+"code": "g00",
+"name": "Judge Gift Cards 2000",
+"released_at": "2000-01-01",
+"set_type": "promo",
+"block_code": "jgp",
+"digital": false
+},
+{
+"code": "psus",
+"name": "Junior Super Series",
+"released_at": "1999-12-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "brb",
+"name": "Battle Royale Box Set",
+"released_at": "1999-11-12",
+"set_type": "box",
+"digital": false
+},
+{
+"code": "pmmq",
+"name": "Mercadian Masques Promos",
+"released_at": "1999-10-04",
+"set_type": "promo",
+"block_code": "mmq",
+"parent_set_code": "mmq",
+"digital": false
+},
+{
+"code": "mmq",
+"name": "Mercadian Masques",
+"released_at": "1999-10-04",
+"set_type": "expansion",
+"block_code": "mmq",
+"digital": false
+},
+{
+"code": "pwos",
+"name": "Wizards of the Coast Online Store",
+"released_at": "1999-09-04",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "pwor",
+"name": "World Championship Promos",
+"released_at": "1999-08-04",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "wc99",
+"name": "World Championship Decks 1999",
+"released_at": "1999-08-04",
+"set_type": "memorabilia",
+"digital": false
+},
+{
+"code": "pgru",
+"name": "Guru",
+"released_at": "1999-07-12",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "s99",
+"name": "Starter 1999",
+"released_at": "1999-07-01",
+"set_type": "starter",
+"digital": false
+},
+{
+"code": "puds",
+"name": "Urza's Destiny Promos",
+"released_at": "1999-06-07",
+"set_type": "promo",
+"block_code": "usg",
+"parent_set_code": "uds",
+"digital": false
+},
+{
+"code": "uds",
+"name": "Urza's Destiny",
+"released_at": "1999-06-07",
+"set_type": "expansion",
+"block_code": "usg",
+"digital": false
+},
+{
+"code": "pptk",
+"name": "Portal Three Kingdoms Promos",
+"released_at": "1999-05-01",
+"set_type": "promo",
+"block_code": "por",
+"parent_set_code": "ptk",
+"digital": false
+},
+{
+"code": "ptk",
+"name": "Portal Three Kingdoms",
+"released_at": "1999-05-01",
+"set_type": "starter",
+"block_code": "por",
+"digital": false
+},
+{
+"code": "6ed",
+"name": "Classic Sixth Edition",
+"released_at": "1999-04-21",
+"set_type": "core",
+"block_code": "lea",
+"digital": false
+},
+{
+"code": "pulg",
+"name": "Urza's Legacy Promos",
+"released_at": "1999-02-15",
+"set_type": "promo",
+"block_code": "usg",
+"parent_set_code": "ulg",
+"digital": false
+},
+{
+"code": "ulg",
+"name": "Urza's Legacy",
+"released_at": "1999-02-15",
+"set_type": "expansion",
+"block_code": "usg",
+"digital": false
+},
+{
+"code": "pal99",
+"name": "Arena League 1999",
+"released_at": "1999-01-01",
+"set_type": "promo",
+"block_code": "parl",
+"digital": false
+},
+{
+"code": "g99",
+"name": "Judge Gift Cards 1999",
+"released_at": "1999-01-01",
+"set_type": "promo",
+"block_code": "jgp",
+"digital": false
+},
+{
+"code": "ath",
+"name": "Anthologies",
+"released_at": "1998-11-01",
+"set_type": "box",
+"digital": false
+},
+{
+"code": "pusg",
+"name": "Urza's Saga Promos",
+"released_at": "1998-10-12",
+"set_type": "promo",
+"block_code": "usg",
+"parent_set_code": "usg",
+"digital": false
+},
+{
+"code": "usg",
+"name": "Urza's Saga",
+"released_at": "1998-10-12",
+"set_type": "expansion",
+"block_code": "usg",
+"digital": false
+},
+{
+"code": "palp",
+"name": "Asia Pacific Land Program",
+"released_at": "1998-09-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "wc98",
+"name": "World Championship Decks 1998",
+"released_at": "1998-08-12",
+"set_type": "memorabilia",
+"digital": false
+},
+{
+"code": "tugl",
+"name": "Unglued Tokens",
+"released_at": "1998-08-11",
+"set_type": "token",
+"parent_set_code": "ugl",
+"digital": false
+},
+{
+"code": "ugl",
+"name": "Unglued",
+"released_at": "1998-08-11",
+"set_type": "funny",
+"digital": false
+},
+{
+"code": "p02",
+"name": "Portal Second Age",
+"released_at": "1998-06-24",
+"set_type": "starter",
+"block_code": "por",
+"digital": false
+},
+{
+"code": "pexo",
+"name": "Exodus Promos",
+"released_at": "1998-06-15",
+"set_type": "promo",
+"block_code": "tmp",
+"parent_set_code": "exo",
+"digital": false
+},
+{
+"code": "exo",
+"name": "Exodus",
+"released_at": "1998-06-15",
+"set_type": "expansion",
+"block_code": "tmp",
+"digital": false
+},
+{
+"code": "psth",
+"name": "Stronghold Promos",
+"released_at": "1998-03-02",
+"set_type": "promo",
+"block_code": "tmp",
+"parent_set_code": "sth",
+"digital": false
+},
+{
+"code": "sth",
+"name": "Stronghold",
+"released_at": "1998-03-02",
+"set_type": "expansion",
+"block_code": "tmp",
+"digital": false
+},
+{
+"code": "jgp",
+"name": "Judge Gift Cards 1998",
+"released_at": "1998-01-01",
+"set_type": "promo",
+"block_code": "jgp",
+"digital": false
+},
+{
+"code": "ptmp",
+"name": "Tempest Promos",
+"released_at": "1997-10-14",
+"set_type": "promo",
+"block_code": "tmp",
+"parent_set_code": "tmp",
+"digital": false
+},
+{
+"code": "tmp",
+"name": "Tempest",
+"released_at": "1997-10-14",
+"set_type": "expansion",
+"block_code": "tmp",
+"digital": false
+},
+{
+"code": "wc97",
+"name": "World Championship Decks 1997",
+"released_at": "1997-08-13",
+"set_type": "memorabilia",
+"digital": false
+},
+{
+"code": "wth",
+"name": "Weatherlight",
+"released_at": "1997-06-09",
+"set_type": "expansion",
+"block_code": "mir",
+"digital": false
+},
+{
+"code": "olep",
+"name": "Oversized League Prizes",
+"released_at": "1997-05-30",
+"set_type": "memorabilia",
+"digital": false
+},
+{
+"code": "por",
+"name": "Portal",
+"released_at": "1997-05-01",
+"set_type": "starter",
+"block_code": "por",
+"digital": false
+},
+{
+"code": "pvan",
+"name": "Vanguard Series",
+"released_at": "1997-05-01",
+"set_type": "vanguard",
+"digital": false
+},
+{
+"code": "pmic",
+"name": "MicroProse Promos",
+"released_at": "1997-04-01",
+"set_type": "memorabilia",
+"parent_set_code": "past",
+"digital": false
+},
+{
+"code": "past",
+"name": "Astral Cards",
+"released_at": "1997-04-01",
+"set_type": "box",
+"digital": true
+},
+{
+"code": "5ed",
+"name": "Fifth Edition",
+"released_at": "1997-03-24",
+"set_type": "core",
+"block_code": "lea",
+"digital": false
+},
+{
+"code": "vis",
+"name": "Visions",
+"released_at": "1997-02-03",
+"set_type": "expansion",
+"block_code": "mir",
+"digital": false
+},
+{
+"code": "itp",
+"name": "Introductory Two-Player Set",
+"released_at": "1996-12-31",
+"set_type": "starter",
+"digital": false
+},
+{
+"code": "mgb",
+"name": "Multiverse Gift Box",
+"released_at": "1996-11-01",
+"set_type": "box",
+"parent_set_code": "vis",
+"digital": false
+},
+{
+"code": "mir",
+"name": "Mirage",
+"released_at": "1996-10-08",
+"set_type": "expansion",
+"block_code": "mir",
+"digital": false
+},
+{
+"code": "pred",
+"name": "Redemption Program",
+"released_at": "1996-10-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "pcel",
+"name": "Celebration Cards",
+"released_at": "1996-08-14",
+"set_type": "memorabilia",
+"digital": false
+},
+{
+"code": "parl",
+"name": "Arena League 1996",
+"released_at": "1996-08-02",
+"set_type": "promo",
+"block_code": "parl",
+"digital": false
+},
+{
+"code": "plgm",
+"name": "DCI Legend Membership",
+"released_at": "1996-07-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "rqs",
+"name": "Rivals Quick Start Set",
+"released_at": "1996-07-01",
+"set_type": "box",
+"digital": false
+},
+{
+"code": "all",
+"name": "Alliances",
+"released_at": "1996-06-10",
+"set_type": "expansion",
+"block_code": "ice",
+"digital": false
+},
+{
+"code": "ptc",
+"name": "Pro Tour Collector Set",
+"released_at": "1996-05-01",
+"set_type": "memorabilia",
+"digital": false
+},
+{
+"code": "o90p",
+"name": "Oversized 90's Promos",
+"released_at": "1996-04-01",
+"set_type": "memorabilia",
+"digital": false
+},
+{
+"code": "hml",
+"name": "Homelands",
+"released_at": "1995-10-01",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "ren",
+"name": "Renaissance",
+"released_at": "1995-08-01",
+"set_type": "masters",
+"digital": false
+},
+{
+"code": "rin",
+"name": "Rinascimento",
+"released_at": "1995-08-01",
+"set_type": "masters",
+"digital": false
+},
+{
+"code": "chr",
+"name": "Chronicles",
+"released_at": "1995-07-01",
+"set_type": "masters",
+"digital": false
+},
+{
+"code": "bchr",
+"name": "Chronicles Foreign Black Border",
+"released_at": "1995-07-01",
+"set_type": "masters",
+"parent_set_code": "chr",
+"digital": false
+},
+{
+"code": "ice",
+"name": "Ice Age",
+"released_at": "1995-06-03",
+"set_type": "expansion",
+"block_code": "ice",
+"digital": false
+},
+{
+"code": "4bb",
+"name": "Fourth Edition Foreign Black Border",
+"released_at": "1995-04-01",
+"set_type": "core",
+"parent_set_code": "4ed",
+"digital": false
+},
+{
+"code": "4ed",
+"name": "Fourth Edition",
+"released_at": "1995-04-01",
+"set_type": "core",
+"block_code": "lea",
+"digital": false
+},
+{
+"code": "pmei",
+"name": "Media and Collaboration Promos",
+"released_at": "1995-01-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "fem",
+"name": "Fallen Empires",
+"released_at": "1994-11-01",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "phpr",
+"name": "HarperPrism Book Promos",
+"released_at": "1994-09-01",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "drk",
+"name": "The Dark",
+"released_at": "1994-08-01",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "pdrc",
+"name": "Dragon Con",
+"released_at": "1994-07-15",
+"set_type": "promo",
+"digital": false
+},
+{
+"code": "sum",
+"name": "Summer Magic / Edgar",
+"released_at": "1994-06-21",
+"set_type": "core",
+"block_code": "lea",
+"digital": false
+},
+{
+"code": "leg",
+"name": "Legends",
+"released_at": "1994-06-01",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "3ed",
+"name": "Revised Edition",
+"released_at": "1994-04-11",
+"set_type": "core",
+"block_code": "lea",
+"digital": false
+},
+{
+"code": "fbb",
+"name": "Foreign Black Border",
+"released_at": "1994-04-11",
+"set_type": "core",
+"block_code": "lea",
+"parent_set_code": "3ed",
+"digital": false
+},
+{
+"code": "atq",
+"name": "Antiquities",
+"released_at": "1994-03-04",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "arn",
+"name": "Arabian Nights",
+"released_at": "1993-12-17",
+"set_type": "expansion",
+"digital": false
+},
+{
+"code": "cei",
+"name": "Intl. Collectors' Edition",
+"released_at": "1993-12-10",
+"set_type": "memorabilia",
+"digital": false
+},
+{
+"code": "ced",
+"name": "Collectors' Edition",
+"released_at": "1993-12-10",
+"set_type": "memorabilia",
+"digital": false
+},
+{
+"code": "2ed",
+"name": "Unlimited Edition",
+"released_at": "1993-12-01",
+"set_type": "core",
+"block_code": "lea",
+"digital": false
+},
+{
+"code": "leb",
+"name": "Limited Edition Beta",
+"released_at": "1993-10-04",
+"set_type": "core",
+"block_code": "lea",
+"digital": false
+},
+{
+"code": "lea",
+"name": "Limited Edition Alpha",
+"released_at": "1993-08-05",
+"set_type": "core",
+"block_code": "lea",
+"digital": false
+}
+]
+}

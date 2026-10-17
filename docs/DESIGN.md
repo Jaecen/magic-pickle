@@ -188,7 +188,9 @@ For each card in the target deck's in-deck boards (excluding tokens and basic la
    - **every other printing of the card that has free copies**, with set, collector number, finish, free count, and location
    You then change the printing in the Moxfield deck and regenerate the picklist. Any free copies of the requested printing still go on the picklist, so a partial shortfall is visible.
 3. If no printing has a free copy at all, the card is flagged **unavailable**, with each built deck holding a copy and its printing (G3).
-4. If `available[p] < 0` for any printing, flag it **over-allocated**: the Moxfield records have drifted from reality (§6.4).
+4. If `available[p] < 0` for any printing, flag it **over-allocated**: the Moxfield records have drifted from reality (§6.4). This is only checked for the target deck's cards, because collection lookups only fetch those names.
+
+Implemented in `src/engine/picklist.ts`. A notice of kind `unavailable` also covers a partial shortfall: some copies were picked, and no other printing has a free copy for the rest.
 
 Open edge case: double-faced cards (name matching on `A // B`).
 
@@ -324,7 +326,7 @@ manifest.json, vite.config.ts, .github/workflows/
 | --- | --- | --- |
 | **0. Discovery** ✅ | Prove extension access, auth, the search protocol, and the data shape | Done: §4 |
 | **0b. Sort system** | Write down the hotel and binder layout and order ✅; capture fixtures (target deck, 2–3 built decks, binder decks, collection search results) | §6.3 filled in ✅; fixtures in `tests/fixtures` |
-| **1. Engine** | Sort keys and sections, availability, printing notices, binder copies, with Vitest tests | Correct picklist for the fixtures |
+| **1. Engine** | Sort keys and sections ✅, availability ✅, printing notices ✅, binder copies ✅, with Vitest tests ✅ | Correct picklist for the fixtures. Synthetic fixtures pass; real Moxfield fixtures come with phase 2 |
 | **2. Extension MVP** | Scaffold (Vite + TypeScript + Preact + `web-ext`), Moxfield client, 🥒 button, picklist page. **Test:** whether `x-moxfield-version` and `X-Session-User` are required (Q7) | A real deck pull done with it on desktop |
 | **3. Ship** | CI, unlisted signing, Releases, auto-update. **Research and test:** installing on Firefox for Android (Q6) | Signed build installed on desktop and phone |
 | **4. Polish** | Pull progress, settings, printing details | Fewer manual steps per pull |

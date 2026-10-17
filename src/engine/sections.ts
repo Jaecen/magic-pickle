@@ -79,6 +79,43 @@ export const TYPE_SECTIONS: Readonly<Record<string, SectionId>> = {
   spellbook: "signatureSpellbook",
 };
 
+/** A `Collections` deck whose cards have fixed copies in a binder (§6.3.2), matched by exact deck name. */
+export interface BinderDeckDef {
+  deck: string;
+  binder: SectionId;
+  /** If set, cards are arranged by their Moxfield tag in this order, then collector number, not by color and name. */
+  tagOrder?: readonly string[];
+}
+
+/** Binder decks in pull order. A deck's position within its binder comes from its order here. */
+export const BINDER_DECKS: readonly BinderDeckDef[] = [
+  { deck: "Showcase - Theros Gods", binder: "yellowBinder" },
+  { deck: "Showcase - KLD Viking Legends", binder: "yellowBinder" },
+  { deck: "Showcase - STX Mystical Archives", binder: "yellowBinder" },
+  { deck: "Showcase - SNC Gilded Foils", binder: "yellowBinder" },
+  { deck: "Language - Phyrexian", binder: "yellowBinder" },
+  { deck: "Showcase - WOE Enchanting Tales", binder: "yellowBinder" },
+  { deck: "Showcase - OTJ Breaking News", binder: "yellowBinder" },
+  { deck: "Showcase - BLB Courageous Critters", binder: "yellowBinder" },
+  {
+    deck: "Showcase - LTR Panoramas",
+    binder: "whiteBinder",
+    tagOrder: [
+      "March of the Ents",
+      "The Mines of Moria",
+      "Farewells",
+      "Battle of Pelennor Fields",
+      "Destruction of the Ring",
+      "The Scouring of the Shire",
+      "Aragorn at Helm's Deep",
+      "Flight of the Witch King",
+      "Gandalf in the Pelennor Fields",
+      "The Might of Galadriel",
+      "Bilbo's Birthday Bash",
+    ],
+  },
+];
+
 /**
  * Cards whose frame color the mana-cost approximation gets wrong (§6.3.1), by card name.
  * Example: ["Transguild Courier", "colorless"] if its frame turns out not to be gold.

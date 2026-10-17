@@ -41,3 +41,31 @@ export interface SetInfo {
   block_code?: string;
   parent_set_code?: string;
 }
+
+/** One card line in a deck. `board` is Moxfield's board name: `mainboard`, `commanders`, `maybeboard`, … */
+export interface DeckEntry {
+  board: string;
+  quantity: number;
+  finish: Finish;
+  isProxy?: boolean;
+  card: Card;
+}
+
+export interface Deck {
+  publicId: string;
+  name: string;
+  entries: readonly DeckEntry[];
+  /** Moxfield's per-card tags (`authorTags`), keyed by card name. */
+  tags?: Readonly<Record<string, readonly string[]>>;
+}
+
+/** One collection row: a printing in one finish, condition, and language. */
+export interface CollectionRow {
+  id: string;
+  quantity: number;
+  finish: Finish;
+  isProxy?: boolean;
+  /** The copy's language (`language.code`), which can differ from `card.lang`. */
+  languageCode: string;
+  card: Card;
+}

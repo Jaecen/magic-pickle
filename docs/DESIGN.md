@@ -169,7 +169,7 @@ The engine is pure TypeScript with no I/O, tested with Vitest against fixture JS
 
 - **Printing key:** `(scryfall_id, finish)`, where finish is `nonFoil`, `foil`, or `etched`.
 - **Card identity:** the exact card `name`, since lookups are by name. Moxfield's `uniqueCardId` may be a better key; to be checked against fixtures.
-- **Language:** collection rows have `language.code` separate from `card.lang`, and decks don't record language. To be decided whether a non-English copy satisfies a deck entry (see Open questions).
+- **Language:** collection rows have `language.code` separate from `card.lang`, and decks don't record language. A collection copy counts toward a deck entry, as owned or as used by a built deck, **only if its `language.code` equals the deck card's `lang`**. A Japanese copy of C21 Sol Ring never satisfies an English C21 Sol Ring entry, and Phyrexian printings (their own Scryfall ids, `lang` `ph`) match only Phyrexian copies. Foreign copies are therefore never offered for English deck entries.
 - **Proxies:** collection rows and deck entries with `isProxy` are excluded from the counts.
 
 ### 6.2 Availability
@@ -336,7 +336,7 @@ Resolved questions are struck through; their answers are in the decision log.
 1. ~~The sort system.~~ §6.3.
 2. ~~Printing preferences.~~ No automatic substitution: flag the card and list the free printings (§6.2).
 3. ~~Basic lands.~~ Not cataloged; out of scope.
-4. **Language.** Proposed: a collection copy counts toward a deck entry only if its `language.code` matches the deck card's `lang`. So a Japanese copy of C21 Sol Ring never satisfies an English C21 Sol Ring entry, and Phyrexian printings (their own Scryfall ids, `lang` `ph`) match only Phyrexian copies. Foreign copies would never be offered or counted as used.
+4. ~~Language.~~ A copy counts toward a deck entry only if its language matches the deck card's language (§6.1).
 5. ~~Collection quirks.~~ None; Moxfield tracks nothing outside the hotels, boxes, and binders.
 6. **Android install.** Can an unlisted, self-hosted signed `.xpi` be installed on Firefox for Android? To research and test in phase 3.
 7. **Required headers.** Are `x-moxfield-version` and `X-Session-User` required, and if so where should the extension get `x-moxfield-version` from? To test in phase 2.
@@ -375,6 +375,7 @@ Resolved questions are struck through; their answers are in the decision log.
 | 2026-10-16 | Tokens are out of scope | Not cataloged; a separate future project |
 | 2026-10-16 | Basic lands are out of scope; the picklist only summarizes the basics a deck needs | Not cataloged |
 | 2026-10-16 | **No automatic printing substitution.** When the requested printing isn't free, flag it and list every printing with free copies; you edit the deck and regenerate | Which printing to use can't be decided ahead of time. Replaces the earlier substitution and write-back design |
+| 2026-10-16 | A copy counts for a deck entry only if its language matches the deck card's `lang` | Foreign copies aren't played and live in their own section; Phyrexian still works because those printings have their own Scryfall ids |
 | 2026-10-16 | Siblings strictly alphabetical by set code; panorama cards by collector number; playtest cards in their own box; box order arbitrary but fixed | Your answers to Q13, Q17b, Q18, and Q19 |
 | 2026-10-16 | Scryfall blocks count only for expansion blocks through GRN/RNA/WAR; siblings come from `parent_set_code`; named sections override both | Scryfall also labels all Commander products, all core sets, and newer set families (e.g. OTJ) as blocks, which don't match your system |
 | 2026-10-14 | Stack: TypeScript, Vite, Preact, Vitest, `web-ext`; unlisted AMO signing; releases on GitHub | Small, standard extension toolchain; signing is required for release Firefox |

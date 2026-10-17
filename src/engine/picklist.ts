@@ -3,6 +3,7 @@
 
 import { matchBinderDecks, placeInBinder, type BinderDeck } from "./binders";
 import { compareText } from "./names";
+import { PLAYABLE_LANGUAGES } from "./sections";
 import { compareKeys, type CollectionSorter, type Placement } from "./sort";
 import type { Card, CollectionRow, Deck, DeckEntry, Finish } from "./types";
 
@@ -60,7 +61,7 @@ interface ShortfallBase {
 }
 
 export type Notice =
-  /** The requested printing is short, but other printings of the card have free copies. */
+  /** The requested printing is short, but other printings of the card (in a usable language) have free copies. */
   | (ShortfallBase & { kind: "printingNotFree"; heldBy: Holding[]; alternatives: Alternative[] })
   /** No printing of the card has a free copy. `heldBy` lists every built deck holding any printing. */
   | (ShortfallBase & { kind: "unavailable"; heldBy: Holding[] })
@@ -200,8 +201,9 @@ export function buildPicklist(input: PicklistInput): Picklist {
   const notices: Notice[] = [];
   for (const { entry, p, picked } of shortfalls) {
     const base = { card: p.card, finish: p.finish, languageCode: p.languageCode, wanted: entry.quantity, picked, owned: p.owned };
+    // Other printings of the card in a language that can stand in for the requested one (English ↔ Phyrexian).
     const samePrintings = [...printings.values()].filter(
-      (o) => o.card.name === p.card.name && o.languageCode === p.languageCode,
+      (o) => o.card.name === p.card.name && interchangeable(o.languageCode, p.languageCode),
     );
     const alternatives = samePrintings
       .filter((o) => o !== p && o.freeLoose + o.freeBinder > 0)
@@ -233,6 +235,10 @@ export function buildPicklist(input: PicklistInput): Picklist {
     notices,
     skipped: [...skipped.values()].sort((a, b) => compareText(a.name, b.name)),
   };
+}
+
+function interchangeable(a: string, b: string): boolean {
+  return a === b || (PLAYABLE_LANGUAGES.has(a) && PLAYABLE_LANGUAGES.has(b));
 }
 
 function pick(p: Printing, quantity: number, placement: Placement, fromBinder: boolean): Pick {

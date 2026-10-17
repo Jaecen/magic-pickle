@@ -102,11 +102,50 @@ describe("availability", () => {
     expect(result.notices[0]).toMatchObject({ kind: "unavailable", owned: 0 });
   });
 
-  it("matches Phyrexian printings only to Phyrexian copies", () => {
-    const phyrexian = card({ name: "Elesh Norn, Mother of Machines", set: "one", cn: "10ph", lang: "ph" });
-    const result = run({ target: deck("New", [entry(phyrexian)]), collection: [row(phyrexian, 1, { lang: "ph" })] });
-    expect(result.picks).toHaveLength(1);
-    expect(result.picks[0]!.placement.section).toBe("foreign");
+  describe("Phyrexian and English stand in for each other", () => {
+    const norn = card({ name: "Elesh Norn, Mother of Machines", set: "one", cn: "10", mana_cost: "{4}{W}" });
+    const nornPh = { ...norn, scryfall_id: "one-norn-ph", lang: "ph" };
+
+    it("pulls a Phyrexian line from a Phyrexian copy", () => {
+      const result = run({ target: deck("New", [entry(nornPh)]), collection: [row(nornPh, 1, { lang: "ph" })] });
+      expect(result.picks).toMatchObject([{ languageCode: "ph", placement: { section: "foreign" } }]);
+    });
+
+    it("offers free English printings when the Phyrexian one is in use", () => {
+      const result = run({
+        target: deck("New", [entry(nornPh)]),
+        builtDecks: [deck("Built A", [entry(nornPh)])],
+        collection: [row(nornPh, 1, { lang: "ph" }), row(norn, 2)],
+      });
+      const notice = result.notices[0]!;
+      if (notice.kind !== "printingNotFree") throw new Error(notice.kind);
+      expect(notice.alternatives).toMatchObject([{ languageCode: "en", free: 2 }]);
+    });
+
+    it("offers free Phyrexian printings when the English one is in use, and lists holders of both", () => {
+      const result = run({
+        target: deck("New", [entry(norn)]),
+        builtDecks: [deck("Built A", [entry(norn)])],
+        collection: [row(norn, 1), row(nornPh, 1, { lang: "ph" })],
+      });
+      const notice = result.notices[0]!;
+      if (notice.kind !== "printingNotFree") throw new Error(notice.kind);
+      expect(notice.alternatives).toMatchObject([{ languageCode: "ph", free: 1 }]);
+
+      const none = run({
+        target: deck("New", [entry(norn)]),
+        builtDecks: [deck("Built A", [entry(norn)]), deck("Built B", [entry(nornPh)])],
+        collection: [row(norn, 1), row(nornPh, 1, { lang: "ph" })],
+      });
+      const unavailable = none.notices.find((n) => n.kind === "unavailable")!;
+      if (unavailable.kind !== "unavailable") throw new Error();
+      expect(unavailable.heldBy.map((h) => h.deck).sort()).toEqual(["Built A", "Built B"]);
+    });
+
+    it("still never offers other foreign-language copies", () => {
+      const result = run({ target: deck("New", [entry(nornPh)]), collection: [row(norn, 1, { lang: "ja" })] });
+      expect(result.notices[0]).toMatchObject({ kind: "unavailable" });
+    });
   });
 
   it("ignores proxies in the collection and in built decks, and skips proxy lines in the target", () => {
@@ -200,6 +239,16 @@ describe("binder copies", () => {
     const wishlist = deck("Showcase - Theros Gods", [entry(god, 1), entry(bolt, 1)]);
     const result = run({ target: deck("New", [entry(bolt)]), binderDecks: [wishlist], collection: [row(bolt, 1)] });
     expect(result.picks).toMatchObject([{ fromBinder: true, placement: { section: "yellowBinder" } }]);
+  });
+
+  it("matches binder decks by the start of their name, ignoring completion markers", () => {
+    const result = run({
+      target: deck("New", [entry(god)]),
+      builtDecks: [deck("Built A", [entry(god)])],
+      binderDecks: [deck("Showcase - Theros Gods ✅ (15/15)", [entry(god)])],
+      collection: [row(god, 2)],
+    });
+    expect(result.picks).toMatchObject([{ fromBinder: true, placement: { group: "Showcase - Theros Gods" } }]);
   });
 
   it("ignores Collections decks that aren't configured as binders", () => {

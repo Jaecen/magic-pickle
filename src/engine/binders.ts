@@ -15,15 +15,17 @@ export interface BinderDeck {
   deck: Deck;
 }
 
-/** Matches `Collections` decks to the configured binder decks, in pull order. Unconfigured decks are ignored. */
+/**
+ * Matches `Collections` decks to the configured binder decks by name prefix, in pull order. Unconfigured
+ * decks are ignored.
+ */
 export function matchBinderDecks(decks: readonly Deck[]): BinderDeck[] {
-  const byName = new Map(decks.map((d) => [d.name, d]));
   const positions = new Map<string, number>();
   const matched: BinderDeck[] = [];
   for (const def of BINDER_DECKS) {
     const position = positions.get(def.binder) ?? 0;
     positions.set(def.binder, position + 1);
-    const deck = byName.get(def.deck);
+    const deck = decks.find((d) => d.name.startsWith(def.deck));
     if (deck) matched.push({ def, position, deck });
   }
   return matched;

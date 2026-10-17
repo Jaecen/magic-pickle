@@ -169,7 +169,7 @@ The engine is pure TypeScript with no I/O, tested with Vitest against fixture JS
 
 - **Printing key:** `(scryfall_id, finish)`, where finish is `nonFoil`, `foil`, or `etched`.
 - **Card identity:** the exact card `name`, since lookups are by name. Moxfield's `uniqueCardId` may be a better key; to be checked against fixtures.
-- **Language:** collection rows have `language.code` separate from `card.lang`, and decks don't record language. A collection copy counts toward a deck entry, as owned or as used by a built deck, **only if its `language.code` equals the deck card's `lang`**. A Japanese copy of C21 Sol Ring never satisfies an English C21 Sol Ring entry, and Phyrexian printings (their own Scryfall ids, `lang` `ph`) match only Phyrexian copies. Foreign copies are therefore never offered for English deck entries.
+- **Language:** collection rows have `language.code` separate from `card.lang`, and decks don't record language. A collection copy **fills** a deck line, and counts as used by a built deck, only if its `language.code` equals the deck card's `lang`. So a Japanese copy of C21 Sol Ring never fills an English C21 Sol Ring line. **English and Phyrexian are interchangeable for alternatives**, since Phyrexian cards are played: when an English printing isn't free, free Phyrexian printings are listed, and the reverse; "unavailable" lists the built decks holding either. Other foreign-language copies are never offered (`PLAYABLE_LANGUAGES` in `sections.ts`).
 - **Proxies:** collection rows and deck entries with `isProxy` are excluded from the counts.
 
 ### 6.2 Availability
@@ -264,7 +264,7 @@ New sets need a sensible default. A set not named in any list goes to **Modern**
 
 Binders hold a **fixed quantity** of each card in their `Collections` decks (usually one). Extra copies live in the hotels with their set. `Collections` decks are aspirational, so they may list cards that aren't owned yet.
 
-- `binderQty[p] = min(owned[p], Σ quantity of p in binder decks)`. Binder decks are matched by exact deck name in the `Collections` folder; `sections.ts` maps each deck name to a binder and a position.
+- `binderQty[p] = min(owned[p], Σ quantity of p in binder decks)`. Binder decks in the `Collections` folder are matched by the **start of their name**: the rest of the name (completion emoji, card counts) is ignored. `sections.ts` maps each name prefix to a binder and a position.
 - Panorama membership comes from the Moxfield **tags** on the cards in *Showcase - LTR Panoramas* (`authorTags` in the deck JSON, keyed by card name).
 - Moxfield can't tell which copy a built deck holds. So **built decks are assumed to hold non-binder copies first**, and picks come from the hotels and boxes first. Binder copies **can** be pulled: when no other copy is free, the picklist offers the binder copy at its binder location.
 
@@ -378,6 +378,8 @@ Resolved questions are struck through; their answers are in the decision log.
 | 2026-10-16 | Basic lands are out of scope; the picklist only summarizes the basics a deck needs | Not cataloged |
 | 2026-10-16 | **No automatic printing substitution.** When the requested printing isn't free, flag it and list every printing with free copies; you edit the deck and regenerate | Which printing to use can't be decided ahead of time. Replaces the earlier substitution and write-back design |
 | 2026-10-16 | A copy counts for a deck entry only if its language matches the deck card's `lang` | Foreign copies aren't played and live in their own section; Phyrexian still works because those printings have their own Scryfall ids |
+| 2026-10-17 | English and Phyrexian printings are offered as alternatives for each other; other languages still never are | Phyrexian cards are played, and there are few copies, so a busy Phyrexian printing should point to free English ones and vice versa |
+| 2026-10-17 | Binder decks match by name prefix | Deck names carry completion emoji and card counts after the configured name |
 | 2026-10-16 | Siblings strictly alphabetical by set code; panorama cards by collector number; playtest cards in their own box; box order arbitrary but fixed | Your answers to Q13, Q17b, Q18, and Q19 |
 | 2026-10-16 | Scryfall blocks count only for expansion blocks through GRN/RNA/WAR; siblings come from `parent_set_code`; named sections override both | Scryfall also labels all Commander products, all core sets, and newer set families (e.g. OTJ) as blocks, which don't match your system |
 | 2026-10-14 | Stack: TypeScript, Vite, Preact, Vitest, `web-ext`; unlisted AMO signing; releases on GitHub | Small, standard extension toolchain; signing is required for release Firefox |

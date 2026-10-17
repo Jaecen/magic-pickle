@@ -79,8 +79,9 @@ export const TYPE_SECTIONS: Readonly<Record<string, SectionId>> = {
   spellbook: "signatureSpellbook",
 };
 
-/** A `Collections` deck whose cards have fixed copies in a binder (§6.3.2), matched by exact deck name. */
+/** A `Collections` deck whose cards have fixed copies in a binder (§6.3.2). */
 export interface BinderDeckDef {
+  /** Start of the Moxfield deck name; the rest (completion emoji, card counts) is ignored. */
   deck: string;
   binder: SectionId;
   /** If set, cards are arranged by their Moxfield tag in this order, then collector number, not by color and name. */
@@ -115,6 +116,12 @@ export const BINDER_DECKS: readonly BinderDeckDef[] = [
     ],
   },
 ];
+
+/**
+ * Languages that are interchangeable for play. When a printing in one of them isn't free, printings in the
+ * others are offered as alternatives (§6.2). Other foreign-language copies are never offered.
+ */
+export const PLAYABLE_LANGUAGES: ReadonlySet<string> = new Set(["en", "ph"]);
 
 /**
  * Cards whose frame color the mana-cost approximation gets wrong (§6.3.1), by card name.

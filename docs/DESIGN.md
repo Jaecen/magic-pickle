@@ -136,7 +136,7 @@ moxfield.com/decks/{publicId}                  Firefox extension
 3. **Built decks:** filter the decks list to `folder.name == "3 - Built"` (a setting), excluding the target deck itself. For each one, reuse the cached copy if `lastUpdatedAtUtc` is unchanged; otherwise fetch it, a few at a time. Keep only the in-deck boards, reduced to `(name, scryfall_id, finish, quantity, isProxy)`.
 4. **Collection lookup:** take the target deck's distinct card names, split them into OR groups of at most about 900 characters, and run the incremental search for 4 groups at a time (§4.5).
 5. Load the **Scryfall set list** from cache, refreshing it if it's more than 7 days old, and fetch the **`Collections` binder decks** (cached the same way as built decks).
-6. Run the **engine** on (target deck, built-deck usage, binder decks, collection rows, set list, settings). It returns the picklist, the substitutions, and the problems.
+6. Run the **engine** on (target deck, built-deck usage, binder decks, collection rows, set list, settings). It returns the picklist and the problems (printings not free, unavailable cards, over-allocations).
 7. Render the result. Pull progress is saved in `storage.local` under the deck's `publicId`.
 
 Expected time: about 3 s when built decks are cached, more on the first run, depending on how many decks are in `3 - Built`.
@@ -147,7 +147,7 @@ All state lives in `storage.local`. Nothing has to persist reliably: everything 
 
 | Data | Purpose | Lifetime |
 | --- | --- | --- |
-| Settings | Name of the built folder, sort rules (if configurable), printing preferences | Until changed |
+| Settings | Name of the built folder, binder decks, section lists (if editable in the UI) | Until changed |
 | Built-deck cache | Reduced in-deck boards per `publicId` + `lastUpdatedAtUtc` | Replaced when a deck changes; dropped when it leaves the folder |
 | Pull progress | Checked-off cards per target deck | Until cleared or the deck changes |
 | Scryfall set list | Release dates, blocks, parent sets (§6.3.3) | Refreshed after 7 days |
@@ -157,10 +157,9 @@ No collection copy is kept (decision 2026-10-12). Every picklist searches live, 
 
 ### 5.4 UI
 
-1. **Picklist:** the cards to pull, grouped by location (hotel → section, binder → page) in pull order. Each line has a checkbox, quantity, name, set and collector number, finish, and a reason it's there if it's a substitute. Checked items drop to the bottom or collapse. The layout works at phone width, since the likely device is a phone or tablet next to the card hotels. It's also printable.
-2. **Problems:** cards with no free copy (each built deck holding one, per G3), substitutions made, and over-allocated printings (§6.2).
-3. **Write-back checklist:** the printing edits to make in Moxfield after the pull (§6.5).
-4. **Settings:** the built folder, printing preferences, and sort rules if they turn out to be configurable.
+1. **Picklist:** the cards to pull, grouped by location (hotel → section, binder → page) in pull order. Each line has a checkbox, quantity, name, set and collector number, and finish. Checked items drop to the bottom or collapse. The layout works at phone width, since the likely device is a phone or tablet next to the card hotels. It's also printable.
+2. **Problems** (shown first if there are any): cards whose requested printing isn't free, with the free alternatives and a link to the deck (§6.5); unavailable cards with the built decks holding them (G3); over-allocated printings (§6.4).
+3. **Settings:** the built folder, the binder decks, and the section lists, if those turn out to be worth editing in the UI rather than in `sections.ts`.
 
 ## 6. Core logic
 
@@ -181,14 +180,17 @@ used[p]      = Σ quantity of p in the in-deck boards of built decks, excluding 
 available[p] = owned[p] − used[p]
 ```
 
-For each card in the target deck's in-deck boards:
+For each card in the target deck's in-deck boards (excluding tokens and basic lands):
 
-1. If `available[requested] ≥ qty`, pick the requested printing.
-2. Otherwise, take the shortfall from other printings of the same card where `available > 0`, in order of preference (setting; default: same finish first, then whichever comes first in pull order).
-3. If no printing has a free copy, mark the card **unavailable** and list each built deck holding a copy, with its printing (G3).
-4. If `available[p] < 0` for any printing, flag it **over-allocated**: the Moxfield records have drifted from reality (§6.5).
+1. If `available[requested] ≥ qty`, the card goes on the picklist at the requested printing's location.
+2. Otherwise, **the extension doesn't substitute.** Which printing to use can't be decided ahead of time, so the card is flagged **"requested printing not free"**. The notice shows:
+   - how many copies of the requested printing are owned, and which built decks hold them (G3)
+   - **every other printing of the card that has free copies**, with set, collector number, finish, free count, and location
+   You then change the printing in the Moxfield deck and regenerate the picklist. Any free copies of the requested printing still go on the picklist, so a partial shortfall is visible.
+3. If no printing has a free copy at all, the card is flagged **unavailable**, with each built deck holding a copy and its printing (G3).
+4. If `available[p] < 0` for any printing, flag it **over-allocated**: the Moxfield records have drifted from reality (§6.4).
 
-Open edge cases: basic lands, double-faced cards (name matching on `A // B`), and tokens.
+Open edge case: double-faced cards (name matching on `A // B`).
 
 ### 6.3 Sort order
 
@@ -198,7 +200,7 @@ The picklist visits the collection in the order it's stored. Each **collection r
 (section, group, subgroup, color, name)
 ```
 
-Items marked *(assumed)* weren't explicitly confirmed. Q13, Q17b, and Q18–Q19 are still open.
+Items marked *(assumed)* weren't explicitly confirmed.
 
 #### Sections, in physical order
 
@@ -210,7 +212,7 @@ Unless noted, a section sorts **set by set** using the general model (§6.3.1).
 | 2 | Duel Decks | Hotels | Scryfall `set_type` `duel_deck`: DD1–DDU, the anthologies (DVD, EVG, GVL, JVC), GS1 | Set by set |
 | 3 | Modern | Hotels | All core sets; all **promo** sets (Scryfall `set_type` `promo`); Conspiracy (CNS, CN2); reprint-based sets not listed elsewhere (Origins, most Masters sets, From the Vault, Premium Deck Series, Game Night, gift packs, Explorers of Ixalan, Challenger Decks, Commander Collection; all *(assumed)*) | **One merged set** |
 | 4 | Main | Hotels | Everything else, including CLB, Battlebond, LTR, Assassin's Creed, the Eternal sets, Archenemy *(assumed)* | General model |
-| 5 | Planeswalker symbol | Hotels | The List (PLST, ULST), Mystery Booster sets (MB2, MBC, CMB1, CMB2) *(assumed; Q18)* | **One merged set** |
+| 5 | Planeswalker symbol | Hotels | The List (PLST, ULST), Mystery Booster sets (MB2, MBC) *(assumed)* | **One merged set** |
 | 6 | Planechase | Hotels | HOP, PC2, PCA, and later Planechase sets | Set by set |
 | 7 | Guild Kit | Hotels | GK1, GK2 | Set by set |
 | 8 | Foreign language | Hotels | Every row whose `language.code` isn't `en`, whatever the set | **One merged set** (order unimportant) |
@@ -221,18 +223,21 @@ Unless noted, a section sorts **set by set** using the general model (§6.3.1).
 | 13 | Commander Legends | Hotels | CMR | One set |
 | 14 | Universes Within | Hotels | SLX | One set |
 | 15 | Old cards | Separate boxes | True pre-modern frames: card `frame` is `1993` or `1997` **and** the set was released before 8th Edition (2003-07-28). Old-frame cards in newer sets (e.g. TSB, retro frames) stay in their normal section | **Exactly like Main** (core sets, Portal, Starter, and Chronicles are just sets in release order) |
-| 16 | Un-sets | Separate box | UGL, UNH, UST, UND, UNF, SUNF *(assumed list; Q19: does this box come before or after Old cards?)* | Set by set |
-| 17 | Yellow binder | Binder | Fixed copies of the cards in these `Collections` decks, in order: Showcase - Theros Gods; Showcase - KLD Viking Legends; Showcase - STX Mystical Archives; Showcase - SNC Gilded Foils; Language - Phyrexian; Showcase - WOE Enchanting Tales; Showcase - OTJ Breaking News; Showcase - BLB Courageous Critters | Like Main, with each **deck** as the "set": deck order, then color, then name |
-| 18 | White binder | Binder | Showcase - LTR Panoramas | By the panorama **tag** on each card in the deck, in this order: March of the Ents, The Mines of Moria, Farewells, Battle of Pelennor Fields, Destruction of the Ring, The Scouring of the Shire, Aragorn at Helm's Deep, Flight of the Witch King, Gandalf in the Pelennor Fields, The Might of Galadriel, Bilbo's Birthday Bash. Then collector number within a panorama *(assumed; Q17b)* |
-| 19 | Red binder | Binder | (empty) | — |
+| 16 | Un-sets | Separate box | UGL, UNH, UST, UND, UNF, SUNF *(assumed list)* | Set by set |
+| 17 | Playtest cards | Separate box | Mystery Booster playtest cards (CMB1, CMB2) | Set by set |
+| 18 | Yellow binder | Binder | Fixed copies of the cards in these `Collections` decks, in order: Showcase - Theros Gods; Showcase - KLD Viking Legends; Showcase - STX Mystical Archives; Showcase - SNC Gilded Foils; Language - Phyrexian; Showcase - WOE Enchanting Tales; Showcase - OTJ Breaking News; Showcase - BLB Courageous Critters | Like Main, with each **deck** as the "set": deck order, then color, then name |
+| 19 | White binder | Binder | Showcase - LTR Panoramas | By the panorama **tag** on each card in the deck, in this order: March of the Ents, The Mines of Moria, Farewells, Battle of Pelennor Fields, Destruction of the Ring, The Scouring of the Shire, Aragorn at Helm's Deep, Flight of the Witch King, Gandalf in the Pelennor Fields, The Might of Galadriel, Bilbo's Birthday Bash. Then collector number within a panorama |
+| 20 | Red binder | Binder | (empty) | — |
 
-**Tokens** aren't cataloged and are out of scope: token cards and token sets are skipped everywhere.
+The boxes (Old cards, Un-sets, Playtest cards) have no physical order relative to each other. The picklist always visits them in the order shown, so it's consistent.
+
+**Tokens and basic lands** aren't cataloged and are out of scope. Token cards, token sets, and basic lands (type line has the `Basic` supertype, including snow-covered basics and Wastes) are left off the picklist and out of the lookups. The picklist shows a one-line summary of the basics the deck needs (e.g. "Basics, not included: 8 Island, 8 Plains, 8 Swamp").
 
 **Which section wins** when several could apply, checked in this order:
 
 1. **Binder copy** (§6.3.2): the row's copy is one of the fixed binder copies.
 2. **Foreign language:** `language.code ≠ en`. Phyrexian copies in the *Language - Phyrexian* binder deck are caught by rule 1 first.
-3. **Un-sets**, by set code. This comes before Old cards, so Unglued goes in the Un-sets box even though its frame is old.
+3. **Un-sets and Playtest cards**, by set code. These come before Old cards, so Unglued goes in the Un-sets box even though its frame is old.
 4. **Old cards:** old frame and a pre-8th Edition set. This includes old promos.
 5. **Named sections**, by set code or set type (Commander, Duel Decks, Modern, Planeswalker symbol, Planechase, Guild Kit, Jumpstart, Secret Lair, Signature Spellbook, Modern Horizons, Commander Legends, Universes Within). These override Scryfall's parent/child links: KHC (parent KHM), SLX (parent SLD), J25 (parent FDN), and promo sets (e.g. POTJ, parent OTJ) go to their named sections, not to their parent set.
 6. **Main** for everything else.
@@ -243,7 +248,7 @@ New sets need a sensible default. A set not named in any list goes to **Modern**
 
 - **Group** (set or block), ordered **chronologically** by the earliest release date among the group's sets *in that section*. Coldsnap shows why: Scryfall puts it in the Ice Age block, but Ice Age and Alliances are old cards, so Coldsnap sorts in Main at its own 2006 date.
   - **Blocks merge into one set.** Scryfall's `block_code` is used only for **expansion** blocks released through **GRN/RNA/WAR** (2019-05-03). Scryfall also assigns blocks to things that aren't blocks in this system: all Commander products are block `cmd`, all core sets are block `lea`, Modern Horizons is block `mh1`, and newer sets like OTJ have a block containing their siblings. Those are ignored.
-  - **Sibling sets** are sets whose Scryfall `parent_set_code` points to the group's primary set, followed up the chain to the root, and that land in the same section. They sort **after** the primary set, ordered by set code. Example: OTJ, then BIG, OTC, OTP *(Q13: your example said "OTJ, BIG, OTB, OTC", but Breaking News is OTP, which is after OTC alphabetically)*.
+  - **Sibling sets** are sets whose Scryfall `parent_set_code` points to the group's primary set, followed up the chain to the root, and that land in the same section. They sort **after** the primary set, ordered **strictly alphabetically by set code**. Example: OTJ, then BIG, OTC, OTP.
 - **Subgroup:** 0 for the primary set (or all of a block's sets, merged), then 1, 2, … for each sibling set in set-code order.
 - **Color**, in this order: **W, U, B, R, G, multi, colorless, land**. All multicolor cards (gold, hybrid, and so on) are one bucket. The real rule is **the front face's frame color**. The data doesn't include frame color, so it's approximated:
   1. **Land** if the front face's type line includes Land. Dryad Arbor is ruled a land.
@@ -271,9 +276,9 @@ Binders hold a **fixed quantity** of each card in their `Collections` decks (usu
 
 Availability is only as good as the printings recorded in Moxfield. If a built deck lists printing A but physically holds printing B, the math is wrong for both. Over-allocation (`available < 0`) is a sure sign of this, so the problems view shows it.
 
-### 6.5 Write-back assistance
+### 6.5 Fixing the deck
 
-Moxfield can't be updated programmatically, so after a pull the extension lists the edits to make by hand. For example: "In deck X, change *Sol Ring* from CMR #472 to C21 #263". Following it keeps future availability checks accurate.
+Moxfield can't be updated programmatically, and the extension doesn't pick substitutes (§6.2). Each "requested printing not free" notice therefore links to the deck in Moxfield and lists the free printings to choose from. After you change the printing there, regenerating the picklist picks up the change. This also keeps the deck's recorded printings accurate for future availability checks once it's built.
 
 ## 7. Build, test, and release
 
@@ -306,7 +311,7 @@ Release Firefox only runs extensions signed by Mozilla. The extension is signed 
 /src/background/     tab opening, fallback token capture
 /src/pages/pick/     picklist page (Preact)
 /src/moxfield/       auth, decks, incremental collection search, schemas
-/src/engine/         availability, sort, write-back (pure)
+/src/engine/         sort keys, sections, availability, notices (pure); sections.ts
 /tests/fixtures/     sanitized Moxfield responses from the probe
 /spikes/             throwaway experiments (moxfield-probe)
 /docs/DESIGN.md      this file
@@ -319,33 +324,34 @@ manifest.json, vite.config.ts, .github/workflows/
 | --- | --- | --- |
 | **0. Discovery** ✅ | Prove extension access, auth, the search protocol, and the data shape | Done: §4 |
 | **0b. Sort system** | Write down the hotel and binder layout and order ✅; capture fixtures (target deck, 2–3 built decks, binder decks, collection search results) | §6.3 filled in ✅; fixtures in `tests/fixtures` |
-| **1. Engine** | Availability, substitution, sort, write-back, with Vitest tests on the fixtures | Correct picklist for the fixtures |
-| **2. Extension MVP** | Scaffold (Vite + TypeScript + Preact + `web-ext`), Moxfield client, 🥒 button, picklist page | A real deck pull done with it on desktop |
-| **3. Ship** | CI, unlisted signing, Releases, auto-update; install on Android | Signed build installed on desktop and phone |
-| **4. Polish** | Pull progress, write-back checklist, settings, printing view | Fewer manual steps per pull |
+| **1. Engine** | Sort keys and sections, availability, printing notices, binder copies, with Vitest tests | Correct picklist for the fixtures |
+| **2. Extension MVP** | Scaffold (Vite + TypeScript + Preact + `web-ext`), Moxfield client, 🥒 button, picklist page. **Test:** whether `x-moxfield-version` and `X-Session-User` are required (Q7) | A real deck pull done with it on desktop |
+| **3. Ship** | CI, unlisted signing, Releases, auto-update. **Research and test:** installing on Firefox for Android (Q6) | Signed build installed on desktop and phone |
+| **4. Polish** | Pull progress, settings, printing details | Fewer manual steps per pull |
 
 ## Open questions
 
-1. ~~The sort system.~~ Written down in §6.3 (2026-10-16). The remaining details are Q8–Q17.
-2. **Printing preferences.** When substituting, what makes one printing better: same finish, same art, newest, cheapest, or easiest to reach?
-3. **Basic lands.** Are basics in the collection cataloged and pulled like other cards, or kept in a separate land station that the picklist should just total up?
-4. **Language.** Does a non-English copy satisfy a deck entry for the English printing, or should the two be kept apart?
-5. **Collection quirks.** Are there cards Moxfield counts that aren't in the hotels or binders (a "to sort" pile, trade binders, a box of proxies)? Should the picklist handle them differently?
-6. **Android install.** Can an unlisted, self-hosted signed `.xpi` be installed on your Firefox for Android? To be checked with the first signed build.
-7. **Required headers.** Are `x-moxfield-version` and `X-Session-User` required? If so, where should the extension get `x-moxfield-version` from (captured traffic or Moxfield's JavaScript)? To be checked when building the Moxfield client.
+Resolved questions are struck through; their answers are in the decision log.
 
-8. ~~Merged or set-by-set?~~ Set by set (2026-10-16).
-9. ~~Sets you didn't mention.~~ Secret Lair gets its own section between Jumpstart and Signature Spellbook. Promos → Modern. Duel Decks get their own section between Commander and Modern. Un-sets go in a separate box. Conspiracy → Modern. CLB → Main. Tokens are out of scope. The rest of the proposed list is recorded as *(assumed)* in §6.3 (2026-10-16).
-10. ~~Guild Kit 2.~~ Not owned yet, but it belongs in the Guild Kit section (2026-10-16).
-11. ~~Inside Old cards.~~ Exactly like Main, just stored separately (2026-10-16).
-12. ~~Blocks.~~ GRN/RNA/WAR confirmed (2026-10-16). Coldsnap (Ice Age block) and TSB (Time Spiral block) follow Scryfall unless you say otherwise.
-13. **Sibling order.** Strictly alphabetical by set code (OTJ, BIG, OTC, OTP)? Or should the Commander set always come last, as in your example?
-14. ~~Color edge cases.~~ Use the front face's frame color, approximated from its mana cost; Dryad Arbor is a land (2026-10-16). See §6.3.1.
-15. ~~Binder copies.~~ They can be pulled, after every other free copy (2026-10-16).
-16. ~~Order inside the yellow binder.~~ Deck, then color, then name (2026-10-16).
-17. ~~Panoramas.~~ Card tags in the deck (2026-10-16). **17b:** what's the order of cards *within* one panorama? Collector number is assumed.
-18. **Mystery Booster playtest cards** (CMB1, CMB2): with The List in the Planeswalker symbol section, or with the Un-sets?
-19. **Un-sets box:** before or after the Old cards boxes in the pull order?
+1. ~~The sort system.~~ §6.3.
+2. ~~Printing preferences.~~ No automatic substitution: flag the card and list the free printings (§6.2).
+3. ~~Basic lands.~~ Not cataloged; out of scope.
+4. **Language.** Proposed: a collection copy counts toward a deck entry only if its `language.code` matches the deck card's `lang`. So a Japanese copy of C21 Sol Ring never satisfies an English C21 Sol Ring entry, and Phyrexian printings (their own Scryfall ids, `lang` `ph`) match only Phyrexian copies. Foreign copies would never be offered or counted as used.
+5. ~~Collection quirks.~~ None; Moxfield tracks nothing outside the hotels, boxes, and binders.
+6. **Android install.** Can an unlisted, self-hosted signed `.xpi` be installed on Firefox for Android? To research and test in phase 3.
+7. **Required headers.** Are `x-moxfield-version` and `X-Session-User` required, and if so where should the extension get `x-moxfield-version` from? To test in phase 2.
+8. ~~Merged or set-by-set?~~ Set by set.
+9. ~~Sets you didn't mention.~~ §6.3 table.
+10. ~~Guild Kit 2.~~ Guild Kit section.
+11. ~~Inside Old cards.~~ Exactly like Main.
+12. ~~Blocks.~~ GRN/RNA/WAR. Coldsnap (Ice Age block) and TSB (Time Spiral block) follow Scryfall.
+13. ~~Sibling order.~~ Strictly alphabetical by set code.
+14. ~~Color edge cases.~~ §6.3.1.
+15. ~~Binder copies.~~ Can be pulled, after every other free copy.
+16. ~~Order inside the yellow binder.~~ Deck, then color, then name.
+17. ~~Panoramas.~~ Card tags, then collector number.
+18. ~~Playtest cards.~~ Their own box.
+19. ~~Box order.~~ Arbitrary but fixed: Old cards, Un-sets, Playtest cards.
 
 ## Decision log
 
@@ -367,6 +373,9 @@ manifest.json, vite.config.ts, .github/workflows/
 | 2026-10-16 | Sort system written down (§6.3); use the Scryfall set list (cached for 7 days) for set release dates, blocks, and parent sets | Moxfield's card objects have no block or parent-set data, and your system is defined in Scryfall's terms. One cached request; Scryfall allows requests from browser pages |
 | 2026-10-16 | Sort details confirmed: sections are set by set (except Modern, Planeswalker symbol, and Foreign); new Duel Decks, Secret Lair, and Un-sets sections; promos and Conspiracy → Modern; CLB → Main; color by the front face's frame color (approximated from its mana cost); binder copies can be pulled, after all other free copies | Your answers to Q8–Q17 |
 | 2026-10-16 | Tokens are out of scope | Not cataloged; a separate future project |
+| 2026-10-16 | Basic lands are out of scope; the picklist only summarizes the basics a deck needs | Not cataloged |
+| 2026-10-16 | **No automatic printing substitution.** When the requested printing isn't free, flag it and list every printing with free copies; you edit the deck and regenerate | Which printing to use can't be decided ahead of time. Replaces the earlier substitution and write-back design |
+| 2026-10-16 | Siblings strictly alphabetical by set code; panorama cards by collector number; playtest cards in their own box; box order arbitrary but fixed | Your answers to Q13, Q17b, Q18, and Q19 |
 | 2026-10-16 | Scryfall blocks count only for expansion blocks through GRN/RNA/WAR; siblings come from `parent_set_code`; named sections override both | Scryfall also labels all Commander products, all core sets, and newer set families (e.g. OTJ) as blocks, which don't match your system |
 | 2026-10-14 | Stack: TypeScript, Vite, Preact, Vitest, `web-ext`; unlisted AMO signing; releases on GitHub | Small, standard extension toolchain; signing is required for release Firefox |
 

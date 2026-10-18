@@ -4,7 +4,7 @@
 
 | | |
 | --- | --- |
-| **Status** | Phase 2: the extension is built and verified against the real Moxfield (2026-10-18): a 100-card deck's picklist in 2.8 s warm, 3.7 s cold. Next: a real pull, then signing and release |
+| **Status** | **1.0.0 released** (2026-10-18), installed on desktop and Android; in real-world use. Next: whatever real pulls turn up |
 | **Owner** | Jason Addington |
 | **Last updated** | 2026-10-18 |
 
@@ -307,7 +307,7 @@ Release Firefox only runs extensions signed by Mozilla. The extension is signed 
 - `browser_specific_settings.gecko.update_url` points at `https://raw.githubusercontent.com/Jaecen/magic-pickle/main/updates.json`. The release workflow appends each version to that file, with its `update_link` and a `sha256` `update_hash`. Desktop Firefox checks it about once a day.
 - The first install is manual: open the `.xpi` from the release. Updates are automatic after that.
 - `web-ext lint` runs with `--self-hosted`, because `update_url` is only invalid for add-ons hosted on Mozilla's site.
-- **Android:** whether Firefox for Android installs and updates a self-hosted `.xpi` still needs testing with 1.0.0 (Open question 6). If it can't, the fallback is a listed (public but unadvertised) AMO entry.
+- **Android:** Firefox for Android installs the self-hosted `.xpi` once Firefox's **developer mode** is enabled (verified with 1.0.0). It reads the same `update_url`, so updates should arrive the same way; to confirm with the first update after 1.0.0.
 
 ### 7.3 GitHub Actions
 
@@ -317,6 +317,8 @@ Release Firefox only runs extensions signed by Mozilla. The extension is signed 
 | `release.yml` | tag `v*` | Check the tag against `manifest.json` and `package.json`, `npm run check`, `web-ext sign --channel=unlisted` (secrets `AMO_JWT_ISSUER` and `AMO_JWT_SECRET`), `gh release create` with the `.xpi`, then `scripts/update-manifest.mjs` appends the version to `updates.json` and commits it to `main` |
 
 CI runs Node directly on the runner (`setup-node` reads `.node-version`). The container is only for local development.
+
+Both workflows use `actions/checkout@v7` and `actions/setup-node@v7` (the latest as of 2026-10-18; v4 targeted the retired Node 20 runtime). CI caches npm dependencies. The release job doesn't (`package-manager-cache: false`): it can push to `main` and holds the signing secrets, so it shouldn't trust a cache other workflows can write.
 
 ### 7.4 Repo layout
 
@@ -332,7 +334,7 @@ See the README's layout table. In short: `src/engine/` (pure logic; `sections.ts
 | **0b. Sort system** | Write down the hotel and binder layout and order ✅; capture fixtures (target deck, 2–3 built decks, binder decks, collection search results) | §6.3 filled in ✅; fixtures in `tests/fixtures` |
 | **1. Engine** | Sort keys and sections ✅, availability ✅, printing notices ✅, binder copies ✅, with Vitest tests ✅ | Correct picklist for the fixtures. Synthetic fixtures pass; real Moxfield fixtures come with phase 2 |
 | **2. Extension MVP** | Scaffold ✅, Moxfield client ✅, 🥒 button ✅, picklist page ✅, all tested against a fake Moxfield. **Test:** whether `x-moxfield-version` and `X-Session-User` are required (Q7; there's a button for it under Diagnostics) | A real deck pull done with it on desktop |
-| **3. Ship** | CI ✅, unlisted signing ✅, Releases ✅, auto-update ✅ (workflows written; first run with 1.0.0). **Research and test:** installing on Firefox for Android (Q6) | Signed 1.0.0 installed on desktop and phone |
+| **3. Ship** ✅ | CI, unlisted signing, Releases, auto-update; Android install (Q6) | Done: 1.0.0 signed, released, and installed on desktop and Android (2026-10-18) |
 | **4. Polish** | Pull progress, settings, printing details | Fewer manual steps per pull |
 
 ## Open questions
@@ -344,7 +346,7 @@ Resolved questions are struck through; their answers are in the decision log.
 3. ~~Basic lands.~~ Not cataloged; out of scope.
 4. ~~Language.~~ A copy counts toward a deck entry only if its language matches the deck card's language (§6.1).
 5. ~~Collection quirks.~~ None; Moxfield tracks nothing outside the hotels, boxes, and binders.
-6. **Android install.** Can an unlisted, self-hosted signed `.xpi` be installed on Firefox for Android? To research and test in phase 3.
+6. ~~Android install.~~ Yes, after enabling Firefox's developer mode on Android (2026-10-18). Auto-update there is still to be confirmed with the next release.
 7. ~~Required headers.~~ Not required: a full run without them succeeded (2026-10-18). Header learning stays as cheap insurance until a run from the extension page itself confirms it; then the `webRequest` permission can go.
 8. ~~Merged or set-by-set?~~ Set by set.
 9. ~~Sets you didn't mention.~~ §6.3 table.
@@ -392,6 +394,9 @@ Resolved questions are struck through; their answers are in the decision log.
 | 2026-10-18 | Retry refused requests after 1 s and 3 s, then show a "probably rate limiting" error | Heavy test traffic got refused as bare network errors |
 | 2026-10-18 | End-to-end checks run through a dev harness in a moxfield.com tab | Browser automation can't inspect extension pages |
 | 2026-10-18 | Release 1.0.0 as unlisted; make the repo public; serve `updates.json` from `main` via raw.githubusercontent.com, maintained by the release workflow | Firefox can't fetch from a private repo; a public repo was simplest of the options (public releases repo, own domain, no auto-updates) |
+| 2026-10-18 | **1.0.0 released**: PR #1 merged, repo made public, `v1.0.0` signed and published by the release workflow in 5½ min | Verified: Mozilla signature present, permanent install accepted, `updates.json` hash matches the release file |
+| 2026-10-18 | Android installs need Firefox's developer mode | Required for self-hosted (non-AMO) add-ons on Firefox for Android |
+| 2026-10-18 | GitHub Actions on `checkout@v7` and `setup-node@v7`; no npm cache in the release job | v4 targeted the retired Node 20 runtime; setup-node's guidance on cache poisoning for publishing workflows |
 | 2026-10-18 | Deck lines use `printingData` when present; deck cache versioned (`deckCache.v2`) so decks parsed the old way are refetched | A line's own finish can disagree with its real printing; stale cached built decks would otherwise keep the wrong reading until edited |
 | 2026-10-18 | Add-on id `magic-pickle@uninitialized.net` | Your domain, so it can't collide; fixed before the first signed release |
 | 2026-10-18 | Drawer headers lead with set codes: "C13 - Commander 2013", "CHK/BOK/SOK - Champions of Kamigawa block"; sibling sets get their own header; a block with one set in the section is labeled as a plain set | The hotel drawers are labeled by set code, so codes are what you scan for |

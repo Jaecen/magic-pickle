@@ -17,13 +17,15 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version-file: .node-version
-          cache: npm
+          # No dependency cache here: this job can push to main and holds the signing secrets, so it shouldn't
+          # trust a cache other workflows can write (setup-node's cache-poisoning guidance).
+          package-manager-cache: false
 
       - name: Check the tag matches the manifest and package versions
         run: |

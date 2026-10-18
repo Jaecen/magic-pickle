@@ -274,7 +274,7 @@ Binders hold a **fixed quantity** of each card in their `Collections` decks (usu
 #### 6.3.3 Data sources
 
 - **From Moxfield's card object:** `set`, `frame`, `colors` / `card_faces`, `type_line`, `name`; and from the collection row, `language.code` and `finish`.
-- **From the Scryfall set list:** release dates, `block_code`, `parent_set_code`, and `set_type`. Fetched with one request to `https://api.scryfall.com/sets` (about 630 KB; Scryfall allows requests from browser pages) and cached in `storage.local` for 7 days.
+- **From the Scryfall set list:** release dates, `block_code`, `parent_set_code`, and `set_type`; and for set symbols, the symbol name in `icon_svg_uri`. Fetched with one request to `https://api.scryfall.com/sets` (about 630 KB; Scryfall allows requests from browser pages) and cached in `storage.local` for 7 days.
 - **Section lists** (set codes for each named section, binder deck names and order, panorama order) live in one hand-maintained file: `src/engine/sections.ts`.
 
 ### 6.4 Data drift
@@ -400,6 +400,8 @@ Resolved questions are struck through; their answers are in the decision log.
 | 2026-10-18 | Deck lines use `printingData` when present; deck cache versioned (`deckCache.v2`) so decks parsed the old way are refetched | A line's own finish can disagree with its real printing; stale cached built decks would otherwise keep the wrong reading until edited |
 | 2026-10-18 | Add-on id `magic-pickle@uninitialized.net` | Your domain, so it can't collide; fixed before the first signed release |
 | 2026-10-18 | Drawer headers lead with set codes: "C13 - Commander 2013", "CHK/BOK/SOK - Champions of Kamigawa block"; sibling sets get their own header; a block with one set in the section is labeled as a plain set | The hotel drawers are labeled by set code, so codes are what you scan for |
+| 2026-10-18 | Printings show the set symbol, drawn with Keyrune's woff2 font and looked up by the glyph names in its font, read at build time. Matched by set code, then by Scryfall's symbol for the set, with a few aliases where the font's names differ; no symbol when neither matches. Set list cache versioned so the symbol names are fetched | Promo and token sets don't print the set code, so the symbol is what you match. Scryfall's symbol name raises matches from 32% to 93% of paper sets; a generic fallback would be a wrong symbol. The other font formats would add 2 MB that Firefox never uses |
+| 2026-10-18 | Repo licensed MIT. From Keyrune, only the font (SIL OFL 1.1) is used and shipped, with its notice in `public/licenses/`; its stylesheet (GPL-3.0) isn't | Shipping the GPL stylesheet would put the bundled extension under GPL terms; the font's glyph names give the same set table |
 | 2026-10-16 | Siblings strictly alphabetical by set code; panorama cards by collector number; playtest cards in their own box; box order arbitrary but fixed | Your answers to Q13, Q17b, Q18, and Q19 |
 | 2026-10-16 | Scryfall blocks count only for expansion blocks through GRN/RNA/WAR; siblings come from `parent_set_code`; named sections override both | Scryfall also labels all Commander products, all core sets, and newer set families (e.g. OTJ) as blocks, which don't match your system |
 | 2026-10-14 | Stack: TypeScript, Vite, Preact, Vitest, `web-ext`; unlisted AMO signing; releases on GitHub | Small, standard extension toolchain; signing is required for release Firefox |

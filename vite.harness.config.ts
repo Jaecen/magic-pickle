@@ -2,10 +2,11 @@
 import preact from "@preact/preset-vite";
 import { resolve } from "node:path";
 import { defineConfig } from "vite";
+import { keyruneGlyphs } from "./src/build/keyrune.ts";
 
 export default defineConfig({
   publicDir: false,
-  plugins: [preact()],
+  plugins: [preact(), keyruneGlyphs()],
   build: {
     outDir: resolve(import.meta.dirname, "dist-harness"),
     emptyOutDir: true,

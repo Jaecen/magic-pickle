@@ -40,6 +40,11 @@ export interface SetInfo {
   set_type: string;
   block_code?: string;
   parent_set_code?: string;
+  /**
+   * The name of Scryfall's symbol for the set (from `icon_svg_uri`). Often another set's code, e.g. `c16` for the
+   * C16 tokens, or a generic one such as `star`, `dci`, or `default`.
+   */
+  icon?: string;
 }
 
 /** One card line in a deck. `board` is Moxfield's board name: `mainboard`, `commanders`, `maybeboard`, … */

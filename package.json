@@ -1,6 +1,6 @@
 {
   "name": "magic-pickle",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "description": "Firefox extension: collection-order picklists and printing availability for Moxfield decks",
   "type": "module",
@@ -11,7 +11,7 @@
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
-    "lint:ext": "web-ext lint --source-dir dist",
+    "lint:ext": "web-ext lint --source-dir dist --self-hosted",
     "check": "npm run typecheck && npm run lint && npm test && npm run build && npm run lint:ext",
     "build:harness": "vite build -c vite.harness.config.ts"
   },

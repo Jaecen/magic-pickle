@@ -1,7 +1,7 @@
 const DECK_PATH = /^\/decks\/([A-Za-z0-9_-]{10,})(?:\/|$)/;
 const BARE_ID = /^[A-Za-z0-9_-]{10,}$/;
 
-/** The deck's public id from a moxfield.com deck path, e.g. `/decks/oEACJK3IjEqXyOouWwOe3Q`. */
+/** The deck's public id from a moxfield.com deck path, e.g. `/decks/AbCdEfGhIjKlMnOpQrStUv`. */
 export function deckIdFromPath(pathname: string): string | undefined {
   return DECK_PATH.exec(pathname)?.[1];
 }

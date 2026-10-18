@@ -29,6 +29,23 @@ VS Code users can instead open the folder in the container with the Dev Containe
 After a rebuild, click **Reload** for the extension on `about:debugging`. Temporary add-ons are removed when
 Firefox restarts.
 
+### Releasing
+
+Releases are signed by Mozilla as an **unlisted** (self-distributed) add-on and published on GitHub. Installed
+copies update themselves from [`updates.json`](updates.json).
+
+1. Bump `version` in both `public/manifest.json` and `package.json` (it must increase every release).
+2. Commit to `main`, then tag and push: `git tag v1.2.3 && git push origin main v1.2.3`.
+3. The **Release** workflow checks the tag against the manifest, runs `npm run check`, signs with Mozilla, attaches
+   `magic-pickle-<version>.xpi` to a GitHub release, and adds the version (with its SHA-256) to `updates.json` on
+   `main`.
+
+Signing needs the repo secrets `AMO_JWT_ISSUER` and `AMO_JWT_SECRET` (addons.mozilla.org → Developer Hub →
+Manage API Keys).
+
+**First install:** open the `.xpi` from the latest release in Firefox and accept the prompt. After that, Firefox
+checks for updates about once a day (or use "Check for Updates" in `about:addons`).
+
 ### Automated end-to-end checks
 
 Browser automation (WebDriver BiDi, e.g. the Firefox DevTools MCP server) can't inspect `moz-extension://`

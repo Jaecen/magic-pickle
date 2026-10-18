@@ -1,0 +1,67 @@
+# Push a tag like v1.0.1 (matching public/manifest.json's version) to sign and publish a release.
+# Needs repo secrets AMO_JWT_ISSUER and AMO_JWT_SECRET (addons.mozilla.org → Developer Hub → API keys).
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Check the tag matches the manifest and package versions
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          manifest=$(node -p "require('./public/manifest.json').version")
+          pkg=$(node -p "require('./package.json').version")
+          if [ "$tag" != "$manifest" ] || [ "$tag" != "$pkg" ]; then
+            echo "::error::Tag $GITHUB_REF_NAME doesn't match manifest.json ($manifest) and package.json ($pkg)"
+            exit 1
+          fi
+          echo "VERSION=$tag" >> "$GITHUB_ENV"
+
+      - run: npm ci
+      - run: npm run check
+
+      - name: Sign with Mozilla (unlisted)
+        env:
+          WEB_EXT_API_KEY: ${{ secrets.AMO_JWT_ISSUER }}
+          WEB_EXT_API_SECRET: ${{ secrets.AMO_JWT_SECRET }}
+        run: |
+          npx web-ext sign --source-dir dist --artifacts-dir web-ext-artifacts --channel unlisted
+          xpi=$(ls web-ext-artifacts/*.xpi | head -n 1)
+          mv "$xpi" "magic-pickle-$VERSION.xpi"
+
+      - name: Publish the GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" "magic-pickle-$VERSION.xpi" --title "Magic Pickle $VERSION" --generate-notes
+
+      - name: Add the version to updates.json on main
+        run: |
+          git fetch origin main
+          git checkout main
+          node scripts/update-manifest.mjs "$VERSION" \
+            "https://github.com/${GITHUB_REPOSITORY}/releases/download/${GITHUB_REF_NAME}/magic-pickle-${VERSION}.xpi" \
+            "magic-pickle-$VERSION.xpi"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add updates.json
+          git commit -m "Release $VERSION: update updates.json"
+          git push origin main

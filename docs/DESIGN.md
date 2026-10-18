@@ -385,6 +385,7 @@ Resolved questions are struck through; their answers are in the decision log.
 | 2026-10-18 | Over-allocated printings go in a collapsed "records out of sync" section, not under "Needs attention" | On a real deck they outnumbered the actionable notices 11 to 4, and they don't affect the pull |
 | 2026-10-18 | Retry refused requests after 1 s and 3 s, then show a "probably rate limiting" error | Heavy test traffic got refused as bare network errors |
 | 2026-10-18 | End-to-end checks run through a dev harness in a moxfield.com tab | Browser automation can't inspect extension pages |
+| 2026-10-18 | Drawer headers lead with set codes: "C13 - Commander 2013", "CHK/BOK/SOK - Champions of Kamigawa block"; sibling sets get their own header; a block with one set in the section is labeled as a plain set | The hotel drawers are labeled by set code, so codes are what you scan for |
 | 2026-10-16 | Siblings strictly alphabetical by set code; panorama cards by collector number; playtest cards in their own box; box order arbitrary but fixed | Your answers to Q13, Q17b, Q18, and Q19 |
 | 2026-10-16 | Scryfall blocks count only for expansion blocks through GRN/RNA/WAR; siblings come from `parent_set_code`; named sections override both | Scryfall also labels all Commander products, all core sets, and newer set families (e.g. OTJ) as blocks, which don't match your system |
 | 2026-10-14 | Stack: TypeScript, Vite, Preact, Vitest, `web-ext`; unlisted AMO signing; releases on GitHub | Small, standard extension toolchain; signing is required for release Firefox |

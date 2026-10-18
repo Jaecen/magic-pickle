@@ -199,6 +199,29 @@ describe("pull order", () => {
   });
 });
 
+describe("drawer labels", () => {
+  const group = (set: string, frame = "2015") => sorter.place(card({ name: "X", set, frame }), "en").group;
+
+  it("lead with the set code, as the drawers are labeled", () => {
+    expect(group("c13")).toBe("C13 - Commander 2013");
+    expect(group("otj")).toBe("OTJ - Outlaws of Thunder Junction");
+  });
+
+  it("list every block set in the section, in release order; a lone block set is just a set", () => {
+    expect(group("bok")).toBe("CHK/BOK/SOK - Champions of Kamigawa block");
+    expect(group("csp", "2003")).toBe("CSP - Coldsnap");
+  });
+
+  it("give sibling sets their own label", () => {
+    expect(group("big")).toBe("BIG - The Big Score");
+    expect(group("otc")).toBe("OTC - Outlaws of Thunder Junction Commander");
+  });
+
+  it("are empty in merged sections", () => {
+    expect(group("m19")).toBe("");
+  });
+});
+
 describe("names", () => {
   const order = (names: string[]) => pullOrder(names.map((name) => card({ name, set: "otj" }))).map((l) => l.slice(4));
 

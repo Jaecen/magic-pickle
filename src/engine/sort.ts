@@ -12,7 +12,11 @@ export type SortKey = readonly (string | number)[];
 
 export interface Placement {
   section: SectionId;
-  /** The set or block the copy is filed under, e.g. "Champions of Kamigawa block". Empty in merged sections. */
+  /**
+   * The drawer the copy is filed under, led by set codes as the drawers are labeled: "C13 - Commander 2013",
+   * "CHK/BOK/SOK - Champions of Kamigawa block". Sibling sets get their own ("BIG - The Big Score"). Empty in
+   * merged sections.
+   */
   group: string;
   color: ColorBucket;
   key: SortKey;
@@ -113,8 +117,10 @@ export class CollectionSorter {
     }
     const sub = root.code === code ? "" : code;
     const rootBlock = this.classicBlock(root);
-    if (rootBlock) return this.blockGroup(rootBlock, section, sub);
-    return { key: `set:${root.code}`, label: root.name, date: root.released_at, sub };
+    const group = rootBlock
+      ? this.blockGroup(rootBlock, section, sub)
+      : { key: `set:${root.code}`, label: setLabel(root), date: root.released_at, sub };
+    return sub ? { ...group, label: setLabel(set) } : group;
   }
 
   private parentOf(set: SetInfo): SetInfo | undefined {
@@ -140,11 +146,19 @@ export class CollectionSorter {
     const first = members[0];
     return {
       key: `block:${block}`,
-      label: first ? `${first.name} block` : block.toUpperCase(),
+      label: !first
+        ? block.toUpperCase()
+        : members.length === 1
+          ? setLabel(first) // e.g. Coldsnap, alone in Main without the rest of the Ice Age block
+          : `${members.map((m) => m.code.toUpperCase()).join("/")} - ${first.name} block`,
       date: first?.released_at ?? UNKNOWN_DATE,
       sub,
     };
   }
+}
+
+function setLabel(set: SetInfo): string {
+  return `${set.code.toUpperCase()} - ${set.name}`;
 }
 
 export function compareKeys(a: SortKey, b: SortKey): number {

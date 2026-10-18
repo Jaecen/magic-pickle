@@ -9,6 +9,10 @@
   --warn-line: #e8c76a;
   --bad-bg: #fdecea;
   --bad-line: #e59a92;
+  --sleeve-bg: #e4eefa;
+  --sleeve-fg: #1e5a9c;
+  --double-bg: #f4e3f6;
+  --double-fg: #7d2a8c;
   --c-W: #e8e1c4;
   --c-U: #4a8fd4;
   --c-B: #4a4540;
@@ -31,6 +35,10 @@
     --warn-line: #8a7230;
     --bad-bg: #331b18;
     --bad-line: #8f4a42;
+    --sleeve-bg: #17283b;
+    --sleeve-fg: #8dbbef;
+    --double-bg: #331b38;
+    --double-fg: #dd9be8;
     --c-W: #d8d1b4;
     --c-B: #8d857c;
     color-scheme: dark;
@@ -83,6 +91,7 @@ h1 { font-size: 1.4rem; margin: 0 0 4px; }
 .pick .name { grid-area: name; font-weight: 600; overflow-wrap: anywhere; }
 .pick .printing { grid-area: printing; }
 .pick.done .name, .pick.done .printing { text-decoration: line-through; opacity: 0.5; }
+.pick.done .sleeve { text-decoration: none; }
 @media (min-width: 560px) {
   .pick { grid-template-columns: auto auto auto 1fr auto; grid-template-areas: "box pip qty name printing"; }
 }
@@ -94,6 +103,13 @@ h1 { font-size: 1.4rem; margin: 0 0 4px; }
   vertical-align: -0.1em; user-select: none;
 }
 .badge { margin-left: 6px; padding: 0 6px; border-radius: 999px; background: var(--line); color: var(--fg); font-size: 0.85em; }
+/* Storage hint for filing a card back. Double sleeves get a double border, so the two differ by more than color. */
+.sleeve {
+  display: inline-block; margin-left: 8px; padding: 0 7px; border-radius: 999px; font-size: 0.78em; font-weight: 600;
+  vertical-align: 0.1em; white-space: nowrap; color: var(--sleeve-fg); background: var(--sleeve-bg); border: 1px solid currentColor;
+}
+.sleeve.doubleSleeve { color: var(--double-fg); background: var(--double-bg); border: 3px double currentColor; }
+.sleeve .reason { font-weight: normal; }
 
 .c-W { background: var(--c-W); } .c-U { background: var(--c-U); } .c-B { background: var(--c-B); }
 .c-R { background: var(--c-R); } .c-G { background: var(--c-G); } .c-multi { background: var(--c-multi); }

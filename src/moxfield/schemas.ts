@@ -10,6 +10,8 @@ z.config({ jitless: true });
 
 const optionalString = z.string().nullish().transform((v) => v ?? undefined);
 const optionalStrings = z.array(z.string()).nullish().transform((v) => v ?? undefined);
+// Prices only decide the sleeve hint, so an odd value is dropped rather than failing the whole response.
+const optionalPrice = z.number().nullish().catch(undefined).transform((v) => v ?? undefined);
 
 export const finishSchema = z.enum(["nonFoil", "foil", "etched"]);
 
@@ -34,6 +36,12 @@ export const cardSchema = z
     card_faces: z.array(faceSchema).nullish().transform((v) => v ?? undefined),
     frame: optionalString,
     isToken: z.boolean().nullish().transform((v) => v ?? undefined),
+    rarity: optionalString,
+    prices: z
+      .object({ usd: optionalPrice, usd_foil: optionalPrice, usd_etched: optionalPrice })
+      .nullish()
+      .catch(undefined)
+      .transform((p) => (p && (p.usd ?? p.usd_foil ?? p.usd_etched) !== undefined ? stripUndefined(p) : undefined)),
   })
   .transform((c): Card => stripUndefined(c));
 

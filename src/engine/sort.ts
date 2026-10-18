@@ -50,9 +50,10 @@ export class CollectionSorter {
   place(card: Card, languageCode: string): Placement {
     const color = colorBucket(card, this.colorOverrides);
     const code = card.set.toLowerCase();
+    const home = this.homeSet(code);
     const section =
-      languageCode !== "en" ? "foreign" : this.sectionFor(code, OLD_FRAMES.has(card.frame ?? ""));
-    const group: Group = MERGED_SECTIONS.has(section) ? { key: "", label: "", date: "", sub: "" } : this.groupFor(code, section);
+      languageCode !== "en" ? "foreign" : this.sectionFor(home, OLD_FRAMES.has(card.frame ?? ""));
+    const group: Group = MERGED_SECTIONS.has(section) ? { key: "", label: "", date: "", sub: "" } : this.groupFor(home, section);
     return {
       section,
       group: group.label,
@@ -68,6 +69,23 @@ export class CollectionSorter {
         code,
       ],
     };
+  }
+
+  /**
+   * The set whose cards a set's cards file with. A promo set tied to a set (Scryfall parent, e.g. PDKA → DKA,
+   * PTSNC → PSNC → SNC) files as that set, card for card; promos with no parent (FNM, Judge, media inserts) and
+   * sets named in `SET_SECTIONS` stay as they are (§6.3, rule 5).
+   */
+  private homeSet(code: string): string {
+    let set = this.catalog.get(code);
+    const seen = new Set<string>();
+    while (set?.set_type === "promo" && set.parent_set_code && !SET_SECTIONS[set.code] && !seen.has(set.code)) {
+      seen.add(set.code);
+      const parent = this.catalog.get(set.parent_set_code);
+      if (!parent) break;
+      set = parent;
+    }
+    return set?.code ?? code;
   }
 
   /** The section a set's cards go to (§6.3, "Which section wins", rules 3–6). */

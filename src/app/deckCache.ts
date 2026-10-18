@@ -7,9 +7,9 @@ import { mapLimit } from "../util/pool";
 import type { Store } from "../util/store";
 
 // Bump the version whenever deck parsing changes, so decks cached under the old parsing are refetched.
-// v2: honor printingData (2026-10-18).
-const CACHE_KEY = "deckCache.v2";
-const OLD_CACHE_KEYS = ["deckCache"];
+// v2: honor printingData (2026-10-18). v3: keep the signatureSpells board (2026-10-18).
+const CACHE_KEY = "deckCache.v3";
+const OLD_CACHE_KEYS = ["deckCache", "deckCache.v2"];
 const CONCURRENT_DECK_FETCHES = 4;
 
 type DeckCache = Record<string, FetchedDeck>;

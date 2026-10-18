@@ -24,7 +24,7 @@ VS Code users can instead open the folder in the container with the Dev Containe
 1. `scripts/dev npm run build` (or keep `npm run dev` running).
 2. In Firefox, open `about:debugging#/runtime/this-firefox`, click **Load Temporary Add-on…**, and pick
    `dist/manifest.json`.
-3. Open a deck on moxfield.com while logged in and click the **🥒 Picklist** button (or the toolbar button).
+3. Open a deck on moxfield.com while logged in and click the round **🥒** button in the bottom-right corner (or the toolbar button).
 
 After a rebuild, click **Reload** for the extension on `about:debugging`. Temporary add-ons are removed when
 Firefox restarts.

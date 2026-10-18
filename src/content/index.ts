@@ -10,19 +10,26 @@ function createButton(): HTMLButtonElement {
   const button = document.createElement("button");
   button.id = BUTTON_ID;
   button.type = "button";
-  button.textContent = "🥒 Picklist";
+  // Just the emoji, so it doesn't cover the deck stats along the bottom of the page.
+  button.textContent = "🥒";
   button.title = "Magic Pickle: open a picklist for this deck";
+  button.setAttribute("aria-label", "Open a Magic Pickle picklist for this deck");
   Object.assign(button.style, {
     position: "fixed",
     right: "16px",
     bottom: "16px",
     zIndex: "2147483647",
-    padding: "8px 14px",
-    borderRadius: "999px",
+    width: "44px",
+    height: "44px",
+    padding: "0",
+    borderRadius: "50%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     border: "none",
     background: "#3a7d44",
     color: "#fff",
-    font: "600 14px system-ui, sans-serif",
+    font: "22px/1 system-ui, sans-serif",
     cursor: "pointer",
     boxShadow: "0 2px 8px rgba(0,0,0,.3)",
   });

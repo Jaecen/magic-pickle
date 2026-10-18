@@ -11,6 +11,11 @@
           "version": "1.1.0",
           "update_link": "https://github.com/Jaecen/magic-pickle/releases/download/v1.1.0/magic-pickle-1.1.0.xpi",
           "update_hash": "sha256:0190cae6ca5ca3b8956768be37fc3dc8c3f0223b84a958789afe7bceecf6bea4"
+        },
+        {
+          "version": "1.2.0",
+          "update_link": "https://github.com/Jaecen/magic-pickle/releases/download/v1.2.0/magic-pickle-1.2.0.xpi",
+          "update_hash": "sha256:6bf04ca0945a87892ac300e59aef1994a309b4b4fb388c12f081af3f118178ae"
         }
       ]
     }

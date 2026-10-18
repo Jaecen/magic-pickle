@@ -74,3 +74,9 @@ in an iframe). Keep runs spaced out: each costs 18–52 Moxfield requests, and b
 | `public/` | `manifest.json` and icon |
 | `tests/` | Fake Moxfield server, fixtures, test helpers |
 | `spikes/moxfield-probe/` | The throwaway probe extension that worked out the Moxfield API |
+
+## License
+
+MIT; see [LICENSE](LICENSE). Set symbols use the [Keyrune](https://keyrune.andrewgioia.com) font by Andrew Gioia,
+under the SIL Open Font License 1.1 ([notice](public/licenses/keyrune-font.txt), shipped in the extension). Only the
+font is used: the rest of Keyrune is GPL-3.0, so its stylesheet isn't used or shipped.

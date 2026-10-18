@@ -1,11 +1,14 @@
-import { useCallback, useEffect, useRef, useState } from "preact/hooks";
+import { createContext } from "preact";
+import { useCallback, useContext, useEffect, useRef, useState } from "preact/hooks";
 import { z } from "zod";
 import { generatePicklist, type GenerateResult } from "../../app/generate";
 import type { Holding, Notice, Pick } from "../../engine/picklist";
+import { SetCatalog } from "../../engine/sets";
 import { MoxfieldChangedError, NotLoggedInError, type FetchFn, type MoxfieldClient } from "../../moxfield/client";
 import { deckIdFromInput, deckUrl } from "../../moxfield/urls";
 import type { Store } from "../../util/store";
 import { COLOR_LABELS, pickId, printing, sectionLabel, sectionLocation, where } from "./format";
+import { setGlyph } from "./symbols";
 
 interface Props {
   client: MoxfieldClient;
@@ -19,6 +22,9 @@ type State =
   | { status: "error"; error: unknown };
 
 const progressKey = (publicId: string) => `progress:${publicId}`;
+
+/** Scryfall's set list, for set symbols. */
+const SetsContext = createContext(new SetCatalog([]));
 
 /** `deck` overrides the `?deck=` query parameter (used by the dev harness). */
 export function App(props: Props & { deck?: string }) {
@@ -103,66 +109,68 @@ function Picklist({ client, store, fetchFn, publicId }: Props & { publicId: stri
   }
   if (state.status === "error") return <ErrorView error={state.error} retry={run} client={client} />;
 
-  const { deck, picklist, stats } = state.result;
+  const { deck, picklist, sets, stats } = state.result;
   const copies = picklist.picks.reduce((n, p) => n + p.quantity, 0);
   const forThisPull = picklist.notices.filter((n) => n.kind !== "overAllocated");
   const outOfSync = picklist.notices.filter((n) => n.kind === "overAllocated");
   const pickedCopies = picklist.picks.filter((p) => picked.has(pickId(p))).reduce((n, p) => n + p.quantity, 0);
 
   return (
-    <main class="page">
-      <header class="deck-header">
-        <h1>{deck.name}</h1>
-        <p class="muted">
-          {pickedCopies} of {copies} cards pulled
-          {forThisPull.length > 0 && ` · ${forThisPull.length} need attention`}
-        </p>
-        <div class="toolbar">
-          <a href={deckUrl(deck.publicId)} target="_blank" rel="noreferrer">
-            Open in Moxfield
-          </a>
-          <button type="button" onClick={run}>
-            Regenerate
-          </button>
-          <label class="check">
-            <input type="checkbox" checked={hidePicked} onChange={(e) => setHidePicked(e.currentTarget.checked)} />
-            Hide pulled
-          </label>
-        </div>
-      </header>
-
-      {forThisPull.length > 0 && <Notices notices={forThisPull} deckLink={deckUrl(deck.publicId)} />}
-
-      {picklist.skipped.length > 0 && (
-        <p class="skipped">
-          Not included:{" "}
-          {picklist.skipped
-            .map((s) => `${s.quantity} ${s.name}${s.reason === "proxy" ? " (proxy)" : s.reason === "token" ? " (token)" : ""}`)
-            .join(", ")}
-        </p>
-      )}
-
-      <PickList picks={picklist.picks} picked={picked} hidePicked={hidePicked} onToggle={toggle} />
-
-      {outOfSync.length > 0 && (
-        <details class="out-of-sync">
-          <summary>
-            {outOfSync.length} Moxfield {outOfSync.length === 1 ? "record" : "records"} out of sync
-          </summary>
+    <SetsContext.Provider value={sets}>
+      <main class="page">
+        <header class="deck-header">
+          <h1>{deck.name}</h1>
           <p class="muted">
-            Built decks list more copies of these printings than your collection has. They don't affect this pull, but
-            the deck or collection records in Moxfield should be corrected.
+            {pickedCopies} of {copies} cards pulled
+            {forThisPull.length > 0 && ` · ${forThisPull.length} need attention`}
           </p>
-          {outOfSync.map((n, i) => (
-            <article class={`notice ${n.kind}`} key={i}>
-              <NoticeBody notice={n} deckLink={deckUrl(deck.publicId)} />
-            </article>
-          ))}
-        </details>
-      )}
+          <div class="toolbar">
+            <a href={deckUrl(deck.publicId)} target="_blank" rel="noreferrer">
+              Open in Moxfield
+            </a>
+            <button type="button" onClick={run}>
+              Regenerate
+            </button>
+            <label class="check">
+              <input type="checkbox" checked={hidePicked} onChange={(e) => setHidePicked(e.currentTarget.checked)} />
+              Hide pulled
+            </label>
+          </div>
+        </header>
 
-      <Diagnostics client={client} stats={stats} />
-    </main>
+        {forThisPull.length > 0 && <Notices notices={forThisPull} deckLink={deckUrl(deck.publicId)} />}
+
+        {picklist.skipped.length > 0 && (
+          <p class="skipped">
+            Not included:{" "}
+            {picklist.skipped
+              .map((s) => `${s.quantity} ${s.name}${s.reason === "proxy" ? " (proxy)" : s.reason === "token" ? " (token)" : ""}`)
+              .join(", ")}
+          </p>
+        )}
+
+        <PickList picks={picklist.picks} picked={picked} hidePicked={hidePicked} onToggle={toggle} />
+
+        {outOfSync.length > 0 && (
+          <details class="out-of-sync">
+            <summary>
+              {outOfSync.length} Moxfield {outOfSync.length === 1 ? "record" : "records"} out of sync
+            </summary>
+            <p class="muted">
+              Built decks list more copies of these printings than your collection has. They don't affect this pull, but
+              the deck or collection records in Moxfield should be corrected.
+            </p>
+            {outOfSync.map((n, i) => (
+              <article class={`notice ${n.kind}`} key={i}>
+                <NoticeBody notice={n} deckLink={deckUrl(deck.publicId)} />
+              </article>
+            ))}
+          </details>
+        )}
+
+        <Diagnostics client={client} stats={stats} />
+      </main>
+    </SetsContext.Provider>
   );
 }
 
@@ -201,6 +209,7 @@ function PickList(props: { picks: Pick[]; picked: ReadonlySet<string>; hidePicke
         <span class="qty">{p.quantity}×</span>
         <span class="name">{p.card.name}</span>
         <span class="printing">
+          <SetSymbol code={p.card.set} />
           {printing(p.card, p.finish, p.languageCode)}
           {p.fromBinder && <span class="badge">binder</span>}
         </span>
@@ -226,7 +235,11 @@ function Notices({ notices, deckLink }: { notices: Notice[]; deckLink: string })
 function NoticeBody({ notice: n, deckLink }: { notice: Notice; deckLink: string }) {
   const title = (
     <h3>
-      {n.card.name} <span class="printing">{printing(n.card, n.finish, n.languageCode)}</span>
+      {n.card.name}{" "}
+      <span class="printing">
+        <SetSymbol code={n.card.set} />
+        {printing(n.card, n.finish, n.languageCode)}
+      </span>
     </h3>
   );
   if (n.kind === "overAllocated") {
@@ -259,7 +272,8 @@ function NoticeBody({ notice: n, deckLink }: { notice: Notice; deckLink: string 
         <ul class="alternatives">
           {n.alternatives.map((a, i) => (
             <li key={i}>
-              {a.free}× {printing(a.card, a.finish, a.languageCode)} <span class="muted">· {where(a.placement)}</span>
+              {a.free}× <SetSymbol code={a.card.set} />
+              {printing(a.card, a.finish, a.languageCode)} <span class="muted">· {where(a.placement)}</span>
             </li>
           ))}
         </ul>
@@ -296,11 +310,23 @@ function Holders({ holders }: { holders: Holding[] }) {
             {h.deck}
           </a>{" "}
           <span class="muted">
-            ({h.quantity}× {printing(h.card, h.finish, h.card.lang)})
+            ({h.quantity}× <SetSymbol code={h.card.set} />
+            {printing(h.card, h.finish, h.card.lang)})
           </span>
         </span>
       ))}
     </p>
+  );
+}
+
+function SetSymbol({ code }: { code: string }) {
+  const sets = useContext(SetsContext);
+  const glyph = setGlyph(code, sets);
+  if (!glyph) return null;
+  return (
+    <span class="set-symbol" title={sets.get(code)?.name} aria-hidden="true">
+      {glyph}
+    </span>
   );
 }
 

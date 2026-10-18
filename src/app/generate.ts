@@ -22,6 +22,7 @@ export interface GenerateDeps {
 export interface GenerateResult {
   deck: FetchedDeck;
   picklist: Picklist;
+  sets: SetCatalog;
   stats: { builtDecks: number; binderDecks: number; decksFetched: number; cardsSearched: number; collectionRows: number; ms: number };
 }
 
@@ -52,16 +53,18 @@ export async function generatePicklist(publicId: string, deps: GenerateDeps): Pr
   onStep(`Searching your collection for ${names.length} cards…`);
   const collection = await lookUpCards(client, names);
 
+  const catalog = new SetCatalog(sets);
   const picklist = buildPicklist({
     target: deck,
     builtDecks: pickDecks(built),
     binderDecks: pickDecks(binders),
     collection,
-    sorter: new CollectionSorter(new SetCatalog(sets)),
+    sorter: new CollectionSorter(catalog),
   });
   return {
     deck,
     picklist,
+    sets: catalog,
     stats: {
       builtDecks: built.length,
       binderDecks: binders.length,

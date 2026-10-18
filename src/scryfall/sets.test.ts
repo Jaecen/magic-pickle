@@ -13,6 +13,7 @@ describe("loadSets", () => {
     const sets = await loadSets(store, fetchFn, 1000);
     expect(sets.find((s) => s.code === "otj")).toMatchObject({ released_at: "2024-04-19", block_code: "otj" });
     expect(sets.some((s) => s.code.startsWith("y2"))).toBe(false);
+    expect(sets.find((s) => s.code === "tc16")?.icon).toBe("c16");
     await loadSets(store, fetchFn, 1000 + 6 * DAY);
     expect(fetchFn).toHaveBeenCalledTimes(1);
   });
@@ -25,6 +26,13 @@ describe("loadSets", () => {
     expect(refetch).toHaveBeenCalledTimes(1);
     const down = vi.fn(async () => new Response("", { status: 503 }));
     expect((await loadSets(store, down, 20 * DAY)).length).toBeGreaterThan(500);
+  });
+
+  it("refetches a cache written before set icons were kept", async () => {
+    const store = memoryStore({ scryfallSets: { fetchedAt: 0, sets: [] } });
+    const fetchFn = ok();
+    expect((await loadSets(store, fetchFn, DAY)).length).toBeGreaterThan(500);
+    expect(fetchFn).toHaveBeenCalledTimes(1);
   });
 
   it("fails clearly with no cache and no Scryfall", async () => {

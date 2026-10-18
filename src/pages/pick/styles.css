@@ -87,6 +87,12 @@ h1 { font-size: 1.4rem; margin: 0 0 4px; }
   .pick { grid-template-columns: auto auto auto 1fr auto; grid-template-areas: "box pip qty name printing"; }
 }
 .printing { color: var(--muted); font-size: 0.9em; font-weight: normal; }
+/* Keyrune's set symbol font (SIL OFL 1.1; notice in public/licenses/). Only woff2: Firefox needs no other format. */
+@font-face { font-family: Keyrune; src: url("keyrune/fonts/keyrune.woff2") format("woff2"); font-display: block; }
+.set-symbol {
+  display: inline-block; width: 1.3em; margin-right: 3px; font: 1.15em/1 Keyrune; text-align: center;
+  vertical-align: -0.1em; user-select: none;
+}
 .badge { margin-left: 6px; padding: 0 6px; border-radius: 999px; background: var(--line); color: var(--fg); font-size: 0.85em; }
 
 .c-W { background: var(--c-W); } .c-U { background: var(--c-U); } .c-B { background: var(--c-B); }

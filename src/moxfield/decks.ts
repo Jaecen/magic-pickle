@@ -1,7 +1,7 @@
 import { IN_DECK_BOARDS } from "../engine/picklist";
 import type { Deck, DeckEntry } from "../engine/types";
 import { MoxfieldChangedError, type MoxfieldClient } from "./client";
-import { deckEntrySchema, deckListSchema, deckSchema, toDeckEntry } from "./schemas";
+import { deckEntrySchema, deckListSchema, deckSchema, toDeckEntries } from "./schemas";
 
 export interface DeckSummary {
   publicId: string;
@@ -39,7 +39,7 @@ export async function getDeck(client: MoxfieldClient, publicId: string): Promise
         const issue = parsed.error.issues[0];
         throw new MoxfieldChangedError(path, `boards.${board}.cards.${id}.${issue?.path.join(".")}: ${issue?.message}`);
       }
-      entries.push(toDeckEntry(board, parsed.data));
+      entries.push(...toDeckEntries(board, parsed.data));
     }
   }
   return {

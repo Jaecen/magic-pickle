@@ -28,6 +28,14 @@ describe("loadDecksCached", () => {
 
     const onlyOne = (await listDecks(client2)).slice(0, 1);
     await loadDecksCached(client2, store, onlyOne);
-    expect(Object.keys(store.data.get("deckCache") as object)).toEqual(["deckone000"]);
+    expect(Object.keys(store.data.get("deckCache.v2") as object)).toEqual(["deckone000"]);
+  });
+
+  it("drops caches written by older versions of the deck parsing", async () => {
+    const store = memoryStore({ deckCache: { stale: {} } });
+    const server = fakeMoxfield({ decks: [deck("deckone000", "t1")] });
+    const client = new MoxfieldClient(server.fetch);
+    expect((await loadDecksCached(client, store, await listDecks(client))).fetched).toBe(1);
+    expect(store.data.has("deckCache")).toBe(false);
   });
 });

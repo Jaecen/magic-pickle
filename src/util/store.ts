@@ -2,15 +2,23 @@
 export interface Store {
   get<T>(key: string): Promise<T | undefined>;
   set(key: string, value: unknown): Promise<void>;
+  remove(key: string): Promise<void>;
 }
 
-export function browserStore(area: { get(key: string): Promise<Record<string, unknown>>; set(items: Record<string, unknown>): Promise<void> }): Store {
+export function browserStore(area: {
+  get(key: string): Promise<Record<string, unknown>>;
+  set(items: Record<string, unknown>): Promise<void>;
+  remove(key: string): Promise<void>;
+}): Store {
   return {
     async get<T>(key: string) {
       return (await area.get(key))[key] as T | undefined;
     },
     async set(key, value) {
       await area.set({ [key]: value });
+    },
+    async remove(key) {
+      await area.remove(key);
     },
   };
 }
@@ -24,6 +32,9 @@ export function memoryStore(initial: Record<string, unknown> = {}): Store & { da
     },
     async set(key, value) {
       data.set(key, structuredClone(value));
+    },
+    async remove(key) {
+      data.delete(key);
     },
   };
 }

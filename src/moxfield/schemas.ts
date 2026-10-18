@@ -37,11 +37,20 @@ export const cardSchema = z
   })
   .transform((c): Card => stripUndefined(c));
 
-export const deckEntrySchema = z.object({
+const printingSchema = z.object({
   quantity: z.number(),
   finish: finishSchema,
   isProxy: z.boolean().nullish(),
   card: cardSchema,
+});
+
+/**
+ * One deck line. When `printingData` is present it holds the line's actual printings, overriding the line's
+ * own card and finish (§4.4): e.g. a line saying nonFoil whose printingData says foil, or 1 nonfoil + 1 foil
+ * under a single line.
+ */
+export const deckEntrySchema = printingSchema.extend({
+  printingData: z.array(printingSchema).nullish(),
 });
 
 /** `GET /v3/decks/all/{publicId}`. Boards stay raw; only the boards the engine counts get parsed. */
@@ -101,8 +110,17 @@ export function copyLanguage(rowLanguage: string | undefined, printingLanguage: 
   return !rowLanguage || rowLanguage === "en" ? printingLanguage : rowLanguage;
 }
 
-export function toDeckEntry(board: string, raw: z.output<typeof deckEntrySchema>): DeckEntry {
-  return stripUndefined({ board, quantity: raw.quantity, finish: raw.finish, isProxy: raw.isProxy ?? undefined, card: raw.card });
+/** The engine's entries for one deck line: one per printing in `printingData`, or the line itself. */
+export function toDeckEntries(board: string, raw: z.output<typeof deckEntrySchema>): DeckEntry[] {
+  const entry = (p: z.output<typeof printingSchema>, quantity = p.quantity): DeckEntry =>
+    stripUndefined({ board, quantity, finish: p.finish, isProxy: p.isProxy ?? undefined, card: p.card });
+  const printings = (raw.printingData ?? []).filter((p) => p.quantity > 0);
+  if (printings.length === 0) return [entry(raw)];
+  const entries = printings.map((p) => entry(p));
+  // If the printings don't cover the whole line, the rest falls back to the line's own printing.
+  const remainder = raw.quantity - printings.reduce((n, p) => n + p.quantity, 0);
+  if (remainder > 0) entries.push(entry(raw, remainder));
+  return entries;
 }
 
 /** Drops undefined-valued keys so cached objects stay small and tests compare cleanly. */

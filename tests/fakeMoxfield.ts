@@ -23,8 +23,15 @@ export interface RawDeck {
   name: string;
   folder?: string;
   lastUpdatedAtUtc?: string;
-  boards: Record<string, Array<{ quantity: number; finish?: string; isProxy?: boolean; card: RawCard }>>;
+  boards: Record<string, Array<RawPrinting & { printingData?: RawPrinting[] }>>;
   authorTags?: Record<string, string[]>;
+}
+
+export interface RawPrinting {
+  quantity: number;
+  finish?: string;
+  isProxy?: boolean;
+  card: RawCard;
 }
 
 export interface RawRow {
@@ -130,7 +137,7 @@ export function fakeMoxfield(options: FakeOptions = {}) {
           {
             count: entries.reduce((n, e) => n + e.quantity, 0),
             cards: Object.fromEntries(
-              entries.map((e, i) => [`${board}${i}`, { quantity: e.quantity, finish: e.finish ?? "nonFoil", isProxy: e.isProxy ?? false, boardType: board, card: e.card }]),
+              entries.map((e, i) => [`${board}${i}`, { quantity: e.quantity, finish: e.finish ?? "nonFoil", isProxy: e.isProxy ?? false, boardType: board, card: e.card, ...(e.printingData ? { printingData: e.printingData } : {}) }]),
             ),
           },
         ]),

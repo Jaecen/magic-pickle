@@ -6,7 +6,10 @@ import { getDeck, type DeckSummary, type FetchedDeck } from "../moxfield/decks";
 import { mapLimit } from "../util/pool";
 import type { Store } from "../util/store";
 
-const CACHE_KEY = "deckCache";
+// Bump the version whenever deck parsing changes, so decks cached under the old parsing are refetched.
+// v2: honor printingData (2026-10-18).
+const CACHE_KEY = "deckCache.v2";
+const OLD_CACHE_KEYS = ["deckCache"];
 const CONCURRENT_DECK_FETCHES = 4;
 
 type DeckCache = Record<string, FetchedDeck>;
@@ -31,5 +34,6 @@ export async function loadDecksCached(
   const next: DeckCache = {};
   for (const s of summaries) if (cache[s.publicId]) next[s.publicId] = cache[s.publicId]!;
   await store.set(CACHE_KEY, next);
+  for (const key of OLD_CACHE_KEYS) await store.remove(key);
   return { decks: summaries.map((s) => next[s.publicId]!).filter(Boolean), fetched: fresh.length };
 }

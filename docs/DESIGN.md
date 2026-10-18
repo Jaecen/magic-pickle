@@ -74,6 +74,7 @@ Moxfield has **no official API**. The extension uses the same undocumented `api2
 ### 4.4 Data
 
 - **Deck card entries** carry full printing data on 100% of cards: `scryfall_id`, `set`, `cn`, `finish`, `lang`. They also carry most of the card data the sort needs: `type_line`, `colors`, `frame`, `card_faces`, `set`, `released_at`, and Moxfield's `uniqueCardId`. Set-level data (blocks, parent sets, set release dates) comes from Scryfall's set list (§6.3.3).
+- **A deck line's real printings can be in `printingData`.** When present, it's a list of `{quantity, finish, isProxy, card}` that overrides the line's own `card` and `finish`. A line may say `nonFoil` while its `printingData` says foil (seen on a real deck even with `enableMultiplePrintings: false`), and with multiple printings enabled one line can hold several. Found on 2026-10-18 (Sulfurous Springs DMU #381 foil was reported as not owned).
 - **Collection rows** are one row per printing × finish × condition × language: `{id, quantity, condition, finish, language{code}, isProxy, card{…same card object…}}`. They don't record which decks use a copy, or where a card is stored.
 - **A row's language defaults to English, even for non-English printings.** A copy of a Phyrexian printing (ONE #326, `card.lang` `ph`) shows `language.code` `en`. So a copy's language is the row's language, unless that's English and the printing isn't, in which case it's the printing's language (`copyLanguage` in `schemas.ts`).
 - **Collection size:** 50,694 cards across 28,361 rows. Cards in built decks *are* counted in the collection.
@@ -385,6 +386,7 @@ Resolved questions are struck through; their answers are in the decision log.
 | 2026-10-18 | Over-allocated printings go in a collapsed "records out of sync" section, not under "Needs attention" | On a real deck they outnumbered the actionable notices 11 to 4, and they don't affect the pull |
 | 2026-10-18 | Retry refused requests after 1 s and 3 s, then show a "probably rate limiting" error | Heavy test traffic got refused as bare network errors |
 | 2026-10-18 | End-to-end checks run through a dev harness in a moxfield.com tab | Browser automation can't inspect extension pages |
+| 2026-10-18 | Deck lines use `printingData` when present; deck cache versioned (`deckCache.v2`) so decks parsed the old way are refetched | A line's own finish can disagree with its real printing; stale cached built decks would otherwise keep the wrong reading until edited |
 | 2026-10-18 | Add-on id `magic-pickle@uninitialized.net` | Your domain, so it can't collide; fixed before the first signed release |
 | 2026-10-18 | Drawer headers lead with set codes: "C13 - Commander 2013", "CHK/BOK/SOK - Champions of Kamigawa block"; sibling sets get their own header; a block with one set in the section is labeled as a plain set | The hotel drawers are labeled by set code, so codes are what you scan for |
 | 2026-10-16 | Siblings strictly alphabetical by set code; panorama cards by collector number; playtest cards in their own box; box order arbitrary but fixed | Your answers to Q13, Q17b, Q18, and Q19 |

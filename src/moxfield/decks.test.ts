@@ -46,6 +46,41 @@ describe("decks", () => {
     expect(deck.tags).toEqual({ "Sol Ring": ["Ramp"] });
   });
 
+  it("takes a line's actual printings from printingData", async () => {
+    const springs = rawCard({ name: "Sulfurous Springs", set: "dmu", cn: "381", type_line: "Land", mana_cost: "" });
+    const springsPip = rawCard({ name: "Sulfurous Springs", set: "pip", cn: "290", type_line: "Land", mana_cost: "" });
+    const server = fakeMoxfield({
+      decks: [
+        {
+          publicId: "nekusar000",
+          name: "Nekusar",
+          boards: {
+            mainboard: [
+              // The line itself says nonFoil; printingData says foil (seen on the real Nekusar deck).
+              { quantity: 1, finish: "nonFoil", card: springs, printingData: [{ quantity: 1, finish: "foil", card: springs }] },
+              // Multiple printings under one line, not covering the whole quantity.
+              {
+                quantity: 3,
+                card: ring,
+                printingData: [
+                  { quantity: 1, finish: "foil", card: ring },
+                  { quantity: 1, finish: "nonFoil", card: springsPip },
+                ],
+              },
+            ],
+          },
+        },
+      ],
+    });
+    const deck = await getDeck(new MoxfieldClient(server.fetch), "nekusar000");
+    expect(deck.entries.map((e) => `${e.quantity}× ${e.card.set} #${e.card.cn} ${e.finish}`)).toEqual([
+      "1× dmu #381 foil",
+      "1× c21 #263 foil",
+      "1× pip #290 nonFoil",
+      "1× c21 #263 nonFoil",
+    ]);
+  });
+
   it("names the offending field when an in-deck card has changed shape", async () => {
     const server = fakeMoxfield({
       decks: [{ publicId: "brokendeck", name: "Broken", boards: { mainboard: [{ quantity: 1, card: { ...ring, cn: 263 } as never }] } }],

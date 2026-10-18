@@ -316,7 +316,7 @@ Release Firefox only runs extensions signed by Mozilla. The extension is signed 
 
 See the README's layout table. In short: `src/engine/` (pure logic; `sections.ts` is the hand-edited config), `src/moxfield/`, `src/scryfall/`, `src/app/`, `src/pages/pick/`, `src/content/`, `src/background/`, `public/manifest.json`, and `tests/`.
 
-**Manifest:** permissions `storage` and `webRequest`; host permissions for `api2.moxfield.com`, `api.scryfall.com`, and `moxfield.com`. `webRequest` is only used to learn the `x-moxfield-version` and `X-Session-User` values Moxfield's own pages send (Q7). The add-on id `magic-pickle@picklist.local` is a placeholder: **choose the final id before the first signed release**, because changing it later breaks updates. The minimum versions are Firefox 140 and Firefox for Android 142, the first to support `data_collection_permissions`, which AMO now requires (declared as `none`).
+**Manifest:** permissions `storage` and `webRequest`; host permissions for `api2.moxfield.com`, `api.scryfall.com`, and `moxfield.com`. `webRequest` is only used to learn the `x-moxfield-version` and `X-Session-User` values Moxfield's own pages send (Q7). The add-on id is **`magic-pickle@uninitialized.net`** (a domain you own). It's permanent: Firefox matches updates to installs by id, so changing it after the first signed release would mean reinstalling. The minimum versions are Firefox 140 and Firefox for Android 142, the first to support `data_collection_permissions`, which AMO now requires (declared as `none`).
 
 ## 8. Plan
 
@@ -385,6 +385,7 @@ Resolved questions are struck through; their answers are in the decision log.
 | 2026-10-18 | Over-allocated printings go in a collapsed "records out of sync" section, not under "Needs attention" | On a real deck they outnumbered the actionable notices 11 to 4, and they don't affect the pull |
 | 2026-10-18 | Retry refused requests after 1 s and 3 s, then show a "probably rate limiting" error | Heavy test traffic got refused as bare network errors |
 | 2026-10-18 | End-to-end checks run through a dev harness in a moxfield.com tab | Browser automation can't inspect extension pages |
+| 2026-10-18 | Add-on id `magic-pickle@uninitialized.net` | Your domain, so it can't collide; fixed before the first signed release |
 | 2026-10-18 | Drawer headers lead with set codes: "C13 - Commander 2013", "CHK/BOK/SOK - Champions of Kamigawa block"; sibling sets get their own header; a block with one set in the section is labeled as a plain set | The hotel drawers are labeled by set code, so codes are what you scan for |
 | 2026-10-16 | Siblings strictly alphabetical by set code; panorama cards by collector number; playtest cards in their own box; box order arbitrary but fixed | Your answers to Q13, Q17b, Q18, and Q19 |
 | 2026-10-16 | Scryfall blocks count only for expansion blocks through GRN/RNA/WAR; siblings come from `parent_set_code`; named sections override both | Scryfall also labels all Commander products, all core sets, and newer set families (e.g. OTJ) as blocks, which don't match your system |

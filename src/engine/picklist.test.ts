@@ -158,18 +158,19 @@ describe("availability", () => {
     expect(result.skipped).toEqual([{ reason: "proxy", name: "Sol Ring", quantity: 1 }]);
   });
 
-  it("counts only the main board, commanders, and companions", () => {
+  it("counts only the main board, commanders, companions, and signature spells", () => {
     const zur = card({ name: "Zur the Enchanter", set: "csp", mana_cost: "{1}{W}{U}{B}", frame: "2003" });
     const result = run({
       target: deck("New", [
         entry(zur, 1, { board: "commanders" }),
-        entry(bolt, 1, { board: "maybeboard" }),
+        entry(bolt, 1, { board: "signatureSpells" }),
+        entry(solRingC21, 1, { board: "maybeboard" }),
         entry(solRingC21, 1, { board: "sideboard" }),
       ]),
       builtDecks: [deck("Built A", [entry(zur, 1, { board: "maybeboard" })])],
-      collection: [row(zur, 1)],
+      collection: [row(zur, 1), row(bolt, 1)],
     });
-    expect(result.picks.map((p) => p.card.name)).toEqual(["Zur the Enchanter"]);
+    expect(result.picks.map((p) => p.card.name).sort()).toEqual(["Lightning Bolt", "Zur the Enchanter"]);
     expect(result.notices).toEqual([]);
   });
 

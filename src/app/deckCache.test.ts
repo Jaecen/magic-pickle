@@ -28,7 +28,7 @@ describe("loadDecksCached", () => {
 
     const onlyOne = (await listDecks(client2)).slice(0, 1);
     await loadDecksCached(client2, store, onlyOne);
-    expect(Object.keys(store.data.get("deckCache.v2") as object)).toEqual(["deckone000"]);
+    expect(Object.keys(store.data.get("deckCache.v3") as object)).toEqual(["deckone000"]);
   });
 
   it("drops caches written by older versions of the deck parsing", async () => {

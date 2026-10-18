@@ -8,7 +8,7 @@ import { compareKeys, type CollectionSorter, type Placement } from "./sort";
 import type { Card, CollectionRow, Deck, DeckEntry, Finish } from "./types";
 
 /** The boards physically in a deck; sideboard and Considering never count (§4.4). */
-export const IN_DECK_BOARDS: ReadonlySet<string> = new Set(["mainboard", "commanders", "companions"]);
+export const IN_DECK_BOARDS: ReadonlySet<string> = new Set(["mainboard", "commanders", "companions", "signatureSpells"]);
 
 export interface PicklistInput {
   target: Deck;

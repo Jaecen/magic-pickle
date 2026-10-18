@@ -29,6 +29,20 @@ VS Code users can instead open the folder in the container with the Dev Containe
 After a rebuild, click **Reload** for the extension on `about:debugging`. Temporary add-ons are removed when
 Firefox restarts.
 
+### Automated end-to-end checks
+
+Browser automation (WebDriver BiDi, e.g. the Firefox DevTools MCP server) can't inspect `moz-extension://`
+pages. For automated checks, the same app code runs in a logged-in moxfield.com tab instead:
+
+```sh
+scripts/dev npm run build:harness
+scripts/serve-harness            # serves dist-harness/ on http://127.0.0.1:8765 with CORS
+```
+
+Then, in the moxfield.com tab, load `http://127.0.0.1:8765/harness.js` with a `<script>` tag and call
+`magicPickleHarness.data(publicId)` (a JSON summary) or `magicPickleHarness.render(publicId, cssUrl)` (the real UI
+in an iframe). Keep runs spaced out: each costs 18–52 Moxfield requests, and bursts get rate-limited.
+
 ## Layout
 
 | Path | What |
@@ -39,6 +53,7 @@ Firefox restarts.
 | `src/app/` | Generating a picklist end to end; deck cache |
 | `src/pages/pick/` | The picklist page (Preact) |
 | `src/content/`, `src/background/` | The 🥒 button on deck pages; tab opening and header learning |
+| `src/devtools/` | Dev-only harness for automated end-to-end checks (not shipped) |
 | `public/` | `manifest.json` and icon |
 | `tests/` | Fake Moxfield server, fixtures, test helpers |
 | `spikes/moxfield-probe/` | The throwaway probe extension that worked out the Moxfield API |

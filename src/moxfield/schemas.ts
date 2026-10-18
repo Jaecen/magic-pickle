@@ -80,7 +80,7 @@ const collectionRowSchema = z
       quantity: r.quantity,
       finish: r.finish,
       isProxy: r.isProxy ?? undefined,
-      languageCode: r.language?.code ?? r.card.lang,
+      languageCode: copyLanguage(r.language?.code, r.card.lang),
       card: r.card,
     }),
   );
@@ -91,6 +91,15 @@ export const collectionPageSchema = z.object({
   searchSessionId: z.string().nullish(),
   data: z.array(collectionRowSchema),
 });
+
+/**
+ * The language of a physical copy. Moxfield defaults a row's language to English even when the printing
+ * itself is another language (Phyrexian ONE #326, Japanese alt-art planeswalkers), so an "English" row of a
+ * non-English printing is really in the printing's language.
+ */
+export function copyLanguage(rowLanguage: string | undefined, printingLanguage: string): string {
+  return !rowLanguage || rowLanguage === "en" ? printingLanguage : rowLanguage;
+}
 
 export function toDeckEntry(board: string, raw: z.output<typeof deckEntrySchema>): DeckEntry {
   return stripUndefined({ board, quantity: raw.quantity, finish: raw.finish, isProxy: raw.isProxy ?? undefined, card: raw.card });

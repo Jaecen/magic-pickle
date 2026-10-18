@@ -4,9 +4,9 @@
 
 | | |
 | --- | --- |
-| **Status** | Phase 2: the engine and extension MVP are built and tested against a fake Moxfield; next is a real deck pull in Firefox |
+| **Status** | Phase 2: the extension is built and verified against the real Moxfield (2026-10-18): a 100-card deck's picklist in 2.8 s warm, 3.7 s cold. Next: a real pull, then signing and release |
 | **Owner** | Jason Addington |
-| **Last updated** | 2026-10-17 |
+| **Last updated** | 2026-10-18 |
 
 This is a living document. Update it when a decision is made, an assumption turns out wrong, or an open question is answered. The [Decision log](#decision-log) records the reasons behind each change.
 
@@ -51,7 +51,7 @@ Moxfield has **no official API**. The extension uses the same undocumented `api2
 ### 4.1 Access
 
 - **Only real browser requests get through.** Cloudflare returns 403 to `curl`, even from a home IP. A `fetch` from an extension page (with host permission for `api2.moxfield.com`) returns 200 and isn't challenged. Requests from a content script also work. Making requests as if by the page (`content.fetch`) isn't available to Manifest V3 content scripts, and isn't needed.
-- **A bearer token is required.** Cookies alone get 401 (404 for a private deck). The site sends `Authorization: Bearer <JWT>`, `x-moxfield-version`, and `X-Session-User` with every API call. Whether the last two are required hasn't been tested.
+- **A bearer token is required.** Cookies alone get 401 (404 for a private deck). The site sends `Authorization: Bearer <JWT>`, `x-moxfield-version`, and `X-Session-User` with every API call. **The last two aren't required**: a full picklist run without them succeeded (2026-10-18).
 
 ### 4.2 Auth
 
@@ -75,6 +75,7 @@ Moxfield has **no official API**. The extension uses the same undocumented `api2
 
 - **Deck card entries** carry full printing data on 100% of cards: `scryfall_id`, `set`, `cn`, `finish`, `lang`. They also carry most of the card data the sort needs: `type_line`, `colors`, `frame`, `card_faces`, `set`, `released_at`, and Moxfield's `uniqueCardId`. Set-level data (blocks, parent sets, set release dates) comes from Scryfall's set list (§6.3.3).
 - **Collection rows** are one row per printing × finish × condition × language: `{id, quantity, condition, finish, language{code}, isProxy, card{…same card object…}}`. They don't record which decks use a copy, or where a card is stored.
+- **A row's language defaults to English, even for non-English printings.** A copy of a Phyrexian printing (ONE #326, `card.lang` `ph`) shows `language.code` `en`. So a copy's language is the row's language, unless that's English and the printing isn't, in which case it's the printing's language (`copyLanguage` in `schemas.ts`).
 - **Collection size:** 50,694 cards across 28,361 rows. Cards in built decks *are* counted in the collection.
 - **Boards:** a deck's `boards` include `mainboard`, `sideboard`, `maybeboard` ("Considering"), `commanders`, `companions`, and others. Only **`mainboard` + `commanders` + `companions`** are physically in a deck (Moxfield keeps the commander in its own board). Sideboard and Considering are ignored everywhere: they aren't pulled, they don't use up copies, and they may not be in the collection at all, since Considering is sometimes a wish list.
 - **Built decks:** a deck is built if and only if it's in the **`3 - Built`** folder (`folder.name` in the decks list). Name prefixes like `[1DH]` are personal format labels and are ignored.
@@ -93,7 +94,7 @@ Gotchas found the hard way:
 - **One request is not a search.** A single request only sees the first stage of the scan. The probe's early "misses" (13 of 79 names found) all came from this.
 - **A `searchSessionId` is tied to its original query.** Sending a session id with a different `q` returns the *old* query's results. Random ids the client makes up behave like no id.
 - **The query length is capped at about 1,000 characters.** One 79-name OR query (about 1,800 characters) silently matched only the first 46 names. **Split queries into groups of names of at most about 900 characters.** Groups of 40 names (850–960 characters) found 79 of 79.
-- **No rate limiting seen.** 30 sequential searches and 4 searches running at once (about 20 requests in flight) all returned 200.
+- **Rate limits exist but are generous.** 30 sequential searches and 4 searches at once were fine. About 230 requests in 4 minutes, from repeated test runs including two overlapping runs with 8 searches in flight, got refused: network errors, because Cloudflare's block response has no CORS headers. moxfield.com itself was slow to load for a few minutes afterwards. One picklist is about 18 requests warm and 52 cold. The client retries refused requests after 1 s and 3 s, then reports "Moxfield is refusing requests right now".
 
 Measured on the Zur deck (79 names): 2 groups of 40 or 4 groups of 20, run at the same time, found **all 79 names in about 2 s**.
 
@@ -139,7 +140,7 @@ moxfield.com/decks/{publicId}                  Firefox extension
 6. Run the **engine** on (target deck, built-deck usage, binder decks, collection rows, set list, settings). It returns the picklist and the problems (printings not free, unavailable cards, over-allocations).
 7. Render the result. Pull progress is saved in `storage.local` under the deck's `publicId`.
 
-Expected time: about 3 s when built decks are cached, more on the first run, depending on how many decks are in `3 - Built`.
+Measured (2026-10-18, Miracle Max's Recursion: 80 non-basic cards, 25 built decks, 9 binder decks): **2.8 s and 18 requests warm; 3.7 s and 52 requests cold**, when every built and binder deck is fetched.
 
 ### 5.3 State
 
@@ -158,8 +159,9 @@ No collection copy is kept (decision 2026-10-12). Every picklist searches live, 
 ### 5.4 UI
 
 1. **Picklist:** the cards to pull, grouped by location (hotel → section, binder → page) in pull order. Each line has a checkbox, quantity, name, set and collector number, and finish. Checked items drop to the bottom or collapse. The layout works at phone width, since the likely device is a phone or tablet next to the card hotels. It's also printable.
-2. **Problems** (shown first if there are any): cards whose requested printing isn't free, with the free alternatives and a link to the deck (§6.5); unavailable cards with the built decks holding them (G3); over-allocated printings (§6.4).
-3. **Settings:** the built folder, the binder decks, and the section lists, if those turn out to be worth editing in the UI rather than in `sections.ts`.
+2. **Needs attention** (shown first if there are any): cards whose requested printing isn't free, with the free alternatives and a link to the deck (§6.5), and unavailable cards with the built decks holding them (G3).
+3. **Moxfield records out of sync** (collapsed, below the picklist): over-allocated printings (§6.4). They don't affect the pull, and on a real collection they outnumbered the actionable notices (11 vs. 4).
+4. **Settings:** the built folder, the binder decks, and the section lists, if those turn out to be worth editing in the UI rather than in `sections.ts`.
 
 ## 6. Core logic
 
@@ -291,6 +293,7 @@ Moxfield can't be updated programmatically, and the extension doesn't pick subst
 - Response validation: zod 4, in `jitless` mode because extension pages forbid `eval`.
 - Firefox API types: `@types/webextension-polyfill`, for types only; Firefox's native `browser` global is used directly.
 - Tests: Vitest. Engine tests use synthetic cards plus a trimmed copy of Scryfall's set list. Client and app tests run against a fake Moxfield server (`tests/fakeMoxfield.ts`) that reproduces the behavior measured in the spike: tokens, incremental search with server-issued session ids, and the query-length cap.
+- **Dev harness** (`src/devtools/harness.tsx`, `npm run build:harness`, `scripts/serve-harness`): browser automation (WebDriver BiDi) can't inspect `moz-extension://` pages, so for automated end-to-end checks the same app code is loaded into a logged-in moxfield.com tab. Moxfield sets no CSP. It renders the real UI in an iframe against the real API. It's not part of the extension.
 - `web-ext` for linting and signing. Its Android-debugging dependency (`node-forge`) has a high-severity advisory that npm can only "fix" by downgrading web-ext to 5.x. It's a dev-only tool that never ships in the extension, so the advisory is accepted.
 - **Dev environment:** all Node tooling runs in a `node:24` container (OrbStack) via `scripts/dev`; nothing is installed on the host. See the README.
 
@@ -336,7 +339,7 @@ Resolved questions are struck through; their answers are in the decision log.
 4. ~~Language.~~ A copy counts toward a deck entry only if its language matches the deck card's language (§6.1).
 5. ~~Collection quirks.~~ None; Moxfield tracks nothing outside the hotels, boxes, and binders.
 6. **Android install.** Can an unlisted, self-hosted signed `.xpi` be installed on Firefox for Android? To research and test in phase 3.
-7. **Required headers.** Are `x-moxfield-version` and `X-Session-User` required? The extension learns both from Moxfield's own traffic and sends them when known. The picklist page's Diagnostics has a button that compares a request with and without them. To check on the first real run.
+7. ~~Required headers.~~ Not required: a full run without them succeeded (2026-10-18). Header learning stays as cheap insurance until a run from the extension page itself confirms it; then the `webRequest` permission can go.
 8. ~~Merged or set-by-set?~~ Set by set.
 9. ~~Sets you didn't mention.~~ §6.3 table.
 10. ~~Guild Kit 2.~~ Guild Kit section.
@@ -378,6 +381,10 @@ Resolved questions are struck through; their answers are in the decision log.
 | 2026-10-17 | Dev tooling runs in a `node:24` container via OrbStack (`scripts/dev`) | Your preference: no Node or dev dependencies installed on the host |
 | 2026-10-17 | Preact 10.29 rather than 11; zod in `jitless` mode; two Vite builds | Preact 11 is two weeks old and its Vite plugin predates it; extension pages forbid eval; content scripts can't be ES modules |
 | 2026-10-17 | Learn `x-moxfield-version` and `X-Session-User` from Moxfield's own requests (`webRequest`) and send them when known | Cheap insurance until Q7 is answered; the values aren't secret |
+| 2026-10-18 | A copy's language is the printing's language when Moxfield's row says English | Moxfield defaults row language to English even for Phyrexian or Japanese printings; found on the first real run (Vraska ONE #326) |
+| 2026-10-18 | Over-allocated printings go in a collapsed "records out of sync" section, not under "Needs attention" | On a real deck they outnumbered the actionable notices 11 to 4, and they don't affect the pull |
+| 2026-10-18 | Retry refused requests after 1 s and 3 s, then show a "probably rate limiting" error | Heavy test traffic got refused as bare network errors |
+| 2026-10-18 | End-to-end checks run through a dev harness in a moxfield.com tab | Browser automation can't inspect extension pages |
 | 2026-10-16 | Siblings strictly alphabetical by set code; panorama cards by collector number; playtest cards in their own box; box order arbitrary but fixed | Your answers to Q13, Q17b, Q18, and Q19 |
 | 2026-10-16 | Scryfall blocks count only for expansion blocks through GRN/RNA/WAR; siblings come from `parent_set_code`; named sections override both | Scryfall also labels all Commander products, all core sets, and newer set families (e.g. OTJ) as blocks, which don't match your system |
 | 2026-10-14 | Stack: TypeScript, Vite, Preact, Vitest, `web-ext`; unlisted AMO signing; releases on GitHub | Small, standard extension toolchain; signing is required for release Firefox |

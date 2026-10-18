@@ -94,6 +94,8 @@ h1 { font-size: 1.4rem; margin: 0 0 4px; }
 .c-colorless { background: var(--c-colorless); } .c-land { background: var(--c-land); }
 
 .error { border: 1px solid var(--bad-line); background: var(--bad-bg); border-radius: 10px; padding: 12px 16px; }
+.out-of-sync { margin-top: 32px; }
+.out-of-sync summary { cursor: pointer; font-weight: 600; }
 .diagnostics { margin-top: 32px; font-size: 0.9em; }
 .diagnostics table { border-collapse: collapse; width: 100%; }
 .diagnostics td, .diagnostics th { text-align: left; padding: 2px 6px; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }

@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { z } from "zod";
 import { fakeJwt, fakeMoxfield } from "../../tests/fakeMoxfield";
-import { findJwt, jwtExpiry, MoxfieldChangedError, MoxfieldClient, NotLoggedInError } from "./client";
+import { findJwt, jwtExpiry, MoxfieldChangedError, MoxfieldClient, MoxfieldUnavailableError, NotLoggedInError, type FetchFn } from "./client";
 
 const anything = z.unknown();
 
@@ -48,6 +48,25 @@ describe("MoxfieldClient", () => {
     const error = await client.get("/v3/decks", z.object({ decks: z.array(z.object({ colour: z.string() })) })).catch((e: unknown) => e);
     expect(error).toBeInstanceOf(MoxfieldChangedError);
     expect((error as Error).message).toContain("decks.0.colour");
+  });
+
+  it("retries refused requests with backoff, then reports rate limiting clearly", async () => {
+    const server = fakeMoxfield();
+    let refusals = 2;
+    const flaky: FetchFn = async (input, init) => {
+      if (input.includes("/v3/decks") && refusals-- > 0) throw new TypeError("NetworkError when attempting to fetch resource.");
+      return server.fetch(input, init);
+    };
+    const waits: number[] = [];
+    const client = new MoxfieldClient(flaky, undefined, Date.now, async (ms) => void waits.push(ms));
+    await client.get("/v3/decks", anything);
+    expect(waits).toEqual([1000, 3000]);
+
+    const blocked: FetchFn = async (input, init) =>
+      input.includes("/v3/decks") ? new Response("", { status: 429 }) : server.fetch(input, init);
+    const stuck = new MoxfieldClient(blocked, undefined, Date.now, async () => {});
+    await expect(stuck.get("/v3/decks", anything)).rejects.toBeInstanceOf(MoxfieldUnavailableError);
+    expect(stuck.log.filter((e) => e.path === "/v3/decks").map((e) => e.status)).toEqual([429, 429, 429]);
   });
 
   it("logs every request", async () => {

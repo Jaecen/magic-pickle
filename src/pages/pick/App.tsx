@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "preact/hooks";
+import { useCallback, useEffect, useRef, useState } from "preact/hooks";
 import { z } from "zod";
 import { generatePicklist, type GenerateResult } from "../../app/generate";
 import type { Holding, Notice, Pick } from "../../engine/picklist";
@@ -20,8 +20,9 @@ type State =
 
 const progressKey = (publicId: string) => `progress:${publicId}`;
 
-export function App(props: Props) {
-  const publicId = deckIdFromInput(new URLSearchParams(location.search).get("deck") ?? undefined);
+/** `deck` overrides the `?deck=` query parameter (used by the dev harness). */
+export function App(props: Props & { deck?: string }) {
+  const publicId = deckIdFromInput(props.deck ?? new URLSearchParams(location.search).get("deck") ?? undefined);
   if (!publicId) return <DeckInput />;
   return <Picklist {...props} publicId={publicId} />;
 }
@@ -70,18 +71,27 @@ function Picklist({ client, store, fetchFn, publicId }: Props & { publicId: stri
       .catch((error: unknown) => setState({ status: "error", error }));
   }, [client, store, fetchFn, publicId]);
 
+  // Saved progress loads once; after that, every change is saved.
+  const progressLoaded = useRef(false);
   useEffect(() => {
     run();
-    void store.get<string[]>(progressKey(publicId)).then((ids) => setPicked(new Set(ids ?? [])));
+    void store.get<string[]>(progressKey(publicId)).then((ids) => {
+      setPicked(new Set(ids ?? []));
+      progressLoaded.current = true;
+    });
   }, [run, store, publicId]);
+  useEffect(() => {
+    if (progressLoaded.current) void store.set(progressKey(publicId), [...picked]);
+  }, [picked, store, publicId]);
 
-  const toggle = (id: string) => {
-    const next = new Set(picked);
-    if (next.has(id)) next.delete(id);
-    else next.add(id);
-    setPicked(next);
-    void store.set(progressKey(publicId), [...next]);
-  };
+  // Functional update, so quick successive clicks don't overwrite each other.
+  const toggle = (id: string) =>
+    setPicked((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
 
   if (state.status === "loading") {
     return (
@@ -95,6 +105,8 @@ function Picklist({ client, store, fetchFn, publicId }: Props & { publicId: stri
 
   const { deck, picklist, stats } = state.result;
   const copies = picklist.picks.reduce((n, p) => n + p.quantity, 0);
+  const forThisPull = picklist.notices.filter((n) => n.kind !== "overAllocated");
+  const outOfSync = picklist.notices.filter((n) => n.kind === "overAllocated");
   const pickedCopies = picklist.picks.filter((p) => picked.has(pickId(p))).reduce((n, p) => n + p.quantity, 0);
 
   return (
@@ -103,7 +115,7 @@ function Picklist({ client, store, fetchFn, publicId }: Props & { publicId: stri
         <h1>{deck.name}</h1>
         <p class="muted">
           {pickedCopies} of {copies} cards pulled
-          {picklist.notices.length > 0 && ` · ${picklist.notices.length} need attention`}
+          {forThisPull.length > 0 && ` · ${forThisPull.length} need attention`}
         </p>
         <div class="toolbar">
           <a href={deckUrl(deck.publicId)} target="_blank" rel="noreferrer">
@@ -119,7 +131,7 @@ function Picklist({ client, store, fetchFn, publicId }: Props & { publicId: stri
         </div>
       </header>
 
-      {picklist.notices.length > 0 && <Notices notices={picklist.notices} deckLink={deckUrl(deck.publicId)} />}
+      {forThisPull.length > 0 && <Notices notices={forThisPull} deckLink={deckUrl(deck.publicId)} />}
 
       {picklist.skipped.length > 0 && (
         <p class="skipped">
@@ -131,6 +143,23 @@ function Picklist({ client, store, fetchFn, publicId }: Props & { publicId: stri
       )}
 
       <PickList picks={picklist.picks} picked={picked} hidePicked={hidePicked} onToggle={toggle} />
+
+      {outOfSync.length > 0 && (
+        <details class="out-of-sync">
+          <summary>
+            {outOfSync.length} Moxfield {outOfSync.length === 1 ? "record" : "records"} out of sync
+          </summary>
+          <p class="muted">
+            Built decks list more copies of these printings than your collection has. They don't affect this pull, but
+            the deck or collection records in Moxfield should be corrected.
+          </p>
+          {outOfSync.map((n, i) => (
+            <article class={`notice ${n.kind}`} key={i}>
+              <NoticeBody notice={n} deckLink={deckUrl(deck.publicId)} />
+            </article>
+          ))}
+        </details>
+      )}
 
       <Diagnostics client={client} stats={stats} />
     </main>
@@ -217,7 +246,9 @@ function NoticeBody({ notice: n, deckLink }: { notice: Notice; deckLink: string 
       ? `${n.picked} of ${n.wanted} are on the picklist; ${short} more aren't free.`
       : n.owned === 0
         ? "You don't own this printing."
-        : `None of your ${n.owned} ${n.owned === 1 ? "copy is" : "copies are"} free.`;
+        : n.owned === 1
+          ? "Your only copy is in use."
+          : `All ${n.owned} of your copies are in use.`;
   if (n.kind === "printingNotFree") {
     return (
       <>

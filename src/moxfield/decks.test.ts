@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { fakeMoxfield, rawCard } from "../../tests/fakeMoxfield";
 import { MoxfieldChangedError, MoxfieldClient } from "./client";
 import { getDeck, listDecks } from "./decks";
+import { copyLanguage } from "./schemas";
 
 const zur = rawCard({ name: "Zur the Enchanter", set: "csp", mana_cost: "{1}{W}{U}{B}" });
 const ring = rawCard({ name: "Sol Ring", set: "c21", cn: "263", type_line: "Artifact", mana_cost: "{1}", colors: [] });
@@ -52,5 +53,17 @@ describe("decks", () => {
     const error = await getDeck(new MoxfieldClient(server.fetch), "brokendeck").catch((e: unknown) => e);
     expect(error).toBeInstanceOf(MoxfieldChangedError);
     expect((error as Error).message).toContain("boards.mainboard.cards.mainboard0.card.cn");
+  });
+});
+
+describe("copyLanguage", () => {
+  it("treats an English row of a non-English printing as the printing's language", () => {
+    expect(copyLanguage("en", "ph")).toBe("ph");
+    expect(copyLanguage(undefined, "ja")).toBe("ja");
+  });
+
+  it("keeps an explicit foreign row language", () => {
+    expect(copyLanguage("ja", "en")).toBe("ja");
+    expect(copyLanguage("en", "en")).toBe("en");
   });
 });

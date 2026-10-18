@@ -44,6 +44,13 @@ describe("searchCollection", () => {
 });
 
 describe("lookUpCards", () => {
+  it("reads a Phyrexian printing's default-English row as a Phyrexian copy", async () => {
+    const vraska = rawCard({ name: "Vraska, Betrayal's Sting", set: "one", cn: "326", lang: "ph" });
+    const server = fakeMoxfield({ collection: [{ id: "v1", quantity: 1, card: vraska }] });
+    const [row] = await lookUpCards(new MoxfieldClient(server.fetch), ["Vraska, Betrayal's Sting"]);
+    expect(row).toMatchObject({ languageCode: "ph", card: { lang: "ph" } });
+  });
+
   it("finds every name in a deck-sized lookup despite the query cap", async () => {
     const names = Array.from({ length: 79 }, (_, i) => `Card Number ${i} of the Zur Deck`);
     const server = fakeMoxfield({ collection: rows(names, 2) });

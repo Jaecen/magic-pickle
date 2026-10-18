@@ -30,6 +30,18 @@ export class NotLoggedInError extends MoxfieldError {
   }
 }
 
+/** Moxfield (or Cloudflare in front of it) keeps refusing requests, most likely rate limiting. */
+export class MoxfieldUnavailableError extends MoxfieldError {
+  constructor(endpoint: string, status?: number) {
+    super(
+      "Moxfield is refusing requests right now, probably rate limiting. Wait a few minutes and try again.",
+      endpoint,
+      status,
+    );
+    this.name = "MoxfieldUnavailableError";
+  }
+}
+
 /** A response didn't have the shape this extension expects: Moxfield probably changed its API (§4.6). */
 export class MoxfieldChangedError extends MoxfieldError {
   constructor(endpoint: string, detail: string) {
@@ -55,6 +67,10 @@ interface Token {
 
 /** Renew this long before the token's own expiry. */
 const EXPIRY_MARGIN_MS = 60_000;
+/** Waits before retrying a refused request. A Cloudflare block or rate limit shows up as 429/5xx, or as a
+ * network error when the block page lacks CORS headers. */
+const RETRY_DELAYS_MS = [1_000, 3_000];
+const RETRY_STATUSES = new Set([429, 502, 503, 504]);
 
 export class MoxfieldClient {
   readonly log: RequestLogEntry[] = [];
@@ -65,6 +81,7 @@ export class MoxfieldClient {
     private readonly fetchFn: FetchFn,
     private readonly siteHeaders: () => Promise<SiteHeaders> = async () => ({}),
     private readonly now: () => number = Date.now,
+    private readonly sleep: (ms: number) => Promise<void> = (ms) => new Promise((r) => setTimeout(r, ms)),
   ) {}
 
   /** GETs `path` (relative to {@link API}) and validates the JSON body with `schema`. */
@@ -120,19 +137,25 @@ export class MoxfieldClient {
     return headers;
   }
 
+  /** Sends one request, retrying with backoff while Moxfield refuses it. Every attempt is logged. */
   private async send(method: string, path: string, init: RequestInit): Promise<Response> {
-    const started = this.now();
-    const entry: RequestLogEntry = { method, path: pathOnly(path), ms: 0 };
-    this.log.push(entry);
-    try {
-      const response = await this.fetchFn(`${API}${path}`, { ...init, method, credentials: "include" });
-      entry.status = response.status;
-      return response;
-    } catch (e) {
-      entry.error = String(e);
-      throw new MoxfieldError(`Couldn't reach Moxfield (${String(e)})`, pathOnly(path));
-    } finally {
-      entry.ms = this.now() - started;
+    for (let attempt = 0; ; attempt++) {
+      const started = this.now();
+      const entry: RequestLogEntry = { method, path: pathOnly(path), ms: 0 };
+      this.log.push(entry);
+      let response: Response | undefined;
+      try {
+        response = await this.fetchFn(`${API}${path}`, { ...init, method, credentials: "include" });
+        entry.status = response.status;
+      } catch (e) {
+        entry.error = String(e);
+      } finally {
+        entry.ms = this.now() - started;
+      }
+      if (response && !RETRY_STATUSES.has(response.status)) return response;
+      const delay = RETRY_DELAYS_MS[attempt];
+      if (delay === undefined) throw new MoxfieldUnavailableError(pathOnly(path), response?.status);
+      await this.sleep(delay);
     }
   }
 }

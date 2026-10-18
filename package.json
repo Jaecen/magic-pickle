@@ -12,7 +12,8 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "lint:ext": "web-ext lint --source-dir dist",
-    "check": "npm run typecheck && npm run lint && npm test && npm run build && npm run lint:ext"
+    "check": "npm run typecheck && npm run lint && npm test && npm run build && npm run lint:ext",
+    "build:harness": "vite build -c vite.harness.config.ts"
   },
   "devDependencies": {
     "@babel/core": "7.29.7",

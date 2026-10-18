@@ -4,3 +4,4 @@ web-ext-artifacts/
 coverage/
 *.xpi
 .env
+dist-harness/

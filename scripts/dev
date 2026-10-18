@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+# Run a command in the Node dev container, e.g. `scripts/dev npm test`.
+set -e
+cd "$(dirname "$0")/.."
+if [ -t 0 ] && [ -t 1 ]; then tty=""; else tty="-T"; fi
+exec docker compose run --rm $tty dev "$@"

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Moxfield Probe</title>
+  <style>
+    :root { --bg:#fff; --fg:#1d1d1f; --muted:#6b6b70; --line:#ddd; --card:#f6f6f7; --ok:#2f7d3b; --bad:#b3261e; --warn:#9a6700; --accent:#3a7d44; }
+    @media (prefers-color-scheme: dark) { :root { --bg:#161618; --fg:#e8e8ea; --muted:#9a9aa0; --line:#333; --card:#202023; --ok:#6fcf7f; --bad:#ff8a80; --warn:#e3b341; --accent:#6fcf7f; } }
+    * { box-sizing:border-box; }
+    body { margin:0; padding:16px; background:var(--bg); color:var(--fg); font:14px/1.45 system-ui, sans-serif; max-width:1100px; margin-inline:auto; }
+    h1 { font-size:20px; margin:0 0 4px; } h2 { font-size:16px; margin:0 0 8px; }
+    section { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px; margin:14px 0; }
+    .muted { color:var(--muted); } .ok { color:var(--ok); } .bad { color:var(--bad); } .warn { color:var(--warn); }
+    button { font:inherit; padding:5px 12px; border-radius:6px; border:1px solid var(--line); background:var(--bg); color:var(--fg); cursor:pointer; }
+    button.primary { background:var(--accent); color:#fff; border-color:transparent; }
+    input[type=text], textarea, select { font:12px ui-monospace, monospace; width:100%; padding:6px; border:1px solid var(--line); border-radius:6px; background:var(--bg); color:var(--fg); }
+    textarea { min-height:60px; }
+    table { border-collapse:collapse; width:100%; font-size:12px; } th, td { text-align:left; padding:4px 6px; border-bottom:1px solid var(--line); vertical-align:top; }
+    td.url { font-family:ui-monospace, monospace; word-break:break-all; }
+    pre { font:12px ui-monospace, monospace; white-space:pre-wrap; word-break:break-word; max-height:360px; overflow:auto; background:var(--bg); border:1px solid var(--line); border-radius:6px; padding:8px; margin:6px 0 0; }
+    .row { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin:6px 0; }
+    label.chk { display:inline-flex; gap:4px; align-items:center; font-size:12px; }
+    ol { padding-left:20px; margin:4px 0; }
+    .scroll { overflow-x:auto; }
+  </style>
+</head>
+<body>
+  <h1>🥒 Moxfield Probe <span class="muted" style="font-size:13px">(Magic Pickle spike)</span></h1>
+  <p class="muted">Nothing leaves this browser. The report includes endpoint shapes and response <em>schemas</em>; header values and tokens are never included.</p>
+
+  <section>
+    <h2>0 · Setup</h2>
+    <div id="env" class="muted">…</div>
+    <div class="row"><button id="grant">Grant host permissions</button><span id="perm"></span></div>
+    <div id="auth"></div>
+  </section>
+
+  <section>
+    <h2>★ Automated run</h2>
+    <p>After step 1 below has recorded a collection search and a deck, this runs the remaining tests in one go: request contexts, deck printing data, collection search page-size limit, the <code>deckId</code> filter, batched OR lookups, a rate test, and the deck list and folder layouts. To test a specific deck, put its id in section 4 or open this page from a 🥒 button. Otherwise it uses the last deck you opened.</p>
+    <div class="row"><button id="auto" class="primary">Run all automated tests</button></div>
+    <pre id="autoLog" hidden></pre>
+    <p>Round 2: after the automated run, this tests how to look up cards in collection search: single exact-name searches, several OR syntaxes, and 6 lookups at a time.</p>
+    <div class="row"><button id="lookup" class="primary">Run lookup strategy tests</button></div>
+    <pre id="lookupLog" hidden></pre>
+    <p>Round 3: in Moxfield, search your collection for <code>!"Evolving Wilds"</code> and click <em>Refresh</em> in step 1. This replays that exact search, then changes one thing at a time to find why the probe's searches return fewer results than the site's.</p>
+    <div class="row"><button id="diag" class="primary">Diagnose search mismatch</button></div>
+    <pre id="diagLog" hidden></pre>
+    <p>Round 4: can the extension make up its own <code>searchSessionId</code>? This uses the last recorded collection search and deck (or the deck id in section 4).</p>
+    <div class="row"><button id="session" class="primary">Test search sessions</button></div>
+    <pre id="sessionLog" hidden></pre>
+    <p>Round 5: with the probe reloaded, open your Moxfield <strong>collection</strong> page and search for a card you haven't searched yet, e.g. <code>!"Hero of Bladehold"</code>. Then click <em>Refresh</em> in step 1, then this button. It searches Moxfield's own scripts for how <code>searchSessionId</code> is built, lists the recent traffic to every host, and compares new searches made from the extension page and from the content script.</p>
+    <div class="row"><button id="siteSearch" class="primary">Investigate site search</button></div>
+    <pre id="siteSearchLog" hidden></pre>
+    <p>Round 6: search the way the site does. Re-request with the server's <code>searchSessionId</code> until <code>hasMore</code> is false, then check that every card in the deck is found.</p>
+    <div class="row"><button id="contSearch" class="primary">Test continuation search</button></div>
+    <pre id="contLog" hidden></pre>
+    <p>Round 7: split the deck into groups of names, search the groups 4 at a time, and find the per-query limit.</p>
+    <div class="row"><button id="chunkSearch" class="primary">Test chunked search</button></div>
+    <pre id="chunkLog" hidden></pre>
+    <p class="muted">Optional: tests whether the extension can get its own access token. This rotates your Moxfield session token, which is harmless but could, at worst, sign you out of Moxfield.</p>
+    <div class="row"><button id="refreshTok">Test token self-refresh</button><span id="refreshOut" class="muted"></span></div>
+  </section>
+
+  <section>
+    <h2>1 · Record Moxfield's own traffic</h2>
+    <p>Keep this tab open. In a <strong>moxfield.com</strong> tab, while logged in, do the following, then click <em>Refresh</em>:</p>
+    <ol>
+      <li>Open your <strong>Collection</strong> and run a search, e.g. <code>!"Sol Ring"</code>, then a broader one, e.g. <code>t:legendary c:g</code>.</li>
+      <li>Open your <strong>decks list</strong>, and any <strong>folder</strong> you use for built decks.</li>
+      <li>Open a <strong>private</strong> deck, and switch it to edit mode.</li>
+      <li>If Moxfield shows anything like "in decks" or "used in" for a collection card, open it.</li>
+    </ol>
+    <div class="row"><button id="refresh" class="primary">Refresh</button><button id="clear">Clear log</button><span id="logcount" class="muted"></span></div>
+    <div class="scroll"><table id="endpoints"></table></div>
+  </section>
+
+  <section>
+    <h2>2 · Where does the token live?</h2>
+    <div class="row"><button id="storage">Inspect Moxfield tab storage</button></div>
+    <pre id="storageOut" hidden></pre>
+  </section>
+
+  <section>
+    <h2>3 · Replay from the extension</h2>
+    <p class="muted">Load a recorded request from the table above (or type one), then run it in each context.</p>
+    <div class="row" style="flex-wrap:nowrap"><select id="method" style="width:90px"><option>GET</option><option>POST</option></select><input id="url" type="text" placeholder="https://api2.moxfield.com/..."></div>
+    <textarea id="body" placeholder="request body (POST only)"></textarea>
+    <div class="row" id="ctxs"></div>
+    <div class="row"><button id="replay" class="primary">Run replay matrix</button></div>
+    <div class="scroll"><table id="replayOut"></table></div>
+    <pre id="replaySchema" hidden></pre>
+  </section>
+
+  <section>
+    <h2>4 · Deck fetch</h2>
+    <div class="row" style="flex-wrap:nowrap"><input id="deckId" type="text" placeholder="deck public id (from URL), or use the 🥒 button on a deck page"><button id="deck" class="primary">Fetch deck</button></div>
+    <pre id="deckOut" hidden></pre>
+  </section>
+
+  <section>
+    <h2>5 · Batch collection lookup</h2>
+    <p class="muted">Put the collection search request in section 3 with <code>{{Q}}</code> where the search text goes (and a large page size if there is one). This runs OR'd exact-name queries, e.g. <code>!"A" or !"B"</code>, for the fetched deck's cards.</p>
+    <div class="row"><label class="chk">Context <select id="batchCtx" style="width:auto"></select></label><button id="batch" class="primary">Run batch sizes 1 / 10 / 25 / 50 / all</button></div>
+    <div class="scroll"><table id="batchOut"></table></div>
+    <div class="row"><button id="rate">Rate test: 30 sequential single-card lookups</button><span id="rateOut"></span></div>
+  </section>
+
+  <section>
+    <h2>6 · Report</h2>
+    <div class="row"><button id="copyShort" class="primary">Copy test results (short)</button><button id="copy">Copy full report</button><button id="dlReport">Download report</button><button id="dlFixtures">Download raw responses (fixtures)</button><span id="copyMsg" class="muted"></span></div>
+    <p class="muted">Paste the copied report back to Claude. Raw responses contain your real collection and deck data. Review them before sharing.</p>
+  </section>
+
+  <script type="module" src="probe.js"></script>
+</body>
+</html>

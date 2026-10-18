@@ -1,0 +1,15 @@
+# Node tooling runs here instead of on the host. Use scripts/dev, e.g. `scripts/dev npm test`.
+services:
+  dev:
+    image: node:24-slim
+    working_dir: /work
+    user: node
+    volumes:
+      - .:/work
+      # Whole home dir: Docker seeds a new volume from the image's /home/node, so it stays owned by `node`.
+      - node-home:/home/node
+    environment:
+      CI: ${CI:-}
+
+volumes:
+  node-home:

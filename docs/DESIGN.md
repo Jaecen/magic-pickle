@@ -73,7 +73,7 @@ Moxfield has **no official API**. The extension uses the same undocumented `api2
 
 ### 4.4 Data
 
-- **Deck card entries** carry full printing data on 100% of cards: `scryfall_id`, `set`, `cn`, `finish`, `lang`. They also carry most of the card data the sort needs: `type_line`, `colors`, `frame`, `card_faces`, `set`, `released_at`, and Moxfield's `uniqueCardId`. Set-level data (blocks, parent sets, set release dates) comes from Scryfall's set list (§6.3.3).
+- **Deck card entries** carry full printing data on 100% of cards: `scryfall_id`, `set`, `cn`, `finish`, `lang`. They also carry most of the card data the sort needs: `type_line`, `colors`, `frame`, `card_faces`, `set`, `released_at`, and Moxfield's `uniqueCardId`. Each card also has `rarity` and `prices` (USD as `usd`, `usd_foil`, `usd_etched`), used for the sleeve hint (§5.4). Set-level data (blocks, parent sets, set release dates) comes from Scryfall's set list (§6.3.3).
 - **A deck line's real printings can be in `printingData`.** When present, it's a list of `{quantity, finish, isProxy, card}` that overrides the line's own `card` and `finish`. A line may say `nonFoil` while its `printingData` says foil (seen on a real deck even with `enableMultiplePrintings: false`), and with multiple printings enabled one line can hold several. Found on 2026-10-18 (Sulfurous Springs DMU #381 foil was reported as not owned).
 - **Collection rows** are one row per printing × finish × condition × language: `{id, quantity, condition, finish, language{code}, isProxy, card{…same card object…}}`. They don't record which decks use a copy, or where a card is stored.
 - **A row's language defaults to English, even for non-English printings.** A copy of a Phyrexian printing (ONE #326, `card.lang` `ph`) shows `language.code` `en`. So a copy's language is the row's language, unless that's English and the printing isn't, in which case it's the printing's language (`copyLanguage` in `schemas.ts`).
@@ -150,6 +150,7 @@ All state lives in `storage.local`. Nothing has to persist reliably: everything 
 | Data | Purpose | Lifetime |
 | --- | --- | --- |
 | Settings | Name of the built folder, binder decks, section lists (if editable in the UI) | Until changed |
+| Display options | Whether the sleeve pills show (`showSleeves`) | Until changed |
 | Built-deck cache | Reduced in-deck boards per `publicId` + `lastUpdatedAtUtc` | Replaced when a deck changes; dropped when it leaves the folder |
 | Pull progress | Checked-off cards per target deck | Until cleared or the deck changes |
 | Scryfall set list | Release dates, blocks, parent sets (§6.3.3) | Refreshed after 7 days |
@@ -159,7 +160,7 @@ No collection copy is kept (decision 2026-10-12). Every picklist searches live, 
 
 ### 5.4 UI
 
-1. **Picklist:** the cards to pull, grouped by location (hotel → section, binder → page) in pull order. Each line has a checkbox, quantity, name, set and collector number, and finish. Checked items drop to the bottom or collapse. The layout works at phone width, since the likely device is a phone or tablet next to the card hotels. It's also printable.
+1. **Picklist:** the cards to pull, grouped by location (hotel → section, binder → page) in pull order. Each line has a checkbox, quantity, name, set and collector number, and finish. Lines that need better storage when filed back show a pill after the name: **Sleeve** (a rare or mythic, or worth $1 or more) or **Double sleeve** (worth more than $10), with the price, or the rarity when that's the reason. Price is the copy's finish (`usd`, `usd_foil`, `usd_etched`), falling back to `usd`; the thresholds live in `sections.ts`. A **Sleeves** checkbox in the toolbar hides the pills; it's on by default and remembered across decks (`showSleeves` in `storage.local`). Checked items drop to the bottom or collapse. The layout works at phone width, since the likely device is a phone or tablet next to the card hotels. It's also printable.
 2. **Needs attention** (shown first if there are any): cards whose requested printing isn't free, with the free alternatives and a link to the deck (§6.5), and unavailable cards with the built decks holding them (G3).
 3. **Moxfield records out of sync** (collapsed, below the picklist): over-allocated printings (§6.4). They don't affect the pull, and on a real collection they outnumbered the actionable notices (11 vs. 4).
 4. **Settings:** the built folder, the binder decks, and the section lists, if those turn out to be worth editing in the UI rather than in `sections.ts`.
@@ -215,7 +216,7 @@ Unless noted, a section sorts **set by set** using the general model (§6.3.1).
 | --- | --- | --- | --- | --- |
 | 1 | Commander | Hotels | Commander sets through C21: CMD, CM1 *(assumed)*, C13–C21, CMA, CM2. Also KHC, ZNC, AFC, MIC, VOC, NEC, NCC, DMC | Set by set |
 | 2 | Duel Decks | Hotels | Scryfall `set_type` `duel_deck`: DD1–DDU, the anthologies (DVD, EVG, GVL, JVC), GS1 | Set by set |
-| 3 | Modern | Hotels | All core sets; all **promo** sets (Scryfall `set_type` `promo`); Conspiracy (CNS, CN2); reprint-based sets not listed elsewhere (Origins, most Masters sets, From the Vault, Premium Deck Series, Game Night, gift packs, Explorers of Ixalan, Challenger Decks, Commander Collection; all *(assumed)*) | **One merged set** |
+| 3 | Modern | Hotels | All core sets; **promo sets not tied to a set** (Scryfall `set_type` `promo` with no `parent_set_code`: FNM, Judge Gift Cards, Player Rewards, media inserts, and so on); Conspiracy (CNS, CN2); reprint-based sets not listed elsewhere (Origins, most Masters sets, From the Vault, Premium Deck Series, Game Night, gift packs, Explorers of Ixalan, Challenger Decks, Commander Collection; all *(assumed)*) | **One merged set** |
 | 4 | Main | Hotels | Everything else, including CLB, Battlebond, LTR, Assassin's Creed, the Eternal sets, Archenemy *(assumed)* | General model |
 | 5 | Planeswalker symbol | Hotels | The List (PLST, ULST), Mystery Booster sets (MB2, MBC) *(assumed)* | **One merged set** |
 | 6 | Planechase | Hotels | HOP, PC2, PCA, and later Planechase sets | Set by set |
@@ -244,16 +245,18 @@ The boxes (Old cards, Un-sets, Playtest cards) have no physical order relative t
 2. **Foreign language:** `language.code ≠ en`. Phyrexian copies in the *Language - Phyrexian* binder deck are caught by rule 1 first.
 3. **Un-sets and Playtest cards**, by set code. These come before Old cards, so Unglued goes in the Un-sets box even though its frame is old.
 4. **Old cards:** old frame and a pre-8th Edition set. This includes old promos.
-5. **Named sections**, by set code or set type (Commander, Duel Decks, Modern, Planeswalker symbol, Planechase, Guild Kit, Jumpstart, Secret Lair, Signature Spellbook, Modern Horizons, Commander Legends, Universes Within). These override Scryfall's parent/child links: KHC (parent KHM), SLX (parent SLD), J25 (parent FDN), and promo sets (e.g. POTJ, parent OTJ) go to their named sections, not to their parent set.
+5. **Named sections**, by set code or set type (Commander, Duel Decks, Modern, Planeswalker symbol, Planechase, Guild Kit, Jumpstart, Secret Lair, Signature Spellbook, Modern Horizons, Commander Legends, Universes Within). These override Scryfall's parent/child links: KHC (parent KHM), SLX (parent SLD), J25 (parent FDN) go to their named sections, not to their parent set.
 6. **Main** for everything else.
 
-New sets need a sensible default. A set not named in any list goes to **Modern** if it's a reprint product (Scryfall `set_type` is `core`, `masters`, `from_the_vault`, `premium_deck`, `promo`, or similar), to **Duel Decks** if it's a `duel_deck`, and to **Main** otherwise.
+**Promo sets tied to a set** file as that set before any of these rules apply. A `promo` set with a `parent_set_code` (PDKA → DKA, POTJ → OTJ, PNCC → NCC) takes its parent's section and drawer, and its cards sort among the parent's cards as if they were printings from it: PDKA Mondronen Shaman sits right next to DKA Mondronen Shaman. The parent is followed up while it's also a promo set (PTSNC → PSNC → SNC). Promo sets with no parent (FNM, Judge, media inserts) go to Modern. A promo set listed by code in `sections.ts` stays where it's listed.
+
+New sets need a sensible default. A set not named in any list goes to **Modern** if it's a reprint product (Scryfall `set_type` is `core`, `masters`, `from_the_vault`, `premium_deck`, or similar, or `promo` with no parent set), to **Duel Decks** if it's a `duel_deck`, and to **Main** otherwise.
 
 #### 6.3.1 The general model (inside a section)
 
 - **Group** (set or block), ordered **chronologically** by the earliest release date among the group's sets *in that section*. Coldsnap shows why: Scryfall puts it in the Ice Age block, but Ice Age and Alliances are old cards, so Coldsnap sorts in Main at its own 2006 date.
   - **Blocks merge into one set.** Scryfall's `block_code` is used only for **expansion** blocks released through **GRN/RNA/WAR** (2019-05-03). Scryfall also assigns blocks to things that aren't blocks in this system: all Commander products are block `cmd`, all core sets are block `lea`, Modern Horizons is block `mh1`, and newer sets like OTJ have a block containing their siblings. Those are ignored.
-  - **Sibling sets** are sets whose Scryfall `parent_set_code` points to the group's primary set, followed up the chain to the root, and that land in the same section. They sort **after** the primary set, ordered **strictly alphabetically by set code**. Example: OTJ, then BIG, OTC, OTP.
+  - **Sibling sets** are sets whose Scryfall `parent_set_code` points to the group's primary set, followed up the chain to the root, and that land in the same section. They sort **after** the primary set, ordered **strictly alphabetically by set code**. Example: OTJ, then BIG, OTC, OTP. Promo sets aren't siblings: they merge into their parent (§6.3, "Which section wins").
 - **Subgroup:** 0 for the primary set (or all of a block's sets, merged), then 1, 2, … for each sibling set in set-code order.
 - **Color**, in this order: **W, U, B, R, G, multi, colorless, land**. All multicolor cards (gold, hybrid, and so on) are one bucket. The real rule is **the front face's frame color**. The data doesn't include frame color, so it's approximated:
   1. **Land** if the front face's type line includes Land. Dryad Arbor is ruled a land.
@@ -273,7 +276,7 @@ Binders hold a **fixed quantity** of each card in their `Collections` decks (usu
 
 #### 6.3.3 Data sources
 
-- **From Moxfield's card object:** `set`, `frame`, `colors` / `card_faces`, `type_line`, `name`; and from the collection row, `language.code` and `finish`.
+- **From Moxfield's card object:** `set`, `frame`, `colors` / `card_faces`, `type_line`, `name` (and `rarity`, `prices` for the sleeve hint); and from the collection row, `language.code` and `finish`.
 - **From the Scryfall set list:** release dates, `block_code`, `parent_set_code`, and `set_type`; and for set symbols, the symbol name in `icon_svg_uri`. Fetched with one request to `https://api.scryfall.com/sets` (about 630 KB; Scryfall allows requests from browser pages) and cached in `storage.local` for 7 days.
 - **Section lists** (set codes for each named section, binder deck names and order, panorama order) live in one hand-maintained file: `src/engine/sections.ts`.
 
@@ -401,6 +404,9 @@ Resolved questions are struck through; their answers are in the decision log.
 | 2026-10-18 | Add-on id `magic-pickle@uninitialized.net` | Your domain, so it can't collide; fixed before the first signed release |
 | 2026-10-18 | Drawer headers lead with set codes: "C13 - Commander 2013", "CHK/BOK/SOK - Champions of Kamigawa block"; sibling sets get their own header; a block with one set in the section is labeled as a plain set | The hotel drawers are labeled by set code, so codes are what you scan for |
 | 2026-10-18 | Printings show the set symbol, drawn with Keyrune's woff2 font and looked up by the glyph names in its font, read at build time. Matched by set code, then by Scryfall's symbol for the set, with a few aliases where the font's names differ; no symbol when neither matches. Set list cache versioned so the symbol names are fetched | Promo and token sets don't print the set code, so the symbol is what you match. Scryfall's symbol name raises matches from 32% to 93% of paper sets; a generic fallback would be a wrong symbol. The other font formats would add 2 MB that Firefox never uses |
+| 2026-10-18 | Promo sets with a Scryfall parent file as the parent set, card for card (PDKA Mondronen Shaman next to DKA's); only promos with no parent go to Modern | Your correction: promos for a set are stored with that set. Scryfall's parent link splits them cleanly: FNM, Judge, Player Rewards, and media insert sets have none |
+| 2026-10-18 | Picklist lines show a **Sleeve** pill (rare/mythic, or ≥ $1) or **Double sleeve** pill (> $10), priced by the copy's finish from Moxfield's `prices` | The picklist is also used to file a deck back into the collection; these are your storage rules. Price and rarity come with the card objects already fetched, so no extra requests. An unreadable price is dropped rather than failing the response |
+| 2026-10-18 | Sleeve pills can be turned off with a **Sleeves** toolbar checkbox, on by default, remembered across decks | Filing a deck back is the uncommon case; the pills are noise when pulling |
 | 2026-10-18 | Repo licensed MIT. From Keyrune, only the font (SIL OFL 1.1) is used and shipped, with its notice in `public/licenses/`; its stylesheet (GPL-3.0) isn't | Shipping the GPL stylesheet would put the bundled extension under GPL terms; the font's glyph names give the same set table |
 | 2026-10-16 | Siblings strictly alphabetical by set code; panorama cards by collector number; playtest cards in their own box; box order arbitrary but fixed | Your answers to Q13, Q17b, Q18, and Q19 |
 | 2026-10-16 | Scryfall blocks count only for expansion blocks through GRN/RNA/WAR; siblings come from `parent_set_code`; named sections override both | Scryfall also labels all Commander products, all core sets, and newer set families (e.g. OTJ) as blocks, which don't match your system |

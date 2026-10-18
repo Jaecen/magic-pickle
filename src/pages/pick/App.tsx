@@ -4,6 +4,8 @@ import { z } from "zod";
 import { generatePicklist, type GenerateResult } from "../../app/generate";
 import type { Holding, Notice, Pick } from "../../engine/picklist";
 import { SetCatalog } from "../../engine/sets";
+import { priceOf, sleevingFor } from "../../engine/storage";
+import type { Card, Finish } from "../../engine/types";
 import { MoxfieldChangedError, NotLoggedInError, type FetchFn, type MoxfieldClient } from "../../moxfield/client";
 import { deckIdFromInput, deckUrl } from "../../moxfield/urls";
 import type { Store } from "../../util/store";
@@ -22,6 +24,8 @@ type State =
   | { status: "error"; error: unknown };
 
 const progressKey = (publicId: string) => `progress:${publicId}`;
+/** Whether pick lines show the sleeve hint. One setting for every deck; on unless turned off. */
+const SHOW_SLEEVES_KEY = "showSleeves";
 
 /** Scryfall's set list, for set symbols. */
 const SetsContext = createContext(new SetCatalog([]));
@@ -66,6 +70,7 @@ function Picklist({ client, store, fetchFn, publicId }: Props & { publicId: stri
   const [state, setState] = useState<State>({ status: "loading", step: "Starting…" });
   const [picked, setPicked] = useState<ReadonlySet<string>>(new Set());
   const [hidePicked, setHidePicked] = useState(false);
+  const [showSleeves, setShowSleeves] = useState(true);
 
   const run = useCallback(() => {
     setState({ status: "loading", step: "Starting…" });
@@ -81,6 +86,7 @@ function Picklist({ client, store, fetchFn, publicId }: Props & { publicId: stri
   const progressLoaded = useRef(false);
   useEffect(() => {
     run();
+    void store.get<boolean>(SHOW_SLEEVES_KEY).then((show) => setShowSleeves(show ?? true));
     void store.get<string[]>(progressKey(publicId)).then((ids) => {
       setPicked(new Set(ids ?? []));
       progressLoaded.current = true;
@@ -135,6 +141,17 @@ function Picklist({ client, store, fetchFn, publicId }: Props & { publicId: stri
               <input type="checkbox" checked={hidePicked} onChange={(e) => setHidePicked(e.currentTarget.checked)} />
               Hide pulled
             </label>
+            <label class="check" title="Mark cards to store in a penny sleeve or double sleeve">
+              <input
+                type="checkbox"
+                checked={showSleeves}
+                onChange={(e) => {
+                  setShowSleeves(e.currentTarget.checked);
+                  void store.set(SHOW_SLEEVES_KEY, e.currentTarget.checked);
+                }}
+              />
+              Sleeves
+            </label>
           </div>
         </header>
 
@@ -149,7 +166,7 @@ function Picklist({ client, store, fetchFn, publicId }: Props & { publicId: stri
           </p>
         )}
 
-        <PickList picks={picklist.picks} picked={picked} hidePicked={hidePicked} onToggle={toggle} />
+        <PickList picks={picklist.picks} picked={picked} hidePicked={hidePicked} showSleeves={showSleeves} onToggle={toggle} />
 
         {outOfSync.length > 0 && (
           <details class="out-of-sync">
@@ -174,8 +191,14 @@ function Picklist({ client, store, fetchFn, publicId }: Props & { publicId: stri
   );
 }
 
-function PickList(props: { picks: Pick[]; picked: ReadonlySet<string>; hidePicked: boolean; onToggle: (id: string) => void }) {
-  const { picks, picked, hidePicked, onToggle } = props;
+function PickList(props: {
+  picks: Pick[];
+  picked: ReadonlySet<string>;
+  hidePicked: boolean;
+  showSleeves: boolean;
+  onToggle: (id: string) => void;
+}) {
+  const { picks, picked, hidePicked, showSleeves, onToggle } = props;
   const visible = hidePicked ? picks.filter((p) => !picked.has(pickId(p))) : picks;
   if (picks.length === 0) return <p class="muted">Nothing to pull.</p>;
   if (visible.length === 0) return <p class="muted">Everything's pulled. 🎉</p>;
@@ -207,7 +230,10 @@ function PickList(props: { picks: Pick[]; picked: ReadonlySet<string>; hidePicke
         <input type="checkbox" checked={picked.has(id)} onChange={() => onToggle(id)} />
         <span class={`pip c-${p.placement.color}`} title={COLOR_LABELS[p.placement.color]} />
         <span class="qty">{p.quantity}×</span>
-        <span class="name">{p.card.name}</span>
+        <span class="name">
+          {p.card.name}
+          {showSleeves && <SleeveBadge card={p.card} finish={p.finish} />}
+        </span>
         <span class="printing">
           <SetSymbol code={p.card.set} />
           {printing(p.card, p.finish, p.languageCode)}
@@ -316,6 +342,22 @@ function Holders({ holders }: { holders: Holding[] }) {
         </span>
       ))}
     </p>
+  );
+}
+
+/** How the copy should be stored when it's filed back: sleeved, or double-sleeved. */
+function SleeveBadge({ card, finish }: { card: Card; finish: Finish }) {
+  const sleeving = sleevingFor(card, finish);
+  if (!sleeving) return null;
+  const price = priceOf(card, finish);
+  const rarity = card.rarity ? card.rarity[0]!.toUpperCase() + card.rarity.slice(1) : "";
+  const reason = price !== undefined && price >= 1 ? `$${price.toFixed(2)}` : rarity;
+  const label = sleeving === "doubleSleeve" ? "Double sleeve" : "Sleeve";
+  return (
+    <span class={`sleeve ${sleeving}`} title={[label, rarity, price !== undefined && `$${price.toFixed(2)}`].filter(Boolean).join(" · ")}>
+      {label}
+      {reason && <span class="reason"> · {reason}</span>}
+    </span>
   );
 }
 

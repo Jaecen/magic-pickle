@@ -27,6 +27,16 @@ export interface Card {
   /** Scryfall frame: `1993`, `1997`, `2003`, `2015`, or `future`. */
   frame?: string;
   isToken?: boolean;
+  /** Scryfall rarity: `common`, `uncommon`, `rare`, `mythic`, `special`, or `bonus`. */
+  rarity?: string;
+  /** Market prices in USD, by finish, as Moxfield reports them. */
+  prices?: CardPrices;
+}
+
+export interface CardPrices {
+  usd?: number;
+  usd_foil?: number;
+  usd_etched?: number;
 }
 
 export type Finish = "nonFoil" | "foil" | "etched";

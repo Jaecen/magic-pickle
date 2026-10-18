@@ -1,6 +1,6 @@
 {
   "name": "magic-pickle",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "private": true,
   "license": "MIT",
   "description": "Firefox extension: collection-order picklists and printing availability for Moxfield decks",

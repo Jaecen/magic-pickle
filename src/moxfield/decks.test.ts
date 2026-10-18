@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { fakeMoxfield, rawCard } from "../../tests/fakeMoxfield";
 import { MoxfieldChangedError, MoxfieldClient } from "./client";
 import { getDeck, listDecks } from "./decks";
-import { copyLanguage } from "./schemas";
+import { cardSchema, copyLanguage } from "./schemas";
 
 const zur = rawCard({ name: "Zur the Enchanter", set: "csp", mana_cost: "{1}{W}{U}{B}" });
 const ring = rawCard({ name: "Sol Ring", set: "c21", cn: "263", type_line: "Artifact", mana_cost: "{1}", colors: [] });
@@ -42,7 +42,8 @@ describe("decks", () => {
       "commanders:Zur the Enchanter:nonFoil",
       "mainboard:Sol Ring:foil",
     ]);
-    expect(deck.entries[1]!.card).not.toHaveProperty("prices");
+    expect(deck.entries[1]!.card).not.toHaveProperty("legalities");
+    expect(deck.entries[1]!.card.prices).toEqual({ usd: 0.25 });
     expect(deck.tags).toEqual({ "Sol Ring": ["Ramp"] });
   });
 
@@ -88,6 +89,20 @@ describe("decks", () => {
     const error = await getDeck(new MoxfieldClient(server.fetch), "brokendeck").catch((e: unknown) => e);
     expect(error).toBeInstanceOf(MoxfieldChangedError);
     expect((error as Error).message).toContain("boards.mainboard.cards.mainboard0.card.cn");
+  });
+});
+
+describe("card prices and rarity", () => {
+  it("keeps rarity and the USD prices, and drops prices it can't read instead of failing", () => {
+    const parse = (fields: object) => cardSchema.parse({ ...ring, ...fields });
+    expect(parse({ rarity: "uncommon", prices: { usd: 1.5, usd_foil: null, eur: 1.2 } })).toMatchObject({
+      rarity: "uncommon",
+      prices: { usd: 1.5 },
+    });
+    expect(parse({ prices: { usd_foil: 4 } }).prices).toEqual({ usd_foil: 4 });
+    expect(parse({ prices: { usd: "1.50" } })).not.toHaveProperty("prices");
+    expect(parse({ prices: null })).not.toHaveProperty("prices");
+    expect(parse({ prices: "n/a" })).not.toHaveProperty("prices");
   });
 });
 

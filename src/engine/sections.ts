@@ -66,7 +66,7 @@ export const SET_SECTIONS: Readonly<Record<string, SectionId>> = {
 /** Default section for a set not listed above, by Scryfall `set_type`. Anything else goes to Main. */
 export const TYPE_SECTIONS: Readonly<Record<string, SectionId>> = {
   duel_deck: "duelDecks",
-  // Reprint-based products, and all promos.
+  // Reprint-based products, and promos not tied to a set (promo sets with a parent file with the parent).
   core: "modern",
   masters: "modern",
   from_the_vault: "modern",
@@ -126,6 +126,14 @@ export const BINDER_DECKS: readonly BinderDeckDef[] = [
  * others are offered as alternatives (§6.2). Other foreign-language copies are never offered.
  */
 export const PLAYABLE_LANGUAGES: ReadonlySet<string> = new Set(["en", "ph"]);
+
+/**
+ * How a copy is stored (§5.4): rares, mythics, and copies worth $1 or more go in a penny sleeve; copies worth
+ * more than $10 are double-sleeved.
+ */
+export const SLEEVED_RARITIES: ReadonlySet<string> = new Set(["rare", "mythic"]);
+export const SLEEVE_PRICE_USD = 1;
+export const DOUBLE_SLEEVE_ABOVE_USD = 10;
 
 /**
  * Cards whose frame color the mana-cost approximation gets wrong (§6.3.1), by card name.

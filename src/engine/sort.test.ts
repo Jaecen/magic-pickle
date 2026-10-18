@@ -33,7 +33,15 @@ describe("sections", () => {
     ["fdn", "modern"],
     ["2xm", "modern"],
     ["cns", "modern"],
-    ["potj", "modern"], // promos go to Modern, not with their parent
+    ["f10", "modern"], // promos not tied to a set go to Modern
+    ["pmei", "modern"],
+    ["j20", "modern"],
+    ["potj", "main"], // promos tied to a set go with it
+    ["ptsnc", "main"], // parent PSNC, itself a promo set of SNC
+    ["pm19", "modern"],
+    ["pncc", "commander"],
+    ["slp", "secretLair"],
+    ["pust", "unSets"],
     ["gnt", "modern"],
     ["otj", "main"],
     ["otc", "main"], // later Commander products stay with their parent set
@@ -151,6 +159,35 @@ describe("pull order", () => {
       card({ name: "Aa Outlaw", set: "otj" }),
     ];
     expect(pullOrder(cards)).toEqual(["otj:Aa Outlaw", "otj:Zz Outlaw", "big:Score", "otc:Cmdr", "otp:News"]);
+  });
+
+  it("files a set's promos as the set itself, card for card", () => {
+    const cards = [
+      card({ name: "Wrack with Madness", set: "dka", mana_cost: "{3}{R}" }),
+      card({ name: "Mondronen Shaman", set: "pdka", cn: "98", mana_cost: "{3}{R}" }),
+      card({ name: "Afflicted Deserter", set: "dka", mana_cost: "{3}{R}" }),
+      card({ name: "Nearheath Stalker", set: "isd", mana_cost: "{4}{R}" }),
+      card({ name: "Mondronen Shaman", set: "dka", cn: "98", mana_cost: "{3}{R}" }),
+      card({ name: "Gather the Townsfolk", set: "dka", mana_cost: "{1}{W}" }),
+    ];
+    expect(pullOrder(cards)).toEqual([
+      "dka:Gather the Townsfolk",
+      "dka:Afflicted Deserter",
+      "dka:Mondronen Shaman",
+      "pdka:Mondronen Shaman",
+      "isd:Nearheath Stalker",
+      "dka:Wrack with Madness",
+    ]);
+    expect(sorter.place(cards[1]!, "en").group).toBe(sorter.place(cards[0]!, "en").group);
+  });
+
+  it("files sibling promos with their primary set's own cards, not after its siblings", () => {
+    const cards = [
+      card({ name: "Score", set: "big" }),
+      card({ name: "Zz Promo", set: "potj" }),
+      card({ name: "Aa Outlaw", set: "otj" }),
+    ];
+    expect(pullOrder(cards)).toEqual(["otj:Aa Outlaw", "potj:Zz Promo", "big:Score"]);
   });
 
   it("dates Coldsnap by its own release in Main, not by the Ice Age block", () => {

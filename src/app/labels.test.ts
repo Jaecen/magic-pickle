@@ -3,7 +3,8 @@ import { fakeMoxfield, rawCard, type RawDeck } from "../../tests/fakeMoxfield";
 import { deckHash } from "../engine/deckHash";
 import { MoxfieldClient } from "../moxfield/client";
 import { getDeck } from "../moxfield/decks";
-import { checkLabel } from "./labels";
+import { memoryStore } from "../util/store";
+import { builtDeckHashes, checkLabel } from "./labels";
 
 const ring = rawCard({ name: "Sol Ring", set: "c21", cn: "263" });
 const ringCmr = rawCard({ name: "Sol Ring", set: "cmr", cn: "472" });
@@ -52,5 +53,21 @@ describe("checkLabel", () => {
         ],
       },
     });
+  });
+});
+
+describe("builtDeckHashes", () => {
+  it("hashes the built decks from the cache, refetching only changed decks", async () => {
+    const built = { ...deckWith([{ quantity: 1, card: ring }]), folder: "3 - Built" };
+    const idea = { ...deckWith([{ quantity: 1, card: crypt }]), publicId: "ideadeck00", folder: "0 - Ideas" };
+    const server = fakeMoxfield({ decks: [built, idea] });
+    const client = new MoxfieldClient(server.fetch);
+    const store = memoryStore();
+    const hashes = await builtDeckHashes(client, store);
+    expect([...hashes.keys()]).toEqual(["zurdeck000"]);
+    expect(hashes.get("zurdeck000")).toEqual(await hashOf(built));
+
+    await builtDeckHashes(client, store);
+    expect(server.apiRequests().filter((r) => r.url.pathname.startsWith("/v3/decks/all/"))).toHaveLength(1);
   });
 });

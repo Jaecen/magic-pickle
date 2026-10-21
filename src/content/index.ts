@@ -1,10 +1,24 @@
-// Adds the 🥒 button to Moxfield deck pages. Moxfield is a single-page app, so the button is kept in sync
-// with the URL rather than added once.
+// Adds the 🥒 button and the deck hash to Moxfield deck pages, and hashes to the deck list. Moxfield is a single-page app, so both are kept in
+// sync with the URL rather than added once.
+//
+// This runs at document_start: when Moxfield's app starts it rewrites the URL (to /decks/{id}/preview) and drops
+// the fragment, which may hold a label's hash from its QR code (`#mp1=…`). So the fragment is read first.
 
 import type { OpenPicklistMessage } from "../messages";
+import { isMessage } from "../messages";
 import { deckIdFromPath } from "../moxfield/urls";
+import { refreshDeckList, syncDeckList } from "./deckList";
+import { HashChip } from "./hashChip";
 
 const BUTTON_ID = "magic-pickle-button";
+const HASH_ROW_ID = "magic-pickle-hash-row";
+
+/** The label to check on each deck: from the URL this page was opened with, or typed in the hash dialog. */
+const labels = new Map<string, string>();
+const openedDeck = deckIdFromPath(location.pathname);
+if (openedDeck && /^#mp\d+=/.test(location.hash)) labels.set(openedDeck, location.hash);
+
+let chip: HashChip | undefined;
 
 function createButton(): HTMLButtonElement {
   const button = document.createElement("button");
@@ -40,20 +54,64 @@ function createButton(): HTMLButtonElement {
   return button;
 }
 
-function sync(): void {
-  const onDeck = deckIdFromPath(location.pathname) !== undefined;
-  const existing = document.getElementById(BUTTON_ID);
-  if (onDeck && !existing) document.body.appendChild(createButton());
-  else if (!onDeck && existing) existing.remove();
+/**
+ * Where the hash goes: after the deck's format pills (the row after the title), before the description. Moxfield's
+ * container classes are generated, so the title's `h1` is the anchor.
+ */
+function hashRowAnchor(): Element | null {
+  const title = document.querySelector("main h1, h1");
+  return title?.nextElementSibling ?? title;
 }
 
-let scheduled = false;
-new MutationObserver(() => {
-  if (scheduled) return;
-  scheduled = true;
-  requestAnimationFrame(() => {
-    scheduled = false;
-    sync();
-  });
-}).observe(document.documentElement, { childList: true, subtree: true });
-sync();
+function syncHash(publicId: string | undefined): void {
+  if (chip && chip.publicId !== publicId) {
+    document.getElementById(HASH_ROW_ID)?.remove();
+    chip = undefined;
+  }
+  if (!publicId) return;
+  const anchor = hashRowAnchor();
+  if (!anchor) return;
+  chip ??= new HashChip(publicId, labels);
+  let row = document.getElementById(HASH_ROW_ID);
+  if (!row) {
+    row = document.createElement("div");
+    row.id = HASH_ROW_ID;
+    Object.assign(row.style, { margin: "-0.5rem 0 1.25rem" });
+  }
+  if (row.firstChild !== chip.host) row.replaceChildren(chip.host);
+  // Moxfield re-renders the header, which can drop the row or move things around it.
+  if (anchor.nextElementSibling !== row) anchor.after(row);
+}
+
+function sync(): void {
+  const publicId = deckIdFromPath(location.pathname);
+  const existing = document.getElementById(BUTTON_ID);
+  if (publicId && !existing) document.body.appendChild(createButton());
+  else if (!publicId && existing) existing.remove();
+  syncHash(publicId);
+  syncDeckList();
+}
+
+function start(): void {
+  let scheduled = false;
+  new MutationObserver(() => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(() => {
+      scheduled = false;
+      sync();
+    });
+  }).observe(document.documentElement, { childList: true, subtree: true });
+  sync();
+}
+
+browser.runtime.onMessage.addListener((message: unknown) => {
+  if (isMessage(message, "moxfieldChanged")) {
+    chip?.refreshSoon();
+    refreshDeckList();
+  }
+  return undefined;
+});
+
+if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start, { once: true });
+else start();

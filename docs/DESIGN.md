@@ -4,9 +4,9 @@
 
 | | |
 | --- | --- |
-| **Status** | **1.0.0 released** (2026-10-18), installed on desktop and Android; in real-world use. Next: whatever real pulls turn up |
+| **Status** | **1.3.0**: deck labels (§6.6). In real-world use on desktop and Android. Next: test E11 labels on the printer, then deck snapshots (§6.6.1) and 2×2 labels |
 | **Owner** | Jason Addington |
-| **Last updated** | 2026-10-18 |
+| **Last updated** | 2026-10-21 |
 
 This is a living document. Update it when a decision is made, an assumption turns out wrong, or an open question is answered. The [Decision log](#decision-log) records the reasons behind each change.
 
@@ -28,6 +28,7 @@ Two causes:
 - **G3: Trustworthy "none free" answers.** When the extension says every copy is in use, it names the built decks holding them, so there's no need to go and check.
 - **G4: One click.** A 🥒 button on the Moxfield deck page opens the picklist. No exports, uploads, or manual data entry.
 - **G5: Automated build, test, and release** with GitHub Actions.
+- **G6: Deck labels.** A small label on each deck box with the deck's name, a QR code to its Moxfield page, and a short hash of its contents that shows, by eye, whether the box still matches Moxfield, down to the printing (§6.6).
 
 ### Non-goals (for now)
 
@@ -70,6 +71,7 @@ Moxfield has **no official API**. The extension uses the same undocumented `api2
 | Folders | `GET /v1/deck-folders?pageSize=1000` | 8 folders, named like `0 - Ideas`, `2 - Refining`, `3 - Built` |
 | Deck | `GET /v3/decks/all/{publicId}` | Works for private decks. `boards.<board>.cards.<id>` = `{quantity, finish, isProxy, card{…}}` |
 | Collection search | `GET /v1/collections/search?q=…&pageSize=…&pageNumber=…[&searchSessionId=…]` | Incremental; see §4.5. Also has `setId`, `finish`, `isProxy`, `tradeBinderId`, and `deckId` filters (`deckId` does nothing useful) |
+| Deck history | `GET /v2/decks/all/{publicId}/history?pageNumber=…&pageSize=…` | Newest first; `pageSize=100` works. Each entry: `{boardType, card{…}, cardType, quantityDelta, updatedAtUtc}`. See §4.4 |
 
 ### 4.4 Data
 
@@ -79,6 +81,7 @@ Moxfield has **no official API**. The extension uses the same undocumented `api2
 - **A row's language defaults to English, even for non-English printings.** A copy of a Phyrexian printing (ONE #326, `card.lang` `ph`) shows `language.code` `en`. So a copy's language is the row's language, unless that's English and the printing isn't, in which case it's the printing's language (`copyLanguage` in `schemas.ts`).
 - **Collection size:** 50,694 cards across 28,361 rows. Cards in built decks *are* counted in the collection.
 - **Boards:** a deck's `boards` include `mainboard`, `sideboard`, `maybeboard` ("Considering"), `commanders`, `companions`, `signatureSpells`, and others. Only **`mainboard` + `commanders` + `companions` + `signatureSpells`** are physically in a deck (Moxfield keeps the commander in its own board; for Oathbreaker, the Oathbreaker goes in `commanders` and the signature spell in `signatureSpells`). Sideboard and Considering are ignored everywhere: they aren't pulled, they don't use up copies, and they may not be in the collection at all, since Considering is sometimes a wish list.
+- **Deck history** (checked 2026-10-20 on All the Slivers and [1DH] Thantis's Jund Beatdown) records card adds, removes, and board moves (a move is a −1 and a +1 with the same timestamp). It does **not** record printing or finish swaps: a deck edited after its newest history entry had only swaps. Each entry's card is the printing it was **added** with, not the current one (72 of 203 entries on the Sliver deck), and entries have no finish. Adding up all of a deck's history reproduces its card names and counts exactly on both decks, but not on Land Cycles (1,000 cards): 32 cards differ, cause unknown. The deck's `version` field is 0 even with 378 history entries, so it isn't a revision number.
 - **Built decks:** a deck is built if and only if it's in the **`3 - Built`** folder (`folder.name` in the decks list). Name prefixes like `[1DH]` are personal format labels and are ignored.
 
 ### 4.5 Collection search protocol
@@ -126,10 +129,11 @@ moxfield.com/decks/{publicId}                  Firefox extension
                                                   api2.moxfield.com
 ```
 
-- **Content script** (`moxfield.com/*`): adds a 🥒 button on deck pages, keeps it there through Moxfield's in-site navigation, and opens the picklist page for that deck. The probe proved this works.
+- **Content script** (`moxfield.com/*`): adds a 🥒 button on deck pages, keeps it there through Moxfield's in-site navigation, and opens the picklist page for that deck. The probe proved this works. It also shows the deck hash on deck pages and on the deck list (§6.6). It runs at `document_start` to read a label's `#mp1=` fragment before Moxfield's app rewrites the URL.
 - **Picklist page**: an extension page that does all the work. It's also reachable from the toolbar button, by entering a deck URL.
-- **Background script**: minimal. It opens tabs and holds the fallback token captured through `webRequest`.
-- No modifications to Moxfield's own pages beyond the button.
+- **Label page**: an extension page that renders a deck's label (§6.6).
+- **Background script**: opens tabs and learns site headers through `webRequest`. It also computes deck hashes and checks labels for the content script, with its own Moxfield client, and tells a Moxfield tab when the page saved a change (a PUT, POST, PATCH, or DELETE to `api2.moxfield.com`) so its hash can be refreshed.
+- Changes to Moxfield's own pages are limited to the button and the deck hash (§6.6).
 
 ### 5.2 Generating a picklist
 
@@ -154,6 +158,7 @@ All state lives in `storage.local`. Nothing has to persist reliably: everything 
 | Built-deck cache | Reduced in-deck boards per `publicId` + `lastUpdatedAtUtc` | Replaced when a deck changes; dropped when it leaves the folder |
 | Pull progress | Checked-off cards per target deck | Until cleared or the deck changes |
 | Scryfall set list | Release dates, blocks, parent sets (§6.3.3) | Refreshed after 7 days |
+| E11 label length | A label length set by hand on the label page (`e11Length`); absent means automatic | Until changed |
 | Token | JWT plus expiry | In memory / `storage.session` only |
 
 No collection copy is kept (decision 2026-10-12). Every picklist searches live, so there's nothing to keep in sync.
@@ -288,6 +293,55 @@ Availability is only as good as the printings recorded in Moxfield. If a built d
 
 Moxfield can't be updated programmatically, and the extension doesn't pick substitutes (§6.2). Each "requested printing not free" notice therefore links to the deck in Moxfield and lists the free printings to choose from. After you change the printing there, regenerating the picklist picks up the change. This also keeps the deck's recorded printings accurate for future availability checks once it's built.
 
+### 6.6 Deck labels and hashes
+
+A label on each deck box carries the deck's name, a QR code to its Moxfield page, and a **deck hash**: four words that show by eye whether the box still matches Moxfield. The hash is computed by the extension and shown wherever the deck is (deck page, deck list, picklist, label page), so a label is checked by comparing words.
+
+**The hash (scheme `mp1`, `src/engine/deckHash.ts`).** Two parts, from the in-deck boards (the picklist's boards, §4.4):
+
+- **Three card words:** SHA-256 of `mp1 cards` followed by one line `{count} {name}` per card name (counts summed across in-deck boards, names NFC-normalized, lines sorted by UTF-16 code unit), first 33 bits.
+- **One printing word:** SHA-256 of `mp1 printings` followed by one line `{count} {scryfall_id} {finish}[ proxy]` per printing, sorted the same way, first 11 bits.
+
+Each 11 bits is a word from the BIP39 English list (2,048 words, MIT), whose words are unique by their first 4 letters, so a label can print just those. Moving a card between in-deck boards changes nothing; moving it to or from another board does. Tokens and Considering don't count. Labels are permanent, so `mp1` is frozen by a test vector; any change to what's hashed needs `mp2`, and `mp1` labels must keep working.
+
+**Why two parts.** History replays card names and counts but not printings (§4.4), so splitting the hash lets a label say *which* kind of change happened without any stored state:
+
+| Label vs. deck | Meaning |
+| --- | --- |
+| All four words match | Current, down to the printing |
+| Card words match, printing word differs | Same cards; a printing, finish, or proxy flag changed. History can't say which |
+| Card words differ | Cards changed. The extension finds the label's revision and lists the changes |
+
+**Finding a label's revision** (`src/engine/revisions.ts`). Start from the deck's current card counts and undo history newest first, a timestamp at a time (a board move is two entries with one timestamp), hashing the card list after each step until it matches the label's card words. The changes are the difference between that state and now. History is fetched 100 entries per request, lazily, up to 1,000 entries. A match also proves the replay; when history is missing edits (Land Cycles), nothing matches and no changes are claimed. A printing check isn't possible across a card change.
+
+**The QR code** holds `https://moxfield.com/decks/{publicId}#mp1=oyst-mush-part-urba`, the deck URL plus the hash as 4-letter prefixes. Moxfield's app rewrites the URL to `/decks/{id}/preview` once the tab is visible and drops the fragment, but without reloading, so the content script, running at `document_start`, reads it first. Without the extension, the link still opens the deck.
+
+**Where the hash shows:**
+
+- **Deck page:** a pill between the format pills and the description (anchored on the title's `h1`; Moxfield's container classes are generated). It turns green with ✓ when a label matches and amber with ≠ or ≈ when it doesn't. Clicking it opens a dialog with the words, the label check and changes, a field to type a label's words (whole or 4-letter prefixes), and a **Make label** button. The 🥒 button stays where it is; the hash isn't added there because the button already covers page elements.
+- **Deck list** (`/decks/personal`): the words under each built deck's name, from the built-deck cache, so only changed decks are fetched.
+- **Picklist page:** the words in the header, and a **Make label** link.
+
+**Label printers.** The label page renders labels per printer:
+
+- **Supvan E11** (prototype): 8 dots/mm and an 11 mm (88-dot) printable height, on continuous tape of any length; the first and last 2 mm aren't printed (from khromov's E11 driver, `github.com/khromov/supvan-katasymbol-printer-web-ui`; its 332-column limit is per data buffer, not per label). The page draws the QR code at full height (its modules are 2 or 3 dots wide; jsQR decodes it), then three lines: the deck name (shrunk, then cut to fit, without an ellipsis), the four words on one line as 4-letter prefixes (shrunk but never cut), and the date the deck last changed. Thresholded to black and white. By default the label is as long as the name and words need at full size (the name up to 60 mm); a length typed by hand that's too short for the words gets a warning with the minimum. It downloads as a PNG to print at 100%; the E11 has no driver for macOS, and khromov's web app needs Web Bluetooth, which Firefox lacks.
+- **2×2 in labels** on an Orgsta T003 (planned): the T003 has a normal print driver, so these will print from the label page through Firefox's print dialog.
+
+#### 6.6.1 Next: snapshots (not built yet)
+
+Without stored state, a label check can say *that* printings changed but not *which*, and can't list card changes when history is broken. The plan is to save a snapshot of the deck when its label is made and check against it first. What's known so far (2026-10-20/21):
+
+- **Agreed:** snapshots are an extra layer, never required. A label must still work with no stored state, so the hash scheme doesn't change. The check order becomes: a snapshot whose hash equals the label's → history replay (§6.6) → "diverged".
+- **When to save:** when a label is actually produced: the E11 PNG download (`download` in `src/pages/label/App.tsx`) and, later, printing a 2×2 label. Not when the label page is just opened.
+- **Where:** the latest label per deck in `storage.sync`, so it reaches other desktop Firefoxes on the same Mozilla account; every label in `storage.local` on the machine that made it.
+- **`storage.sync` in Firefox** ([MDN](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/storage/sync)): 102,400 bytes total, 8,192 bytes per item (JSON of the value plus the key's length), at most 512 items. It needs the add-on id in the manifest (set), a Mozilla account, and **Add-ons** ticked in Firefox's Sync settings. It syncs about every 10 minutes, and for each key the server's copy wins a conflict. **Firefox for Android doesn't sync it** (bug 1625257), so a phone scanning a label won't see snapshots made on the laptop; it falls back to the history replay.
+- **Size budget:** 25 built decks today. A snapshot as set + collector number + finish per printing is about 1 KB per deck; with full Scryfall ids about 2.5 KB; with card names too, about 3 KB. 25 × 3 KB fits in 100 KB, but not with much room to grow.
+- **Open decisions:**
+  - **Printing identity.** The printing word hashes Scryfall ids, so a snapshot stored as set + collector number can't be checked against a label by recomputing its hash. Either store the label's words with the snapshot and trust them, or store Scryfall ids (bigger).
+  - **Names.** Listing a printing that's no longer in the deck needs its name. Either store names (bigger) or look them up when needed (Scryfall's `/cards/{set}/{cn}`, or Moxfield's collection search).
+  - **Quota.** What to do when `storage.sync` is full: drop decks that left the built folder first, then the oldest.
+- **UI:** the deck page dialog (`labelResult` in `src/content/hashChip.ts`) would list printing changes ("Toxin Sliver: PLST LGN-84 → SLD 635 foil") and say when the answer came from a snapshot. The check itself belongs in `checkLabel` (`src/app/labels.ts`), which runs in the background script.
+
 ## 7. Build, test, and release
 
 ### 7.1 Stack
@@ -339,6 +393,7 @@ See the README's layout table. In short: `src/engine/` (pure logic; `sections.ts
 | **2. Extension MVP** | Scaffold ✅, Moxfield client ✅, 🥒 button ✅, picklist page ✅, all tested against a fake Moxfield. **Test:** whether `x-moxfield-version` and `X-Session-User` are required (Q7; there's a button for it under Diagnostics) | A real deck pull done with it on desktop |
 | **3. Ship** ✅ | CI, unlisted signing, Releases, auto-update; Android install (Q6) | Done: 1.0.0 signed, released, and installed on desktop and Android (2026-10-18) |
 | **4. Polish** | Pull progress, settings, printing details | Fewer manual steps per pull |
+| **5. Deck labels** | Deck hash ✅, label check and history replay ✅, hash on deck page, deck list, and picklist ✅, E11 label image ✅ (1.3.0). Next: E11 print test, snapshots (§6.6.1), 2×2 labels on the Orgsta T003 | Every built deck labeled; a label's state readable without opening Moxfield |
 
 ## Open questions
 
@@ -412,6 +467,14 @@ Resolved questions are struck through; their answers are in the decision log.
 | 2026-10-16 | Siblings strictly alphabetical by set code; panorama cards by collector number; playtest cards in their own box; box order arbitrary but fixed | Your answers to Q13, Q17b, Q18, and Q19 |
 | 2026-10-16 | Scryfall blocks count only for expansion blocks through GRN/RNA/WAR; siblings come from `parent_set_code`; named sections override both | Scryfall also labels all Commander products, all core sets, and newer set families (e.g. OTJ) as blocks, which don't match your system |
 | 2026-10-14 | Stack: TypeScript, Vite, Preact, Vitest, `web-ext`; unlisted AMO signing; releases on GitHub | Small, standard extension toolchain; signing is required for release Firefox |
+| 2026-10-20 | **Deck labels (G6):** a four-word deck hash (three card words, one printing word, BIP39 list), scheme `mp1` frozen by a test vector | Must be compared by eye from a laptop as well as scanned. History can replay card names but not printing swaps (§4.4), so the split tells the two kinds of change apart without stored state. Your preference: lower-fidelity hashes over per-browser state |
+| 2026-10-20 | A label's revision is found by undoing history until the card words match; the changes are listed only when it matches | History has no revision ids and misses some edits; the match proves the replay |
+| 2026-10-20 | Snapshots in `storage.sync` come later, as an extra layer under the same dialog | `storage.sync` doesn't sync on Firefox for Android, and labels must work without stored state |
+| 2026-10-20 | The QR code holds the plain deck URL plus `#mp1=…`; the content script runs at `document_start` to read the fragment before Moxfield rewrites the URL | Works signed in or out; doesn't depend on Moxfield's `/preview` route. Verified: the rewrite is in the page, without a reload |
+| 2026-10-20 | The deck hash goes between the format pills and the description, not next to the 🥒 button; it's also on the deck list (built decks only) and the picklist page | Your placement. Revises the 2026-10-12 decision not to change Moxfield's pages, for this one small, isolated element (a shadow root) |
+| 2026-10-20 | Supvan E11 labels as a prototype: a PNG at the printer's dot grid, printed from khromov's web app; 2×2 labels on an Orgsta T003 later | The E11 has no Mac driver and Firefox has no Web Bluetooth; the T003 prints from the normal print dialog |
+| 2026-10-20 | QR codes with `uqr` (MIT) | Small, typed, no dependencies |
+| 2026-10-21 | E11 labels: any length, automatic by default; the four words on one line and the deck's last-changed date on a third | Your tape is continuous; the words were split over two lines, which is harder to compare. The date is a check that needs no phone or laptop: a label from before a set came out, on a deck you've since changed for that set, is due for a scan |
 
 ## Appendix: Alternatives considered
 

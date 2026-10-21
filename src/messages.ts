@@ -25,12 +25,19 @@ export type DeckHashReply =
 
 export type LabelReply = { valid: false } | ({ valid: true; words: string[] } & LabelCheck);
 
+/** Asks the background for the hash words of every built deck, for Moxfield's deck list. */
+export interface BuiltDeckHashesMessage {
+  type: "builtDeckHashes";
+}
+
+export type BuiltDeckHashesReply = { ok: true; words: Record<string, string[]> } | { ok: false; error: string };
+
 /** Sent by the background to a Moxfield tab after the page saved a change, so its hash can be refreshed. */
 export interface MoxfieldChangedMessage {
   type: "moxfieldChanged";
 }
 
-type Message = OpenPicklistMessage | OpenLabelMessage | DeckHashMessage | MoxfieldChangedMessage;
+type Message = OpenPicklistMessage | OpenLabelMessage | DeckHashMessage | BuiltDeckHashesMessage | MoxfieldChangedMessage;
 
 export function isMessage<T extends Message["type"]>(message: unknown, type: T): message is Extract<Message, { type: T }> {
   return typeof message === "object" && message !== null && (message as { type?: unknown }).type === type;

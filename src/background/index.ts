@@ -1,13 +1,23 @@
-import { checkLabel } from "../app/labels";
+import { builtDeckHashes, checkLabel } from "../app/labels";
 import { deckHash, hashWords, parseHash } from "../engine/deckHash";
-import { LABEL_PAGE, PICK_PAGE, SITE_HEADERS_KEY, isMessage, type DeckHashReply, type LabelReply } from "../messages";
+import {
+  LABEL_PAGE,
+  PICK_PAGE,
+  SITE_HEADERS_KEY,
+  isMessage,
+  type BuiltDeckHashesReply,
+  type DeckHashReply,
+  type LabelReply,
+} from "../messages";
 import { MoxfieldClient, NotLoggedInError, type SiteHeaders } from "../moxfield/client";
 import { getDeck } from "../moxfield/decks";
 import { deckIdFromInput } from "../moxfield/urls";
+import { browserStore } from "../util/store";
 
+const store = browserStore(browser.storage.local);
 const client = new MoxfieldClient(
   (input, init) => fetch(input, init),
-  async () => ((await browser.storage.local.get(SITE_HEADERS_KEY))[SITE_HEADERS_KEY] as SiteHeaders | undefined) ?? {},
+  async () => (await store.get<SiteHeaders>(SITE_HEADERS_KEY)) ?? {},
 );
 
 async function openPage(page: string, publicId: string | undefined): Promise<void> {
@@ -31,10 +41,20 @@ async function deckHashReply(publicId: string, labelText: string | undefined): P
   }
 }
 
+async function builtDeckHashesReply(): Promise<BuiltDeckHashesReply> {
+  try {
+    const hashes = await builtDeckHashes(client, store);
+    return { ok: true, words: Object.fromEntries([...hashes].map(([id, hash]) => [id, hashWords(hash)])) };
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : String(e) };
+  }
+}
+
 browser.runtime.onMessage.addListener((message: unknown) => {
   if (isMessage(message, "openPicklist")) return openPage(PICK_PAGE, message.publicId);
   if (isMessage(message, "openLabel")) return openPage(LABEL_PAGE, message.publicId);
   if (isMessage(message, "deckHash")) return deckHashReply(message.publicId, message.label);
+  if (isMessage(message, "builtDeckHashes")) return builtDeckHashesReply();
   return undefined;
 });
 

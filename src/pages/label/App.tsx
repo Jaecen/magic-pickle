@@ -5,7 +5,7 @@ import { getDeck } from "../../moxfield/decks";
 import { deckIdFromInput, deckUrl } from "../../moxfield/urls";
 import type { Store } from "../../util/store";
 import { HashWords } from "../common/HashWords";
-import { E11, drawE11Label, type LabelContent } from "./e11";
+import { drawE11Label, type E11Layout, type LabelContent } from "./e11";
 
 interface Props {
   client: MoxfieldClient;
@@ -16,9 +16,11 @@ interface Props {
 
 type State = { status: "loading" } | { status: "done"; label: LabelContent } | { status: "error"; error: unknown };
 
-/** The last E11 label length used, in mm. */
-const E11_LENGTH_KEY = "e11LengthMm";
-const DEFAULT_E11_LENGTH_MM = 40;
+/** The E11 label length set by hand, in mm; absent for automatic. (`e11LengthMm` held the old 41.5 mm-capped one.) */
+const E11_LENGTH_KEY = "e11Length";
+const OLD_E11_LENGTH_KEY = "e11LengthMm";
+const MIN_E11_LENGTH_MM = 20;
+const KHROMOV_APP = "https://khromov.github.io/supvan-katasymbol-printer-web-ui/";
 
 export function LabelApp({ client, store, deck: deckProp }: Props) {
   const publicId = deckIdFromInput(deckProp ?? new URLSearchParams(location.search).get("deck") ?? undefined);
@@ -30,7 +32,15 @@ export function LabelApp({ client, store, deck: deckProp }: Props) {
       .then(async (deck) => {
         const hash = await deckHash(deck.entries);
         document.title = `${deck.name} label · Magic Pickle`;
-        setState({ status: "done", label: { name: deck.name, url: `${deckUrl(publicId)}#${hashFragment(hash)}`, words: hashWords(hash) } });
+        setState({
+          status: "done",
+          label: {
+            name: deck.name,
+            url: `${deckUrl(publicId)}#${hashFragment(hash)}`,
+            words: hashWords(hash),
+            updated: deck.lastUpdatedAtUtc,
+          },
+        });
       })
       .catch((error: unknown) => setState({ status: "error", error }));
   }, [client, publicId]);
@@ -87,14 +97,17 @@ export function LabelApp({ client, store, deck: deckProp }: Props) {
 
 function E11Label({ label, store }: { label: LabelContent; store: Store }) {
   const canvas = useRef<HTMLCanvasElement>(null);
-  const [lengthMm, setLengthMm] = useState(DEFAULT_E11_LENGTH_MM);
+  /** Set by hand, or undefined for automatic. */
+  const [lengthMm, setLengthMm] = useState<number>();
+  const [layout, setLayout] = useState<E11Layout>();
 
   useEffect(() => {
     void store.get<number>(E11_LENGTH_KEY).then((saved) => saved && setLengthMm(saved));
+    void store.remove(OLD_E11_LENGTH_KEY);
   }, [store]);
   useEffect(() => {
     if (!canvas.current) return;
-    drawE11Label(canvas.current, label, lengthMm);
+    setLayout(drawE11Label(canvas.current, label, lengthMm));
     canvas.current.style.width = `${canvas.current.width * 3}px`;
   }, [label, lengthMm]);
 
@@ -116,27 +129,38 @@ function E11Label({ label, store }: { label: LabelContent; store: Store }) {
           Label length (mm)
           <input
             type="number"
-            min={20}
-            max={E11.maxLengthMm}
+            min={MIN_E11_LENGTH_MM}
             step={0.5}
-            value={lengthMm}
+            placeholder="auto"
+            value={lengthMm ?? ""}
             onChange={(e) => {
-              const mm = Math.min(E11.maxLengthMm, Math.max(20, Number(e.currentTarget.value) || DEFAULT_E11_LENGTH_MM));
+              const typed = Number(e.currentTarget.value);
+              const mm = e.currentTarget.value.trim() && typed > 0 ? Math.max(MIN_E11_LENGTH_MM, typed) : undefined;
               setLengthMm(mm);
-              void store.set(E11_LENGTH_KEY, mm);
+              void (mm ? store.set(E11_LENGTH_KEY, mm) : store.remove(E11_LENGTH_KEY));
             }}
           />
         </label>
+        {layout && lengthMm === undefined && <span class="muted">Automatic: {layout.lengthMm.toFixed(1)} mm</span>}
         <button type="button" onClick={download}>
           Download PNG
         </button>
       </p>
+      {layout && !layout.wordsFit && (
+        <p class="error">
+          Too short for the words: this label needs at least {Math.ceil(layout.minLengthMm * 2) / 2} mm. Clear the length
+          for automatic.
+        </p>
+      )}
       <div class="label-preview">
         <canvas ref={canvas} />
       </div>
       <p class="muted">
-        One pixel per printer dot (8 per mm, 11 mm tall). Print it at 100% scale, for example with khromov's Supvan web
-        app in Chrome or Edge.
+        One pixel per printer dot (8 per mm, 11 mm tall). Print it at 100% scale, for example with{" "}
+        <a href={KHROMOV_APP} target="_blank" rel="noreferrer">
+          khromov's Supvan web app
+        </a>{" "}
+        in Chrome or Edge.
       </p>
     </section>
   );

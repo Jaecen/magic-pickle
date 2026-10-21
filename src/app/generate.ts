@@ -6,7 +6,7 @@ import { SetCatalog } from "../engine/sets";
 import { CollectionSorter } from "../engine/sort";
 import type { FetchFn, MoxfieldClient } from "../moxfield/client";
 import { lookUpCards } from "../moxfield/collection";
-import { getDeck, listDecks, type FetchedDeck } from "../moxfield/decks";
+import { getDeck, listDecks, type DeckSummary, type FetchedDeck } from "../moxfield/decks";
 import { loadSets } from "../scryfall/sets";
 import type { Store } from "../util/store";
 import { loadDecksCached } from "./deckCache";
@@ -26,6 +26,14 @@ export interface GenerateResult {
   stats: { builtDecks: number; binderDecks: number; decksFetched: number; cardsSearched: number; collectionRows: number; ms: number };
 }
 
+/** The decks kept in the deck cache: the built decks and the binder decks (§5.2). */
+export function cachedDeckSummaries(summaries: readonly DeckSummary[]): { built: DeckSummary[]; binders: DeckSummary[] } {
+  return {
+    built: summaries.filter((s) => s.folder === BUILT_FOLDER),
+    binders: summaries.filter((s) => s.folder === COLLECTIONS_FOLDER && BINDER_DECKS.some((b) => s.name.startsWith(b.deck))),
+  };
+}
+
 export async function generatePicklist(publicId: string, deps: GenerateDeps): Promise<GenerateResult> {
   const { client, store, onStep = () => {} } = deps;
   const now = deps.now ?? Date.now;
@@ -38,10 +46,8 @@ export async function generatePicklist(publicId: string, deps: GenerateDeps): Pr
     loadSets(store, deps.fetchFn, now()),
   ]);
 
-  const built = summaries.filter((s) => s.folder === BUILT_FOLDER && s.publicId !== publicId);
-  const binders = summaries.filter(
-    (s) => s.folder === COLLECTIONS_FOLDER && BINDER_DECKS.some((b) => s.name.startsWith(b.deck)),
-  );
+  const { built: allBuilt, binders } = cachedDeckSummaries(summaries);
+  const built = allBuilt.filter((s) => s.publicId !== publicId);
   onStep(`Loading ${built.length} built decks and ${binders.length} binder decks…`);
   const { decks, fetched } = await loadDecksCached(client, store, [...built, ...binders], (done, total) =>
     onStep(`Loading changed decks (${done} of ${total})…`),

@@ -25,6 +25,15 @@ export interface RawDeck {
   lastUpdatedAtUtc?: string;
   boards: Record<string, Array<RawPrinting & { printingData?: RawPrinting[] }>>;
   authorTags?: Record<string, string[]>;
+  /** History entries, newest first. */
+  history?: RawHistoryEntry[];
+}
+
+export interface RawHistoryEntry {
+  boardType: string;
+  quantityDelta: number;
+  updatedAtUtc: string;
+  card: RawCard;
 }
 
 export interface RawPrinting {
@@ -149,6 +158,22 @@ export function fakeMoxfield(options: FakeOptions = {}) {
         lastUpdatedAtUtc: deck.lastUpdatedAtUtc ?? "2026-01-01T00:00:00Z",
         boards,
         authorTags: deck.authorTags ?? {},
+      });
+    }
+
+    const historyMatch = /^\/v2\/decks\/all\/([^/]+)\/history$/.exec(url.pathname);
+    if (historyMatch) {
+      const deck = decks.find((d) => d.publicId === decodeURIComponent(historyMatch[1]!));
+      if (!deck) return json(404, {});
+      const history = deck.history ?? [];
+      const pageSize = Number(url.searchParams.get("pageSize"));
+      const pageNumber = Number(url.searchParams.get("pageNumber"));
+      return json(200, {
+        pageNumber,
+        pageSize,
+        totalResults: history.length,
+        totalPages: Math.ceil(history.length / pageSize),
+        data: history.slice((pageNumber - 1) * pageSize, pageNumber * pageSize).map((e) => ({ ...e, cardType: "normal" })),
       });
     }
 

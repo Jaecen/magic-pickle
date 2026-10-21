@@ -82,6 +82,20 @@ export const deckListSchema = z.object({
   ),
 });
 
+/** One page of `GET /v2/decks/all/{publicId}/history`, newest first (§4.3). */
+export const historyPageSchema = z.object({
+  pageNumber: z.number(),
+  totalPages: z.number(),
+  data: z.array(
+    z.object({
+      boardType: z.string(),
+      quantityDelta: z.number(),
+      updatedAtUtc: z.string(),
+      card: z.object({ name: z.string() }),
+    }),
+  ),
+});
+
 const collectionRowSchema = z
   .object({
     id: z.string(),

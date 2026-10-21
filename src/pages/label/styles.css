@@ -1,0 +1,5 @@
+.label-printer h2 { font-size: 1.1rem; margin: 24px 0 8px; }
+.label-printer input[type="number"] { width: 5em; font: inherit; padding: 4px 6px; border-radius: 6px; border: 1px solid var(--line); background: var(--card); color: var(--fg); }
+/* The image is one pixel per printer dot; show it three times larger without smoothing. */
+.label-preview { overflow-x: auto; padding: 12px 0; }
+.label-preview canvas { max-width: 100%; image-rendering: pixelated; border: 1px solid var(--line); background: #fff; }

@@ -6,9 +6,11 @@
 import { render } from "preact";
 import { generatePicklist } from "../app/generate";
 import { MoxfieldClient, type FetchFn } from "../moxfield/client";
+import { LabelApp } from "../pages/label/App";
 import { App } from "../pages/pick/App";
 import { memoryStore } from "../util/store";
 import "../pages/pick/styles.css";
+import "../pages/label/styles.css";
 
 const fetchFn: FetchFn = (input, init) => fetch(input, init);
 const store = memoryStore();
@@ -42,22 +44,33 @@ const harness = {
 
   /** Renders the picklist UI for `publicId` in a full-window iframe over the Moxfield page. */
   async render(publicId: string, cssUrl: string) {
-    document.getElementById("magic-pickle-harness")?.remove();
-    const frame = document.createElement("iframe");
-    frame.id = "magic-pickle-harness";
-    Object.assign(frame.style, { position: "fixed", inset: "0", width: "100vw", height: "100vh", border: "0", zIndex: "2147483647", background: "#fff" });
-    document.body.appendChild(frame);
-    const doc = frame.contentDocument!;
-    doc.open();
-    doc.write(`<!doctype html><html><head><meta charset="utf-8"></head><body><div id="app"></div></body></html>`);
-    doc.close();
-    // Inline the CSS: a <link> in a document.write()'d iframe doesn't reliably apply.
-    const style = doc.createElement("style");
-    style.textContent = await (await fetch(cssUrl)).text();
-    doc.head.appendChild(style);
-    const client = new MoxfieldClient(fetchFn);
-    render(<App client={client} store={store} fetchFn={fetchFn} deck={publicId} />, doc.getElementById("app")!);
+    const root = await frame(cssUrl);
+    render(<App client={new MoxfieldClient(fetchFn)} store={store} fetchFn={fetchFn} deck={publicId} />, root);
+  },
+
+  /** Renders the label page for `publicId` the same way. */
+  async renderLabel(publicId: string, cssUrl: string) {
+    const root = await frame(cssUrl);
+    render(<LabelApp client={new MoxfieldClient(fetchFn)} store={store} deck={publicId} />, root);
   },
 };
+
+/** A full-window iframe over the Moxfield page, with the harness CSS, and the element to render into. */
+async function frame(cssUrl: string): Promise<HTMLElement> {
+  document.getElementById("magic-pickle-harness")?.remove();
+  const frame = document.createElement("iframe");
+  frame.id = "magic-pickle-harness";
+  Object.assign(frame.style, { position: "fixed", inset: "0", width: "100vw", height: "100vh", border: "0", zIndex: "2147483647", background: "#fff" });
+  document.body.appendChild(frame);
+  const doc = frame.contentDocument!;
+  doc.open();
+  doc.write(`<!doctype html><html><head><meta charset="utf-8"></head><body><div id="app"></div></body></html>`);
+  doc.close();
+  // Inline the CSS: a <link> in a document.write()'d iframe doesn't reliably apply.
+  const style = doc.createElement("style");
+  style.textContent = await (await fetch(cssUrl)).text();
+  doc.head.appendChild(style);
+  return doc.getElementById("app")!;
+}
 
 (globalThis as { magicPickleHarness?: typeof harness }).magicPickleHarness = harness;

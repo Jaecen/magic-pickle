@@ -126,3 +126,6 @@ h1 { font-size: 1.4rem; margin: 0 0 4px; }
   .toolbar, .diagnostics, .pick input { display: none; }
   .deck-header { position: static; }
 }
+
+.hash-words { white-space: nowrap; }
+.hash-word b { font-weight: 700; }

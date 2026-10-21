@@ -2,6 +2,7 @@ import { createContext } from "preact";
 import { useCallback, useContext, useEffect, useRef, useState } from "preact/hooks";
 import { z } from "zod";
 import { generatePicklist, type GenerateResult } from "../../app/generate";
+import { deckHash, hashWords } from "../../engine/deckHash";
 import type { Holding, Notice, Pick } from "../../engine/picklist";
 import { SetCatalog } from "../../engine/sets";
 import { priceOf, sleevingFor } from "../../engine/storage";
@@ -9,6 +10,7 @@ import type { Card, Finish } from "../../engine/types";
 import { MoxfieldChangedError, NotLoggedInError, type FetchFn, type MoxfieldClient } from "../../moxfield/client";
 import { deckIdFromInput, deckUrl } from "../../moxfield/urls";
 import type { Store } from "../../util/store";
+import { HashWords } from "../common/HashWords";
 import { COLOR_LABELS, pickId, printing, sectionLabel, sectionLocation, where } from "./format";
 import { setGlyph } from "./symbols";
 
@@ -71,6 +73,7 @@ function Picklist({ client, store, fetchFn, publicId }: Props & { publicId: stri
   const [picked, setPicked] = useState<ReadonlySet<string>>(new Set());
   const [hidePicked, setHidePicked] = useState(false);
   const [showSleeves, setShowSleeves] = useState(true);
+  const [words, setWords] = useState<string[]>();
 
   const run = useCallback(() => {
     setState({ status: "loading", step: "Starting…" });
@@ -95,6 +98,9 @@ function Picklist({ client, store, fetchFn, publicId }: Props & { publicId: stri
   useEffect(() => {
     if (progressLoaded.current) void store.set(progressKey(publicId), [...picked]);
   }, [picked, store, publicId]);
+  useEffect(() => {
+    if (state.status === "done") void deckHash(state.result.deck.entries).then((h) => setWords(hashWords(h)));
+  }, [state]);
 
   // Functional update, so quick successive clicks don't overwrite each other.
   const toggle = (id: string) =>
@@ -130,9 +136,17 @@ function Picklist({ client, store, fetchFn, publicId }: Props & { publicId: stri
             {pickedCopies} of {copies} cards pulled
             {forThisPull.length > 0 && ` · ${forThisPull.length} need attention`}
           </p>
+          {words && (
+            <p class="muted">
+              Deck hash: <HashWords words={words} />
+            </p>
+          )}
           <div class="toolbar">
             <a href={deckUrl(deck.publicId)} target="_blank" rel="noreferrer">
               Open in Moxfield
+            </a>
+            <a href={`../label/index.html?deck=${encodeURIComponent(deck.publicId)}`} target="_blank" rel="noreferrer">
+              Make label
             </a>
             <button type="button" onClick={run}>
               Regenerate

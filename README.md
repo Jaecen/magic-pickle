@@ -1,7 +1,7 @@
 # Magic Pickle
 
 A Firefox extension that turns a Moxfield deck into a picklist in the order your collection is stored, and
-checks which printings are actually free given the decks you've already built. Design and rationale:
+checks which printings are actually free given the decks you've already built. It also makes deck-box labels whose four-word hash shows whether a built deck still matches Moxfield. Design and rationale:
 [docs/DESIGN.md](docs/DESIGN.md).
 
 ## Development
@@ -69,7 +69,8 @@ in an iframe). Keep runs spaced out: each costs 18–52 Moxfield requests, and b
 | `src/scryfall/` | Scryfall set list (cached 7 days) |
 | `src/app/` | Generating a picklist end to end; deck cache |
 | `src/pages/pick/` | The picklist page (Preact) |
-| `src/content/`, `src/background/` | The 🥒 button on deck pages; tab opening and header learning |
+| `src/pages/label/` | The label page: deck hash, QR code, and a Supvan E11 image |
+| `src/content/`, `src/background/` | The 🥒 button and deck hash on Moxfield pages; tab opening, header learning, deck hashes |
 | `src/devtools/` | Dev-only harness for automated end-to-end checks (not shipped) |
 | `public/` | `manifest.json` and icon |
 | `tests/` | Fake Moxfield server, fixtures, test helpers |

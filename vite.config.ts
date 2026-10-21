@@ -18,6 +18,7 @@ export default defineConfig({
     rolldownOptions: {
       input: {
         pick: resolve(import.meta.dirname, "src/pages/pick/index.html"),
+        label: resolve(import.meta.dirname, "src/pages/label/index.html"),
         background: resolve(import.meta.dirname, "src/background/index.ts"),
       },
       output: {
